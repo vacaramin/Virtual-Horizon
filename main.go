@@ -1,5 +1,11 @@
 package main
-import "fmt"
-func main(){
-fmt.Println("hello world")
+
+import (
+	"Virtual-Horizon/backend/app"
+	"fmt"
+)
+
+func main() {
+	app.StartApplication()
+	fmt.Println("hello world")
 }
