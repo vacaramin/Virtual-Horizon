@@ -1,0 +1,215 @@
+.LoginScreen {
+    background-color: #243047;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-image {
+    width: 606px;
+    height: 856px;
+    background: url(../../../public/Login_BG.png);
+    border-radius: 0px 50px 50px 0px;
+}
+
+.left-rectangle {
+    width: 654px;
+    height: 856px;
+    background: #FFFFFF;
+    border-radius: 50px 0px 0px 50px;
+}
+
+/* Positioning for the two elements */
+.left-rectangle,
+.right-image {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+/* Styling for the container element */
+.LoginScreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Positioning for the two elements */
+.right-image {
+    margin-right: 0px;
+    /* Adjust as needed */
+}
+
+.left-rectangle {
+    margin-left: 0px;
+    /* Adjust as needed */
+}
+
+/* Rectangle 5 */
+.signUpButton {
+    position: absolute;
+    width: 315px;
+    height: 80px;
+    left: 179px;
+    top: 787px;
+
+    background: #000000;
+    border-radius: 76px;
+}
+
+/* Sign Up */
+.signUptext {
+    position: absolute;
+    width: 69px;
+    height: 23px;
+    left: 302px;
+    top: 815px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+
+    color: #FFFFFF;
+}
+
+
+/* Name */
+.nameText {
+    position: absolute;
+    width: 54px;
+    height: 23px;
+    left: 159px;
+    top: 333px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+
+    color: #000000;
+}
+
+
+/* Sign Up */
+.signupButtonText {
+    position: absolute;
+    width: 164px;
+    height: 56px;
+    left: 263px;
+    top: 230px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 56px;
+
+    color: #000000;
+}
+
+
+/* Email */
+.emailText {
+    position: absolute;
+    width: 50px;
+    height: 23px;
+    left: 159px;
+    top: 443px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+
+    color: #000000;
+}
+
+
+/* Line 1 */
+.line1 {
+    position: absolute;
+    width: 355.01px;
+    height: 0px;
+    left: 158.99px;
+    top: 393.5px;
+
+    border: 1px solid #000000;
+}
+
+/* Line 2 */
+.line2 {
+    position: absolute;
+    width: 355px;
+    height: 0px;
+    left: 159px;
+    top: 512px;
+
+    border: 1px solid #000000;
+    transform: rotate(0.16deg);
+}
+
+/* Password */
+.password {
+    position: absolute;
+    width: 89px;
+    height: 23px;
+    left: 159px;
+    top: 560px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+
+    color: #000000;
+}
+
+
+/* Contact Number */
+.contactNumberText {
+    position: absolute;
+    width: 147px;
+    height: 23px;
+    left: 159px;
+    top: 670px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+
+    color: #000000;
+}
+
+
+/* Line 3 */
+.line3 {
+    position: absolute;
+    width: 355px;
+    height: 0px;
+    left: 159px;
+    top: 622px;
+
+    border: 1px solid #000000;
+    transform: rotate(0.01deg);
+
+}
+
+/* Line 4 */
+
+.line4 {
+    position: absolute;
+    width: 355px;
+    height: 0px;
+    left: 159px;
+    top: 739px;
+
+    border: 1px solid #000000;
+}

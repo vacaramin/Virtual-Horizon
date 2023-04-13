@@ -1,0 +1,197 @@
+.LoginScreen {
+    background-color: #243047;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-image {
+    width: 606px;
+    height: 856px;
+    background: url(../../../public/Login_BG.png);
+    border-radius: 0px 50px 50px 0px;
+}
+
+.left-rectangle {
+    width: 654px;
+    height: 856px;
+    background: #FFFFFF;
+    border-radius: 50px 0px 0px 50px;
+}
+
+/* Positioning for the two elements */
+.left-rectangle,
+.right-image {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+/* Styling for the container element */
+.LoginScreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Positioning for the two elements */
+.right-image {
+    margin-right: 0px;
+    /* Adjust as needed */
+}
+
+.left-rectangle {
+    margin-left: 0px;
+    /* Adjust as needed */
+}
+
+/* Rectangle 5 */
+.signinButton {
+    position: absolute;
+    width: 315px;
+    height: 80px;
+    left: 174.5px;
+    top: 580px;
+
+    background: #000000;
+    border-radius: 76px;
+
+}
+
+/* Email */
+.EmailText {
+    position: absolute;
+    width: 50px;
+    height: 23px;
+    left: 159px;
+    top: 333px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+
+    color: #000000;
+}
+
+
+
+
+
+/* Sign In */
+.signinText {
+    position: absolute;
+    width: 146px;
+    height: 56px;
+    left: 263px;
+    top: 230px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 56px;
+
+    color: #000000;
+}
+
+
+
+
+/* Password */
+.passwordText {
+    position: absolute;
+    width: 89px;
+    height: 23px;
+    left: 159px;
+    top: 443px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+
+    color: #000000;
+}
+
+
+
+
+/* Line 1 */
+.line1 {
+    position: absolute;
+    width: 355px;
+    height: 0px;
+    left: 159px;
+    top: 395px;
+
+    border: 1px solid #000000;
+    transform: rotate(0.01deg);
+
+}
+
+
+/* Line 2 */
+.line2 {
+    position: absolute;
+    width: 355px;
+    height: 0px;
+    left: 159px;
+    top: 512px;
+
+    border: 1px solid #000000;
+
+}
+
+
+/* Sign In */
+.signinBoxText {
+    position: absolute;
+    width: 61px;
+    height: 23px;
+    left: 293px;
+    top: 608px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+
+    color: #F2DBDB;
+}
+
+
+
+.left-rectangle {
+    position: relative;
+}
+
+
+.signinText,
+.line1,
+.line2,
+.signinBoxText {
+    position: absolute;
+    left: 30%;
+    transform: translateX(-50%);
+}
+.passwordText{
+    position: absolute;
+    left: 23%;
+    transform: translateX(-50%);
+}
+.EmailText{
+    position: absolute;
+    left: 22%;
+    transform: translateX(-50%);
+}
+
+.signinButton {
+    position: absolute;
+    left: 30%;
+    transform: translateX(-50%);
+    bottom: 60px;
+}
