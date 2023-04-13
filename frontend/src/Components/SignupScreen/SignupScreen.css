@@ -1,4 +1,4 @@
-.LoginScreen {
+.SignupScreen {
     background-color: #243047;
     display: flex;
     justify-content: center;
@@ -28,7 +28,7 @@
 }
 
 /* Styling for the container element */
-.LoginScreen {
+.SignupScreen {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,8 +45,8 @@
     margin-left: 0px;
     /* Adjust as needed */
 }
+ 
 
-/* Rectangle 5 */
 .signUpButton {
     position: absolute;
     width: 315px;
@@ -58,7 +58,6 @@
     border-radius: 76px;
 }
 
-/* Sign Up */
 .signUptext {
     position: absolute;
     width: 69px;
@@ -76,7 +75,6 @@
 }
 
 
-/* Name */
 .nameText {
     position: absolute;
     width: 54px;
@@ -94,7 +92,6 @@
 }
 
 
-/* Sign Up */
 .signupButtonText {
     position: absolute;
     width: 164px;
@@ -112,7 +109,6 @@
 }
 
 
-/* Email */
 .emailText {
     position: absolute;
     width: 50px;
@@ -130,7 +126,6 @@
 }
 
 
-/* Line 1 */
 .line1 {
     position: absolute;
     width: 355.01px;
@@ -141,7 +136,6 @@
     border: 1px solid #000000;
 }
 
-/* Line 2 */
 .line2 {
     position: absolute;
     width: 355px;
@@ -153,7 +147,6 @@
     transform: rotate(0.16deg);
 }
 
-/* Password */
 .password {
     position: absolute;
     width: 89px;
@@ -171,7 +164,6 @@
 }
 
 
-/* Contact Number */
 .contactNumberText {
     position: absolute;
     width: 147px;
@@ -189,7 +181,6 @@
 }
 
 
-/* Line 3 */
 .line3 {
     position: absolute;
     width: 355px;
@@ -202,7 +193,6 @@
 
 }
 
-/* Line 4 */
 
 .line4 {
     position: absolute;
@@ -212,4 +202,50 @@
     top: 739px;
 
     border: 1px solid #000000;
+} 
+.line1,
+.line2,
+.line3,
+.line4 {
+    position: absolute;
+    left: 30%;
+    transform: translateX(-50%);
+}
+
+.nameText,
+.emailText
+{
+    position: absolute;
+    left: 22%;
+    transform: translateX(-50%);
+}
+
+.signupButtonText{
+    position: absolute;
+    left: 29%;
+    transform: translateX(-50%);
+}
+
+.password{
+    position: absolute;
+    left: 23%;
+    transform: translateX(-50%);
+}
+
+.contactNumberText{
+    position: absolute;
+    left: 24.5%;
+    transform: translateX(-50%);
+} 
+
+.signUptext{
+    position: absolute;
+    left: 29%;
+    transform: translateX(-50%);
+}
+
+.signUpButton{
+    position: absolute;
+    left: 30%;
+    transform: translateX(-50%);
 }
