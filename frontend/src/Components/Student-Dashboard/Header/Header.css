@@ -1,0 +1,41 @@
+/* Rectangle 8 */
+.logo{
+position: absolute;
+width: 166px;
+height: 140px;
+left: 62px;
+top: 15px;
+
+background: url(../../../../public/Login_BG.png);
+}
+
+/* Hello, Mr Awais */
+.student_name{
+    
+position: absolute;
+width: 141px;
+height: 23px;
+left: 1109px;
+top: 76px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 23px;
+
+color: #FFFFFF;
+
+}
+
+
+/* Ellipse 1 */
+.student_dp{
+    position: absolute;
+    width: 114px;
+    height: 112px;
+    left: 1271px;
+    top: 32px;
+    
+    background: #D9D9D9;
+}
