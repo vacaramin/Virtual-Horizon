@@ -8,7 +8,7 @@
 .right-image {
     width: 606px;
     height: 856px;
-    background: url(../../../public/Login_BG.png);
+    background: url(Login_BG.png);
     border-radius: 0px 50px 50px 0px;
 }
 
@@ -48,7 +48,7 @@
 
 /* Rectangle 5 */
 .signinButton {
-    position: absolute;
+    position: relative;
     width: 315px;
     height: 80px;
     left: 174.5px;
@@ -61,17 +61,13 @@
 
 /* Email */
 .EmailText {
-    position: absolute;
-    width: 50px;
-    height: 23px;
-    left: 159px;
-    top: 333px;
+    left: 0%;
+    top: 40%;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
-    line-height: 23px;
-
+    
     color: #000000;
 }
 
@@ -81,30 +77,26 @@
 
 /* Sign In */
 .signinText {
-    position: absolute;
-    width: 146px;
-    height: 56px;
-    left: 263px;
-    top: 230px;
+    position: relative;
 
+    top: 200px;
     font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
     font-size: 48px;
-    line-height: 56px;
-
+    
     color: #000000;
 }
 
 
+.line1{
+    position: relative;
+    left: 20px;
+}
 
+.line2{
 
+}
 /* Password */
 .passwordText {
-    position: absolute;
-    width: 89px;
-    height: 23px;
-    left: 159px;
     top: 443px;
 
     font-family: 'Roboto';
@@ -119,31 +111,7 @@
 
 
 
-/* Line 1 */
-.line1 {
-    position: absolute;
-    width: 355px;
-    height: 0px;
-    left: 159px;
-    top: 395px;
 
-    border: 1px solid #000000;
-    transform: rotate(0.01deg);
-
-}
-
-
-/* Line 2 */
-.line2 {
-    position: absolute;
-    width: 355px;
-    height: 0px;
-    left: 159px;
-    top: 512px;
-
-    border: 1px solid #000000;
-
-}
 
 
 /* Sign In */
@@ -170,14 +138,6 @@
 }
 
 
-.signinText,
-.line1,
-.line2,
-.signinBoxText {
-    position: absolute;
-    left: 30%;
-    transform: translateX(-50%);
-}
 .passwordText{
     position: absolute;
     left: 23%;
