@@ -1,10 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
-
+import LoginScreen from './Components/LoginScreen/LoginScreen'
+import React from 'react';
 function App() {
   return (
     <div className="App">
-      <a href=''></a>
+      <LoginScreen/>
     </div>
   );
 }
