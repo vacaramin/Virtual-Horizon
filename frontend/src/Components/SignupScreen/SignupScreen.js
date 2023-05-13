@@ -1,6 +1,6 @@
 
 import './SignupScreen.css';
-
+import React from 'react';
 function SignupScreen() {
   return (
     <div className="SignupScreen">
