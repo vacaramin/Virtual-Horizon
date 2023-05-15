@@ -43,11 +43,11 @@
 }
 
 .signinButton {
-    position: relative;
-    width: 315px;
-    height: 80px;
+    position: absolute;
+    width: 45%;
+    height: 8%;
     left: 174.5px;
-    top: 100%;
+    top: 68%;
 
     display: flex;
     justify-content: center;
@@ -63,25 +63,7 @@
     color: #FFFFFF;
 }
 .signinButton:hover {
-    position: relative;
-    width: 315px;
-    height: 80px;
-    left: 174.5px;
-    top: 580px;
-
     background: rgb(71, 71, 71);
-    border-radius: 76px;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    
-    text-align: center;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-size: 20px;
-    color: #FFFFFF;
 }
 
 
@@ -92,7 +74,7 @@
 /* Sign In */
 .Welcome-Text {
     position: relative;
-
+    text-align: center;
     font-family: 'Roboto';
     font-size: 48px;
     
@@ -100,34 +82,12 @@
 }
 
 
-input {
-    border: none;
-    border-bottom: 1px solid black;
-    margin-bottom: 10px;
-    padding: 5px;
-    font-size: 16px;
-    width: 29%;
-}
 
 .rectangle {
     width: 100%;
-    height: 20%;
+    height: 10%;
 }
 
-
-
-
-
-/* Sign In */
-.signinBoxText {
-    position: relative;
-    top: 33%;
-    text-align: center;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-size: 20px;
-    color: #FFFFFF;
-}
 
 
 
@@ -137,8 +97,9 @@ input {
 
 
 .EmailText {
-    position: relative;
-    top: 50%;
+    position: absolute;
+    top: 40%;
+    left: 20%;
     text-align: left;
     font-family: 'Roboto';
     font-style: normal;
@@ -147,8 +108,23 @@ input {
     color: #000000;
 }
 
+.input-email {
+    position:absolute;
+    top: 44%;
+    left: 20%;
+    border: none;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 16px;
+    width: 39%;
+    outline: none;
+}
+
 .passwordTex {
-    top: 56%;
+    position:absolute;
+    top: 54%;
+    left: 20%;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
@@ -156,3 +132,25 @@ input {
     line-height: 23px;
     color: #000000;
 }
+
+
+.input-pw {
+    position: absolute;
+    top: 58%;
+    left: 20%;
+    border: none;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 16px;
+    width: 39%;
+    outline: none;
+}
+
+.login-text{
+    position:absolute;
+    top: 82%;
+    left:38%;
+}
+
+

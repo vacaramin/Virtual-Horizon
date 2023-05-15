@@ -19,7 +19,6 @@
     border-radius: 50px 0px 0px 50px;
 }
 
-/* Positioning for the two elements */
 .left-rectangle,
 .right-image {
     position: relative;
@@ -27,225 +26,131 @@
     left: 0;
 }
 
-/* Styling for the container element */
-.SignupScreen {
+.LoginScreen {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-/* Positioning for the two elements */
 .right-image {
     margin-right: 0px;
-    /* Adjust as needed */
+
 }
 
 .left-rectangle {
     margin-left: 0px;
-    /* Adjust as needed */
 }
- 
 
-.signUpButton {
+.signinButton {
     position: absolute;
-    width: 315px;
-    height: 80px;
-    left: 179px;
-    top: 787px;
+    width: 45%;
+    height: 8%;
+    left: 174.5px;
+    top: 68%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     background: #000000;
     border-radius: 76px;
-}
 
-.signUptext {
-    position: absolute;
-    width: 69px;
-    height: 23px;
-    left: 302px;
-    top: 815px;
-
+    text-align: center;
     font-family: 'Roboto';
     font-style: normal;
-    font-weight: 400;
     font-size: 20px;
-    line-height: 23px;
-
     color: #FFFFFF;
 }
-
-
-.nameText {
-    position: absolute;
-    width: 54px;
-    height: 23px;
-    left: 159px;
-    top: 333px;
-
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 23px;
-
-    color: #000000;
+.signinButton:hover {
+    background: rgb(71, 71, 71);
 }
 
 
-.signupButtonText {
-    position: absolute;
-    width: 164px;
-    height: 56px;
-    left: 263px;
-    top: 230px;
 
+
+
+
+/* Sign In */
+.Welcome-Text {
+    position: relative;
+    text-align: center;
     font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
     font-size: 48px;
-    line-height: 56px;
-
+    
     color: #000000;
 }
 
 
-.emailText {
-    position: absolute;
-    width: 50px;
-    height: 23px;
-    left: 159px;
-    top: 443px;
 
+.rectangle {
+    width: 100%;
+    height: 20%;
+}
+
+
+
+
+.left-rectangle {
+    position: relative;
+}
+
+
+.EmailText {
+    position: absolute;
+    top: 40%;
+    left: 20%;
+    text-align: left;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    color: #000000;
+}
+
+.input-email {
+    position:absolute;
+    top: 44%;
+    left: 20%;
+    border: none;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 16px;
+    width: 39%;
+    outline: none;
+}
+
+.passwordTex {
+    position:absolute;
+    top: 54%;
+    left: 20%;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
     line-height: 23px;
-
     color: #000000;
 }
 
 
-.line1 {
+.input-pw {
     position: absolute;
-    width: 355.01px;
-    height: 0px;
-    left: 158.99px;
-    top: 393.5px;
-
-    border: 1px solid #000000;
+    top: 58%;
+    left: 20%;
+    border: none;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 16px;
+    width: 39%;
+    outline: none;
 }
 
-.line2 {
-    position: absolute;
-    width: 355px;
-    height: 0px;
-    left: 159px;
-    top: 512px;
-
-    border: 1px solid #000000;
-    transform: rotate(0.16deg);
-}
-
-.password {
-    position: absolute;
-    width: 89px;
-    height: 23px;
-    left: 159px;
-    top: 560px;
-
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 23px;
-
-    color: #000000;
+.sign-up-text{
+    position:absolute;
+    top: 82%;
+    left:40%;
 }
 
 
-.contactNumberText {
-    position: absolute;
-    width: 147px;
-    height: 23px;
-    left: 159px;
-    top: 670px;
-
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 23px;
-
-    color: #000000;
-}
-
-
-.line3 {
-    position: absolute;
-    width: 355px;
-    height: 0px;
-    left: 159px;
-    top: 622px;
-
-    border: 1px solid #000000;
-    transform: rotate(0.01deg);
-
-}
-
-
-.line4 {
-    position: absolute;
-    width: 355px;
-    height: 0px;
-    left: 159px;
-    top: 739px;
-
-    border: 1px solid #000000;
-} 
-.line1,
-.line2,
-.line3,
-.line4 {
-    position: absolute;
-    left: 30%;
-    transform: translateX(-50%);
-}
-
-.nameText,
-.emailText
-{
-    position: absolute;
-    left: 22%;
-    transform: translateX(-50%);
-}
-
-.signupButtonText{
-    position: absolute;
-    left: 29%;
-    transform: translateX(-50%);
-}
-
-.password{
-    position: absolute;
-    left: 23%;
-    transform: translateX(-50%);
-}
-
-.contactNumberText{
-    position: absolute;
-    left: 24.5%;
-    transform: translateX(-50%);
-} 
-
-.signUptext{
-    position: absolute;
-    left: 29%;
-    transform: translateX(-50%);
-}
-
-.signUpButton{
-    position: absolute;
-    left: 30%;
-    transform: translateX(-50%);
-}
