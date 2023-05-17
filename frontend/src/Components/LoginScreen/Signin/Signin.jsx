@@ -3,7 +3,7 @@ import './Signin.css'
 import logo from './logo.svg'
 import { Link } from 'react-router-dom';
 function Signin(props) {
-  if (props.type == 'student'){
+  if (props.type === 'student'){
     return (
     <div className="left-rectangle">
       <div className="rectangle">
@@ -38,7 +38,7 @@ function Signin(props) {
       </div>
     </div>
   );}
-  else if (props.type == 'teacher'){
+  else if (props.type === 'teacher'){
     return(
         <div className="left-rectangle">
         <div className="rectangle">

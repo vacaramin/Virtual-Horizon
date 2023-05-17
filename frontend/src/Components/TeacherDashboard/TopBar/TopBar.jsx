@@ -14,7 +14,7 @@ function TopBar() {
       </div>
       <div className="profile-info">
         <p>Welcome, Waqar!</p>
-        <img src={profilePic} alt="Profile picture" className="profile-pic" />
+        <img src={profilePic} alt="Profile" className="profile-pic" />
       </div>
     </div>
   );

@@ -6,13 +6,13 @@ import Signin from './Signin/Signin';
 function LoginScreen(props) {
     return (
         <div className="LoginScreen">
-            
-            <Signin type ={props.type}/>
+
+            <Signin type={props.type} />
 
             <div className='right-image'>
-    <div className='background'></div>
-    <img src={logo} alt='logo' className='login-logo' />
-</div>
+                <div className='background'></div>
+                <img src={logo} alt='logo' className='login-logo1' />
+            </div>
 
         </div>
     );
