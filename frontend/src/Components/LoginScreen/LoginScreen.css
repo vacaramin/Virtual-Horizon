@@ -5,12 +5,7 @@
     align-items: center;
 }
 
-.right-image {
-    width: 606px;
-    height: 856px;
-    background: url(Login_BG.png);
-    border-radius: 0px 50px 50px 0px;
-}
+
 
 .left-rectangle {
     width: 654px;
@@ -19,12 +14,12 @@
     border-radius: 50px 0px 0px 50px;
 }
 
-.left-rectangle,
-.right-image {
+.left-rectangle{
     position: relative;
     top: 0;
     left: 0;
 }
+
 
 .LoginScreen {
     display: flex;
@@ -33,10 +28,7 @@
     height: 100vh;
 }
 
-.right-image {
-    margin-right: 0px;
 
-}
 
 .left-rectangle {
     margin-left: 0px;
@@ -46,7 +38,7 @@
     position: absolute;
     width: 45%;
     height: 8%;
-    left: 174.5px;
+    left: 25%;
     top: 68%;
 
     display: flex;
@@ -81,13 +73,43 @@
     color: #000000;
 }
 
+.login-logo{
+    width: 100%;
 
+
+}
 
 .rectangle {
     width: 100%;
     height: 10%;
+
+}
+.right-image {
+    display: inline-block;
+    width: 606px;
+    height: 856px;
+    border-radius: 0px 50px 50px 0px;
+    margin-bottom: 41px;
 }
 
+.right-image .background {
+    background-image: url(Login_BG.png);
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+}
+
+.right-image img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 1;
+}
 
 
 
@@ -98,7 +120,7 @@
 
 .EmailText {
     position: absolute;
-    top: 40%;
+    top: 45%;
     left: 20%;
     text-align: left;
     font-family: 'Roboto';
@@ -108,22 +130,22 @@
     color: #000000;
 }
 
-.input-email {
+.input-email1 {
     position:absolute;
-    top: 44%;
+    top: 45%;
     left: 20%;
     border: none;
     border-bottom: 1px solid black;
     margin-bottom: 10px;
     padding: 5px;
     font-size: 16px;
-    width: 39%;
+    width: 43%;
     outline: none;
 }
 
 .passwordTex {
     position:absolute;
-    top: 54%;
+    top: 65%;
     left: 20%;
     font-family: 'Roboto';
     font-style: normal;
@@ -134,20 +156,20 @@
 }
 
 
-.input-pw {
+.input-pw1 {
     position: absolute;
-    top: 58%;
+    top: 55%;
     left: 20%;
     border: none;
     border-bottom: 1px solid black;
     margin-bottom: 10px;
     padding: 5px;
     font-size: 16px;
-    width: 39%;
+    width: 43%;
     outline: none;
 }
 
-.login-text{
+.sign-up-text{
     position:absolute;
     top: 82%;
     left:38%;

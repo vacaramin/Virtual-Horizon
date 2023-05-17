@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 .right-image {
@@ -17,16 +18,18 @@
     height: 856px;
     background: #FFFFFF;
     border-radius: 50px 0px 0px 50px;
+    position: relative;
+    top:10%;
 }
 
 .left-rectangle,
 .right-image {
     position: relative;
-    top: 0;
+    top: 20px;
     left: 0;
 }
 
-.LoginScreen {
+.SignupScreen {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,9 +47,9 @@
 
 .signinButton {
     position: absolute;
-    width: 45%;
-    height: 8%;
-    left: 174.5px;
+    width: 42%;
+    height: 7%;
+    left: 25%;
     top: 68%;
 
     display: flex;
@@ -79,13 +82,14 @@
     font-size: 48px;
     
     color: #000000;
+    margin-top: 15%;
 }
 
 
 
 .rectangle {
     width: 100%;
-    height: 20%;
+    height: 10%;
 }
 
 
@@ -95,10 +99,33 @@
     position: relative;
 }
 
+.NameText {
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    text-align: left;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    color: #000000;
+}
+.input-name {
+    position:absolute;
+    top: 33%;
+    left: 20%;
+    border: none;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 16px;
+    width: 39%;
+    outline: none;
+}
 
 .EmailText {
     position: absolute;
-    top: 40%;
+    top: 41%;
     left: 20%;
     text-align: left;
     font-family: 'Roboto';
@@ -110,7 +137,7 @@
 
 .input-email {
     position:absolute;
-    top: 44%;
+    top: 41%;
     left: 20%;
     border: none;
     border-bottom: 1px solid black;
@@ -123,7 +150,7 @@
 
 .passwordTex {
     position:absolute;
-    top: 54%;
+    top: 49%;
     left: 20%;
     font-family: 'Roboto';
     font-style: normal;
@@ -136,7 +163,20 @@
 
 .input-pw {
     position: absolute;
-    top: 58%;
+    top: 49%;
+    left: 20%;
+    border: none;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 16px;
+    width: 39%;
+    outline: none;
+}
+
+.input-contact {
+    position: absolute;
+    top: 57%;
     left: 20%;
     border: none;
     border-bottom: 1px solid black;
@@ -150,7 +190,8 @@
 .sign-up-text{
     position:absolute;
     top: 82%;
-    left:40%;
+    left:38%;
+    text-align: center;
 }
 
 
