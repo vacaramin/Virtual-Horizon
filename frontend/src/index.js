@@ -1,17 +1,18 @@
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SignupScreen from './Components/SignupScreen/SignupScreen'
 import LoginScreen from './Components/LoginScreen/LoginScreen';
-import studentDashboard from './Components/Student-Dashboard/student-Dashboard'
+import StudentDashboard from './Components/StudentDashboard/studentDashboard'
+import App from './App';
+import TeacherDashboard from './Components/TeacherDashboard/TeacherDashboard';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LoginScreen/>,
+    element: <App/>,
   },
   {
     path: "/sign-up",
@@ -23,7 +24,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: <studentDashboard/>,
+    element: <StudentDashboard/>,
+  },
+  {
+    path: "/teacher",
+    element: <TeacherDashboard/>,
   },
   
   

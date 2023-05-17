@@ -1,39 +1,41 @@
 
 import './SignupScreen.css';
-
 import { Link } from 'react-router-dom';
 import React from 'react';
 function SignupScreen() {
-  return (
-    <div className="SignupScreen">
+    return (
+        
+        <div className="SignupScreen">
             <div className='left-rectangle'>
-                <div className='rectangle'></div>
-                <div style={{textAlign: "center"}}>
+                <div >
                     <div className='Welcome-Text'>Welcome to Virtual Horizon</div>
                 </div>
 
                 <div style={{ display: "block" }}>
-                    <label htmlFor="email" className='EmailText'>Email</label>
-                    <br />
 
-                    <input className='input-email' id="email" />
+                    <input className='input-name' id="name" placeholder='Name' />
                     <br />
-
-                    <label htmlFor="password" className='passwordTex'>Password</label>
+                    <input className='input-email' id="email" placeholder='email'/>
+     
                     <br />
-                    <input className='input-pw' id="password" />
+                    
+                    <input className='input-pw' id="password"  type = 'password' placeholder='password'/>
+                    
+                    <br />
+                    <input className='input-contact' id="Contact" placeholder='Contact Number'/>
+                
                 </div>
                 <div>
 
-                    <Link to="/home">
+                    <Link to="/login">
                         <div className='signinButton'>
-                            Sign up
+                            Sign Up
                         </div>
                     </Link>
 
                 </div>
 
-                <div className='login-text'><i>Already registered? <Link to="/login">Login here</Link></i></div>
+                <div className='sign-up-text'><i style={{textAlign:"center"}}>Already Registered? <Link to="/login">Login</Link></i></div>
             </div>
 
             <div className='right-image'></div>
@@ -42,7 +44,8 @@ function SignupScreen() {
 
 
         </div>
-  );
+
+    );
 }
 
 export default SignupScreen;
