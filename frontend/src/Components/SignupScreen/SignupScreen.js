@@ -2,6 +2,7 @@
 import './SignupScreen.css';
 import { Link } from 'react-router-dom';
 import React from 'react';
+import logo from './logo.svg'
 function SignupScreen() {
     return (
         
@@ -27,7 +28,7 @@ function SignupScreen() {
                 </div>
                 <div>
 
-                    <Link to="/login">
+                    <Link to="/login-student">
                         <div className='signinButton'>
                             Sign Up
                         </div>
@@ -35,10 +36,13 @@ function SignupScreen() {
 
                 </div>
 
-                <div className='sign-up-text'><i style={{textAlign:"center"}}>Already Registered? <Link to="/login">Login</Link></i></div>
+                <div className='sign-up-text'><i style={{textAlign:"center"}}>Already Registered? <Link to="/login-student">Login</Link></i></div>
             </div>
 
-            <div className='right-image'></div>
+            <div className='right-image'>
+                <div className='background'></div>
+                <img src={logo} alt='logo' className='login-logo1' />
+            </div>
 
 
 

@@ -1,7 +1,6 @@
 import React from "react";
 import "./Sidebar.css";
 import menuIcon from "./menu-icon.svg";
-import settingsIcon from "./settings-Icon.svg";
 import home from './Logo of Student Dashboard/Home.svg'
 import subjecticon from './Logo of Student Dashboard/Subjects.svg'
 import timetable from './Logo of Student Dashboard/Time-Table.svg'

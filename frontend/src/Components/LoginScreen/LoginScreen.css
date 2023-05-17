@@ -18,8 +18,10 @@
 }
 
 
-.login-logo{
-    width: 100%;
+.login-logo1{
+    width: 40%;
+    position: absolute;
+    left:60%;
 
 
 }
