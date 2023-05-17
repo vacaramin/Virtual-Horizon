@@ -19,15 +19,20 @@ const router = createBrowserRouter([
     element: <SignupScreen/>,
   },
   {
-    path: "/login",
-    element: <LoginScreen/>,
+    path: "/login-teacher",
+    element: <LoginScreen type = 'teacher'/>,
+  },
+
+  {
+    path: "/login-student",
+    element: <LoginScreen type = 'student'/>,
   },
   {
-    path: "/home",
+    path: "/home-student",
     element: <StudentDashboard/>,
   },
   {
-    path: "/teacher",
+    path: "/home-teacher",
     element: <TeacherDashboard/>,
   },
   
