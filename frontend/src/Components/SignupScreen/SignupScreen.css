@@ -75,13 +75,13 @@
 
 
 /* Sign In */
-.Welcome-Text {
+.Welcome-Text1 {
     position: relative;
     text-align: center;
     font-family: 'Roboto';
     font-size: 48px;
     
-    color: #000000;
+    color: black;
     margin-top: 15%;
 }
 
@@ -189,7 +189,7 @@
 
 .sign-up-text{
     position:absolute;
-    top: 82%;
+    top: 89%;
     left:38%;
     text-align: center;
 }
