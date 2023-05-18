@@ -1,0 +1,7 @@
+.default-step {
+    color: gray; /* Default color for unselected steps */
+  }
+  
+  .selected-step {
+    color: red; /* Color for the selected step */
+  }
