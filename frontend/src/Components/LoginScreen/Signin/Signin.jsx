@@ -1,16 +1,20 @@
 import React from "react";
 import './Signin.css'
 import logo from './logo.svg'
+
+import logo2 from './Logo2.svg'
 import { Link } from 'react-router-dom';
 function Signin(props) {
   if (props.type === 'student'){
     return (
     <div className="left-rectangle">
       <div className="rectangle">
-        <img src={logo} alt="logo" class="login-logo" />
-      </div>
+      <img src={logo2} alt="logo" width={'100%'} style={{opacity:0.2, marginBottom: '5%'}} />
+      
+     </div>
 
       <div>
+      
         <div className="Welcome-Text">Welcome to Virtual Horizon<br/> </div>
       
       </div>

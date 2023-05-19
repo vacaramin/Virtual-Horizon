@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import "./SignupForm.css";
 import { styled } from "@mui/system";
 import { Stepper, Step, StepLabel } from "@mui/material";
-import { withStyles } from '@material-ui/core/styles';
-import { StepConnector } from '@mui/material';
+
 
 import {
   Button,
@@ -14,7 +13,7 @@ import {
   RadioGroup,
   Radio,
 } from "@mui/material";
-import { hover } from "@testing-library/user-event/dist/hover";
+
 
 const Container = styled("div")({
   width: "80%",
@@ -25,7 +24,7 @@ const Container = styled("div")({
   margin: "0 auto",
 });
 const StepperContainer = styled("div")({
-  margin: "7% 0", // Adjust the margin as needed to position the steps
+  margin: "7%",
 });
 
 const BackButton = styled(Button)({
@@ -34,11 +33,11 @@ const BackButton = styled(Button)({
   borderRadius: "76px",
   width: "20%",
   color: "white",
-  ":hover": {
+  "&:hover": {
     background: "#f7cb46",
     color: "black",
   },
-  ":disabled": {
+  "&:disabled": {
     background: "gray",
     color: "white",
   },
@@ -50,7 +49,7 @@ const NextButton = styled(Button)({
   borderRadius: "76px",
   color: "white",
   width: "50%",
-  ":hover": {
+  "&:hover": {
     background: "#f7cb46",
     color: "black",
   },
@@ -61,6 +60,7 @@ const Instructions = styled(Typography)({
   marginBottom: "20%",
 });
 
+
 const steps = [
   "Personal Information",
   "Contact Information",
@@ -69,25 +69,7 @@ const steps = [
   "Additional Information",
   "Present Address",
 ];
-// Custom styles for the StepConnector
-const CustomStepConnector = withStyles({
-    active: {
-      '& $line': {
-        backgroundColor: 'red', // Color for the active (selected) step
-      },
-    },
-    completed: {
-      '& $line': {
-        backgroundColor: 'green', // Color for the completed steps
-      },
-    },
-    line: {
-      height: 3, // Adjust the height of the connector line
-      border: 0,
-      backgroundColor: 'gray', // Color for the default (unselected) steps
-      borderRadius: 1,
-    },
-  })(StepConnector);
+
 
 const SignupForm = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -203,18 +185,15 @@ const SignupForm = () => {
   return (
     <Container>
       <StepperContainer>
-        <Stepper
-          activeStep={activeStep}
-          alternativeLabel
-          connector={<CustomStepConnector />}
-        >
-          {steps.map((label) => (
+        <Stepper activeStep={activeStep} alternativeLabel>
+          {steps.map((label, index) => (
             <Step key={label}>
-              <StepLabel>{label}</StepLabel>
+              <StepLabel>
+                {label}
+              </StepLabel>
             </Step>
           ))}
         </Stepper>
-        ;
       </StepperContainer>
       <div>
         {activeStep === steps.length ? (
