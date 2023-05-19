@@ -11,13 +11,15 @@
   }
   .sidebar-collapsed .profile {
     position: absolute;
-   }
- 
+    
+  }
+   
   
   .sidebar-collapsed .profile img {
     max-width: 50px; /* adjust the size as needed */
     max-height: 50px; /* adjust the size as needed */
     border-radius: 50%;
+
   }
   
   .sidebar-header {
@@ -36,6 +38,7 @@
     position: absolute;
     width: 100%;
     bottom: 0px;
+    left: 0px;
     color: white;
   }
   

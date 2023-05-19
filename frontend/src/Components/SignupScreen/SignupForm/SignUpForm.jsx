@@ -29,7 +29,7 @@ const StepperContainer = styled("div")({
 
 const BackButton = styled(Button)({
   marginRight: "15%",
-  background: "black",
+  background: '#243047',
   borderRadius: "76px",
   width: "20%",
   color: "white",
@@ -45,7 +45,7 @@ const BackButton = styled(Button)({
 
 const NextButton = styled(Button)({
   marginRight: "0%",
-  background: "black",
+  background: '#243047',
   borderRadius: "76px",
   color: "white",
   width: "50%",

@@ -28,7 +28,7 @@ span.t1 {
   left: 30%;
   transform: translateX(0%);
   animation-name: rainbow-ellipse;
-  animation-duration: 10s;
+  animation-duration: 5s;
   animation-iteration-count: infinite;
 }
 
@@ -57,12 +57,19 @@ span.t1 {
     filter: hue-rotate(0deg);
   }
   20% {
-    transform: translateX(60%) translateY(40%) rotate(45deg) scale(1.2);
+    transform: translateX(60%) translateY(30%) rotate(49deg) scale(1.2);
     filter: hue-rotate(0deg);
   }
-  
+  30% {
+    transform: translateX(70%) translateY(30%) rotate(30deg) scale(1.2);
+    filter: hue-rotate(180deg);
+  }
+  40% {
+    transform: translateX(70%) translateY(30%) rotate(30deg) scale(1.2);
+    filter: hue-rotate(0deg);
+  }
   50% {
-    transform: translateX(50%) translateY(20%) rotate(20deg) scale(1.2);
+    transform: translateX(0%) translateY(0%) rotate(0deg) scale(1.15);
     filter: hue-rotate(0deg);
   }
   60% {
@@ -70,18 +77,18 @@ span.t1 {
     filter: hue-rotate(0deg);
   }
   70% {
-    transform: translateX(0%) translateY(0%) rotate(0deg) scale(1);
+    transform: translateX(00%) translateY(0%) rotate(0deg) scale(1);
     filter: hue-rotate(0deg);
   }
   80% {
     transform: translateX(0%) translateY(0%) rotate(0deg) scale(1);
     filter: hue-rotate(0deg);
   }90% {
-    transform: translateX(0%) translateY(-10%) rotate(0deg) scale(1);
+    transform: translateX(0%) translateY(0%) rotate(0deg) scale(1);
     filter: hue-rotate(0deg);
   }
   100% {
-    transform: translateX(0%) translateY(-10%) rotate(0deg) scale(1);
+    transform: translateX(0%) translateY(0%) rotate(0deg) scale(1);
     filter: hue-rotate(0deg);
   }
 }
