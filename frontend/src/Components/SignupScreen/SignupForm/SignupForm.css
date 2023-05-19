@@ -1,7 +1,7 @@
-.default-step {
+.MuiStepIcon-active {
     color: gray; /* Default color for unselected steps */
   }
   
-  .selected-step {
+  .MuiStepIcon-completed {
     color: red; /* Color for the selected step */
   }

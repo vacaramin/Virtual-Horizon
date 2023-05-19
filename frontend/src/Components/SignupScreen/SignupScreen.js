@@ -2,16 +2,18 @@ import './SignupScreen.css';
 import { Link } from 'react-router-dom';
 import React from 'react';
 import logo from './logo.svg'
-import Button from '@mui/material/Button';
+import logo2 from './Logo2.svg'
 import SignupForm from './SignupForm/SignUpForm';
 function SignupScreen() {
     return (
 
         <div className="SignupScreen">
             <div className='left-rectangle'>
+            <img src={logo2} alt="logo" width={'100%'} style={{position: 'absolute', opacity:0.08, marginBottom: '5%'}} />
+      
                 <div className='Welcome-Text1'>Welcome to Virtual Horizon</div>
                 <br/>
-
+                
                 <SignupForm class = "sign-up-form" />
                 {/* 
 
