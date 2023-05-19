@@ -1,13 +1,12 @@
 import React from "react";
 import "./Sidebar.css";
 import menuIcon from "./menu-icon.svg";
-import home from './Logo of Student Dashboard/Home.svg'
-import subjecticon from './Logo of Student Dashboard/Subjects.svg'
-import timetable from './Logo of Student Dashboard/Time-Table.svg'
-import Tutor from './Logo of Student Dashboard/Tutor.svg'
-import classlinks from './Logo of Student Dashboard/Class-links.svg'
-import reportcard from './Logo of Student Dashboard/Report-Card.svg'
-import settings from './Logo of Student Dashboard/Setting.svg'
+import home from "./Logos of Teacher Dashboard/Home.svg";
+import settings from "./Logos of Teacher Dashboard/Settings.svg";
+import notification from "./Logos of Teacher Dashboard/Notifications.svg";
+import classes from "./Logos of Teacher Dashboard/Class-links.svg";
+import wallet from "./Logos of Teacher Dashboard/Wallet.svg";
+import report from './Logos of Teacher Dashboard/report.png'
 function Sidebar(props) {
   const { isSidebarOpen, toggleSidebar } = props;
 
@@ -25,36 +24,28 @@ function Sidebar(props) {
           {isSidebarOpen && <span>Home</span>}
         </div>
         <div className="sidebar-item">
-          <img src={subjecticon} alt="Settings icon" />
-          {isSidebarOpen && <span>Subjects</span>}
+          <img src={classes} alt="Settings icon" />
+          {isSidebarOpen && <span>Classes</span>}
         </div>
 
         <div className="sidebar-item">
-          <img src={timetable} alt="Settings icon" />
-          {isSidebarOpen && <span>Time Table</span>}
+          <img src={notification} alt="Settings icon" />
+          {isSidebarOpen && <span>Notifications</span>}
         </div>
 
         <div className="sidebar-item">
-          <img src={Tutor} alt="Settings icon" />
-          {isSidebarOpen && <span>Tutor</span>}
-        </div>
-
-        <div className="sidebar-item">
-          <img src={classlinks} alt="Settings icon" />
-          {isSidebarOpen && <span>Class Links</span>}
-        </div>
-
-        <div className="sidebar-item">
-          <img src={reportcard} alt="Settings icon" />
-          {isSidebarOpen && <span>Report Card</span>}
+          <img src={wallet} alt="Settings icon" />
+          {isSidebarOpen && <span>Wallet</span>}
         </div>
         <div className="sidebar-item">
           <img src={settings} alt="Settings icon" />
           {isSidebarOpen && <span>Settings</span>}
         </div>
-      </div>
-      <div className="sidebar-footer">
-          <span>Report a problem</span>
+
+        <div className="sidebar-footer">
+        <img src={report} alt="Settings icon" />
+          {isSidebarOpen && <span>Report a Problem</span>}
+        </div>
       </div>
     </div>
   );
