@@ -15,7 +15,7 @@ p.omage {
   top: 10%;
   left: 35%;
   transform: translateX(-50%);
-  animation: rainbow-ellipse 5s linear infinite;
+  animation: rainbow-ellipse 5s linear 1;
 }
 
 span.t1 {
@@ -29,7 +29,7 @@ span.t1 {
   transform: translateX(0%);
   animation-name: rainbow-ellipse;
   animation-duration: 5s;
-  animation-iteration-count: infinite;
+  animation-iteration-count: 1;
 }
 
 @media (max-width: 768px) {
