@@ -1,7 +1,20 @@
 package initializers
 
-func ConnectToDb() {
+import (
+	"os"
 
-	//dsn := "host=localhost user=gorm password=gorm dbname=gorm port=9920 sslmode=disable TimeZone=Asia/Shanghai"
-	//db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+)
+
+var DB *gorm.DB
+
+func ConnectToDb() {
+	var err error
+	dsn := os.Getenv("DB")
+
+	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	if err != nil {
+		panic(err)
+	}
 }
