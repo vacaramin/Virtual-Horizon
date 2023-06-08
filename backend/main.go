@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Virtual-Horizon/controllers"
 	"Virtual-Horizon/initializers"
 	"fmt"
 	"net/http"
@@ -10,15 +11,14 @@ import (
 
 func init() {
 	initializers.LoadEnvVariables()
+	initializers.ConnectToDb()
+	initializers.SyncDatabase()
 }
 func main() {
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-			"email":   "awais@gmail.com",
-		})
-	})
+	//setting routes here
+	r.GET("/ping", pong)
+
 	// listen and serve on
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{
@@ -26,6 +26,13 @@ func main() {
 			"body":  "<h1>Hello World</h1>",
 		})
 	})
+	r.POST("/signup", controllers.Signup)
 	r.Run()
 	fmt.Println("Hello, world!")
+}
+
+func pong(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"message": "pong",
+	})
 }
