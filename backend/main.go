@@ -3,6 +3,7 @@ package main
 import (
 	"Virtual-Horizon/controllers"
 	"Virtual-Horizon/initializers"
+	"Virtual-Horizon/middleware"
 	"fmt"
 	"net/http"
 
@@ -27,6 +28,8 @@ func main() {
 		})
 	})
 	r.POST("/signup", controllers.Signup)
+	r.POST("/login", controllers.Login)
+	r.GET("/validate", middleware.RequireAuth, controllers.Validate)
 	r.Run()
 	fmt.Println("Hello, world!")
 }
