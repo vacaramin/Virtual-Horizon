@@ -17,6 +17,9 @@ func init() {
 }
 func main() {
 	r := gin.Default()
+	// Add CORS middleware
+	r.Use(corsMiddleware())
+
 	//setting routes here
 	r.GET("/ping", pong)
 
@@ -38,4 +41,18 @@ func pong(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"message": "pong",
 	})
+}
+func corsMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Origin, Authorization, Content-Type")
+
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(204)
+			return
+		}
+
+		c.Next()
+	}
 }

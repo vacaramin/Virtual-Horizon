@@ -60,7 +60,9 @@ func Login(c *gin.Context) {
 		Email    string
 		Password string
 	}
-
+	c.Header("Access-Control-Allow-Methods", "POST") // Add other allowed methods if needed
+	c.Header("Access-Control-Allow-Headers", "Content-Type, Authorization")
+	c.Header("Access-Control-Allow-Origin", "*")
 	if c.Bind(&body) != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Invalid request body",
@@ -102,13 +104,13 @@ func Login(c *gin.Context) {
 		return
 	}
 	//send it back
-	c.SetSameSite(http.SameSiteLaxMode)
+
 	c.SetCookie("Authorization", tokenString, 3600*24*7, "", "", false, true)
 
 	//uncomment if jwt is to be sent in response body
-	// c.JSON(http.StatusOK, gin.H{
-	// 	"token": tokenString,
-	// })
+	c.JSON(http.StatusOK, gin.H{
+		"token": tokenString,
+	})
 
 }
 
