@@ -1,20 +1,38 @@
-import React from "react";
+import React, {useState} from "react";
 import "./Signin.css";
-import logo from "./logo.svg";
 
 import logo2 from "./Logo2.svg";
 import { Link } from "react-router-dom";
 import {
-  Button,
-  Typography,
   TextField,
-  FormControl,
-  FormControlLabel,
-  RadioGroup,
-  Radio,
 } from "@mui/material";
 
 function Signin(props) {
+  const [email,setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = () => {
+    const payload = { email, password };
+    fetch("http://localhost:4000/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json"},
+      body: JSON.stringify(payload),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      //strong the recieving token in data to local browswer cookies
+      localStorage.setItem("token", data.token);
+      //redirect to home page
+     
+    })
+    .catch((error) => {
+      console.log(error);
+      });
+      
+  }
+
+
   if (props.type === "student") {
     return (
       <div className="left-rectangle">
@@ -37,14 +55,26 @@ function Signin(props) {
         </div>
 
         <div>
-          <TextField id="Email" label="Email" halfWidth style={{marginTop: "20%", marginLeft:'32%'}} />
+          <TextField 
+          id="Email" 
+          label="Email" 
+          halfWidth 
+          style={{marginTop: "20%", marginLeft:'32%'}}
+          value = {email}
+          onChange={(e) => setEmail(e.target.value)} />
           <br />
-          <TextField id="Password" type = "password" label="Password" style={{marginTop: "3%", marginLeft:'32%'}} halfWidth />
+          <TextField id="Password"
+            type = "password"
+            label="Password"
+            style={{marginTop: "3%", marginLeft:'32%'}}
+            halfWidth
+            value  = {password}
+            onChange={(e) => setPassword(e.target.value)}
+            />
         </div>
         <div>
-          <Link to="/home-student">
-            <div className="signinButton">Sign in</div>
-          </Link>
+            <div className="signinButton" onClick={handleLogin}>Sign in</div>
+          
         </div>
 
         <div className="sign-up-text">
@@ -57,37 +87,42 @@ function Signin(props) {
   } else if (props.type === "teacher") {
     return (
       <div className="left-rectangle">
-        <div className="rectangle">
-          <img src={logo} alt="logo" class="login-logo" />
-        </div>
+      <div className="rectangle">
+        <img
+          src={logo2}
+          alt="logo"
+          width={"100%"}
+          style={{ opacity: 0.05, marginBottom: "5%" }}
+        />
+      </div>
+      
+      
 
-        <div>
-          <div className="Welcome-Text">Welcome to Virtual Horizon</div>
-        </div>
-
-        <div style={{ display: "block" }}>
-          <input className="input-email1" id="email" placeholder="Email" />
-
-          <input
-            className="input-pw1"
-            id="password"
-            placeholder="Password"
-            type="password"
-          />
-        </div>
-        <div>
-          <Link to="/home-teacher">
-            <div className="signinButton">Sign in</div>
-          </Link>
-        </div>
-
-        <div className="sign-up-text">
-          <i>
-            new here? <Link to="/sign-up">Sign up</Link>
-          </i>
+      <div>
+        <div className="Welcome-Text">
+          Welcome to Virtual Horizon
+          <br />{" "}
         </div>
       </div>
-    );
+
+      <div>
+        <TextField id="Email" label="Email" halfWidth style={{marginTop: "20%", marginLeft:'32%'}} />
+        <br />
+        <TextField id="Password" type = "password" label="Password" style={{marginTop: "3%", marginLeft:'32%'}} halfWidth />
+      </div>
+      <div>
+        <Link to="/home-student">
+          <div className="signinButton">Sign in</div>
+        </Link>
+      </div>
+
+      <div className="sign-up-text">
+        <i>
+          new here? <Link to="/sign-up">Sign up</Link>
+        </i>
+      </div>
+    </div>
+  );
   } else {
     console.log(
       "In Signin component only accepted values of props are teacher or student"
