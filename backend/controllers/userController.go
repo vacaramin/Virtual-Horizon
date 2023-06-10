@@ -65,7 +65,8 @@ func Login(c *gin.Context) {
 	c.Header("Access-Control-Allow-Origin", "*")
 	if c.Bind(&body) != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Invalid request body",
+			"status": "failed",
+			"error":  "Invalid request body",
 		})
 		return
 	}
@@ -86,7 +87,8 @@ func Login(c *gin.Context) {
 	err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(body.Password))
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{
-			"error": "Invalid Email or Password",
+			"status": "failed",
+			"error":  "Invalid Email or Password",
 		})
 		return
 	}
@@ -100,18 +102,20 @@ func Login(c *gin.Context) {
 	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET")))
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
-			"error": "Error while generating token",
+			"status": "failed",
+			"error":  "Error while generating token",
 		})
 		return
 	}
 	//send it back
 
 	c.SetCookie("Authorization", tokenString, 3600*24*7, "", "", false, true)
-
+	c.SetCookie("User", user.Name, 3600*24*7, "", "", false, true)
 	//uncomment if jwt is to be sent in response body
 	c.JSON(http.StatusOK, gin.H{
-		"status": "success",
-		"token":  tokenString,
+		"status":   "success",
+		"token":    tokenString,
+		"username": user.Name,
 	})
 
 }
