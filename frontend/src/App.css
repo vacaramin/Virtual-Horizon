@@ -77,7 +77,7 @@ span.t1 {
     filter: hue-rotate(0deg);
   }
   70% {
-    transform: translateX(00%) translateY(0%) rotate(0deg) scale(1);
+    transform: translateX(0%) translateY(0%) rotate(0deg) scale(1);
     filter: hue-rotate(0deg);
   }
   80% {

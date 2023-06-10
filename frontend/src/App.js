@@ -14,6 +14,7 @@ function App() {
       <div className='logo-container'>
         <img src={logo} className='appimg' alt='logo' />
       </div>
+      
       <Link to="/login-student">
         <div className='Button1'>
           Student Login
