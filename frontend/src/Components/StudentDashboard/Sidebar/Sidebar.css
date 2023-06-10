@@ -76,6 +76,15 @@
   .sidebar-item:hover {
     background-color: #e0e0e0;
   }
+  .sidebar-item.selected {
+    background-color: #e0e0e0;
+    font-weight: bold;
+    color: #000000;
+  }
+  
+  .sidebar-item.selected:hover {
+    background-color: #e0e0e0;
+  }
   
   .sidebar-item img {
     width: 24px;
