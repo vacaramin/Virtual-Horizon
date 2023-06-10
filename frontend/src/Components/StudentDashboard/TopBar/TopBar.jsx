@@ -13,7 +13,7 @@ function TopBar() {
         <h2>Virtual Horizon</h2>
       </div>
       <div className="profile-info">
-        <p>Welcome, Waqar!</p>
+        <p>Welcome, {localStorage.username}</p>
         <img src={profilePic} alt="Profile" className="profile-pic" />
       </div>
     </div>
