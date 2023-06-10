@@ -1,5 +1,3 @@
-.PHONY: db-start db-stop db-restart db-status start-server
-
 db-start:
 	sudo service postgresql start
 
@@ -14,3 +12,11 @@ db-status:
 
 start-server:
 	go run main.go
+
+migrate-up:
+	migrate -database "postgres://admin:helloworld@localhost:5432/postgres" -path Migrations/ up
+
+migrate-down:
+	migrate -database "postgres://admin:helloworld@localhost:5432/postgres" -path Migrations/ down
+
+.PHONY: db-start db-stop db-restart db-status start-server migrate-up migrate-down

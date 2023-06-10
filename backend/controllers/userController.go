@@ -75,7 +75,8 @@ func Login(c *gin.Context) {
 	initializers.DB.First(&user, "email = ?", body.Email)
 	if user.ID == 0 {
 		c.JSON(http.StatusUnauthorized, gin.H{
-			"error": "Invalid Email or Password",
+			"status": "failed",
+			"error":  "Invalid Email or Password",
 		})
 		return
 	}
@@ -109,7 +110,8 @@ func Login(c *gin.Context) {
 
 	//uncomment if jwt is to be sent in response body
 	c.JSON(http.StatusOK, gin.H{
-		"token": tokenString,
+		"status": "success",
+		"token":  tokenString,
 	})
 
 }
@@ -118,12 +120,14 @@ func Validate(c *gin.Context) {
 	user, exist := c.Get("user")
 	if !exist {
 		c.JSON(http.StatusUnauthorized, gin.H{
-			"error": "Invalid user",
+			"status": "fail",
+			"error":  "Invalid user",
 		})
 		return
 	} else {
 
 		c.JSON(http.StatusOK, gin.H{
+			"status":  "success",
 			"message": user,
 		})
 

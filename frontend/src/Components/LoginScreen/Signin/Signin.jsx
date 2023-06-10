@@ -21,14 +21,14 @@ function Signin(props) {
     .then((response) => response.json())
     .then((data) => {
     //if responsce is ok
-      if (data.status === "ok") {
+      if (data.status === "success") {
         console.log("Login Successful");
       } else {
         console.log("Login Failed");
       }
 
       console.log(data);
-      //strong the recieving token in data to local browswer cookies
+      //strong the recieving token in data to local browser cookies
       localStorage.setItem("token", data.token);
       //setting cookie authorization token
       document.cookie = `authorization=${data.token}`;
