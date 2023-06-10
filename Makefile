@@ -1,11 +1,11 @@
-start-db:
+db:
 	sudo service postgresql start
 
-start-frontend:
+frontend:
 	cd frontend && npm start
 
-start-server:
+backend:
 	cd backend && go run main.go
 
 
-.PHONY: start-frontend start-backend start-db
+.PHONY: frontend backend db
