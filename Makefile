@@ -7,5 +7,11 @@ frontend:
 backend:
 	cd backend && go run main.go
 
+migrate-up:
+	migrate -database "postgres://admin:helloworld@localhost:5432/postgres" -path backend/Migrations/ up
 
-.PHONY: frontend backend db
+migrate-down:
+	migrate -database "postgres://admin:helloworld@localhost:5432/postgres" -path backend/Migrations/ down
+
+
+.PHONY: frontend backend db migrate-up migrate-down
