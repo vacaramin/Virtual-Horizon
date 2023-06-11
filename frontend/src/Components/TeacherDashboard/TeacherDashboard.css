@@ -9,7 +9,7 @@
     flex-direction: column;
   }
   
-  .content-area {
+  .content-area-teacher-dashboard {
     flex: 1;
     display: flex;
     flex-direction: column;

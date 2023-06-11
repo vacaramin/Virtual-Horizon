@@ -1,0 +1,45 @@
+.timetable {
+    margin: 20px 0;
+    margin-left: 100px;
+    max-width: 600px;
+    text-align: center;
+  }
+  
+  table {
+    height: 200%;
+    width: 200%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    border: 1px red solid;
+  }
+  
+  
+  th,
+  td {
+    padding: 10px;
+  }
+  
+  th {
+    background-color: #FF5B5B;
+    color: white;
+  }
+  
+  td {
+    background-color: #F6F6F6;
+  }
+  
+  .subject-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .subject-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .subject-icon {
+    font-size: 24px;
+    color: #FF5B5B;
+  }

@@ -11,16 +11,19 @@ function StudentDashboard() {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+  
   const handleItemClick = (itemName) => {
     setSelectedItem(itemName);
   };
 
   return (
     <div className="dashboard-container">
-      <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} handleItemClick = {handleItemClick} selectedItem = {selectedItem}/>
-      <div className="main-content">
+      <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} handleItemClick={handleItemClick} selectedItem={selectedItem} />
+      <div className="content-wrapper">
         <TopBar />
-        <ContentArea className = "content-area" selectedItem={selectedItem} />
+        <div className="main-content">
+          <ContentArea selectedItem={selectedItem} />
+        </div>
       </div>
     </div>
   );

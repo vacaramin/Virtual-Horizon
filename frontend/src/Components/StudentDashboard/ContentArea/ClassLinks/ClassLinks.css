@@ -1,0 +1,34 @@
+.class-links {
+    margin: 20px 0;
+    max-width: 600px;
+
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  th,
+  td {
+    padding: 10px;
+  }
+  
+  th {
+    background-color: #243047;
+    color: white;
+  }
+  
+  td {
+    background-color: #F6F6F6;
+  }
+  
+  a {
+    color: #3EC1D3;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
