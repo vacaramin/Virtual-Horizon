@@ -1,0 +1,66 @@
+.box.wallet-box {
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    padding: 15px;
+    width: 80%;
+  }
+  
+  .box-title {
+    background-color: #243047;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px 8px 0 0;
+    margin: 0;
+  }
+  
+  .box-content {
+    margin-top: 20px;
+  }
+  
+  .wallet-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .total-amount {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .account-statement-btn,
+  .withdraw-balance-btn {
+    background-color: #f7cb46;
+    color: #243047;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .account-statement-btn:hover,
+  .withdraw-balance-btn:hover {
+    background-color: #ffdf87;
+  }
+  
+  .dummy-transactions {
+    margin-top: 20px;
+  }
+  
+  .transaction-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .transaction-item span {
+    font-size: 14px;
+  }
+  
+  .transaction-item:hover {
+    background-color: #f6f6f6;
+    cursor: pointer;
+  }

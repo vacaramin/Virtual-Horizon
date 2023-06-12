@@ -7,8 +7,8 @@ function Home() {
       <div className="box welcome-box">
         <h1 className="box-title">Welcome to the Student Dashboard</h1>
         <div className="box-content">
-          <h3>Hello, Waqar Amin!</h3>
-          <p>This is the welcome content for the student dashboard.</p>
+          <h3>Hello, {localStorage.username}!</h3>
+          <p> This is the welcome content for the student dashboard.</p>
         </div>
       </div>
 
