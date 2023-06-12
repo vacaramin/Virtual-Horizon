@@ -9,6 +9,7 @@ h1 {
   margin-bottom: 10px;
   text-align: left;
   margin-left: 5%;
+  color: #f7cb46;
 }
 
 p {
@@ -27,8 +28,8 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 200px;
-  height: 100px;
+  width: 450px;
+  height: 200px;
   margin: 10px;
   border-radius: 10px;
   font-size: 20px;

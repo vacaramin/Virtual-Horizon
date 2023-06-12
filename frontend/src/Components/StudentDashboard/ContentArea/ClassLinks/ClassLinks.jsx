@@ -1,8 +1,8 @@
 import React from "react";
-
+import './ClassLinks.css';
 function ClassLinks({ links }) {
   return (
-    <div>
+    <div className="class-links">
       <table>
         <thead>
           <tr>

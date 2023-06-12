@@ -13,7 +13,11 @@
     position: absolute;
     
   }
-   
+  .sidebar-item.selected {
+    background-color: #e0e0e0;
+    font-weight: bold;
+    color: #000000;
+  }
   
   .sidebar-collapsed .profile img {
     max-width: 50px; /* adjust the size as needed */
