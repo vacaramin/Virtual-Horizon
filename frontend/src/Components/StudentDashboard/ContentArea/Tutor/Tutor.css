@@ -104,3 +104,20 @@
   .become-tutor-form button[type='submit'] {
     background-color: #243047;
   }
+  .confirm-tutor-button {
+    margin-top: 10px;
+  }
+  
+  .confirm-tutor-button button {
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    background-color: #f7cb46;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .confirm-tutor-button button:hover {
+    background-color: #243047;
+  }
