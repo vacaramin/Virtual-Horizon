@@ -1,8 +1,11 @@
 import React from "react";
 import "./ContentArea.css";
 import { useState } from "react";
-import Timetable from "../TimeTable/TimeTable";
+import Timetable from "./TimeTable/TimeTable";
 import ClassLinks from "./ClassLinks/ClassLinks";
+import ReportCard from "./ReportCard/ReportCard";
+import Settings from "./Settings/Settings";
+import Home from "./Home/Home";
 function ContentArea({ selectedItem }) {
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [subjectSelected, setSubjectSelected] = useState(false);
@@ -28,14 +31,12 @@ function ContentArea({ selectedItem }) {
 
   if (selectedItem === "home") {
     return (
+      <div>
+      {/* <h1>Welcome to the student dashboard</h1> */}
+        
       <div className="content-area-student">
-        <h1>Welcome to the student dashboard</h1>
-        <p> Home *** Work Under Progress...</p>
-        <img
-          style={{ width: "300px" }}
-          src="https://static.vecteezy.com/system/resources/previews/002/315/143/original/under-construction-symbol-sign-free-vector.jpg"
-          alt="s"
-        />
+        <Home />
+      </div>
       </div>
     );
   } else if (selectedItem === "subjects") {
@@ -50,21 +51,22 @@ function ContentArea({ selectedItem }) {
     } else {
       return (
         <div>
-        <h1>Subjects</h1>
-        <div className="content-area-student">
-          
-          
-          <div className="subject-container">
-            {subjects.map((subject) => (
-              <span
-                onClick={() => handleSubjectClick(subject)}
-                key={subject.name}
-                className="subject-item"
-                style={{ backgroundColor: subject.color }}
-              >
-                {subject.name}
-              </span>
-            ))}
+         <h1>Subjects</h1>
+         
+        <div>
+          <div className="content-area-student">
+            <div className="subject-container">
+              {subjects.map((subject) => (
+                <span
+                  onClick={() => handleSubjectClick(subject)}
+                  key={subject.name}
+                  className="subject-item"
+                  style={{ backgroundColor: subject.color }}
+                >
+                  {subject.name}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
         </div>
@@ -105,23 +107,22 @@ function ContentArea({ selectedItem }) {
 
     return (
       <div>
-      <h1>TimeTable</h1>
-        
-      <div className="content-area-student">
-        <Timetable days={days} subjects={subjects} timetable={timetable} />
-      </div>
+        <h1>TimeTable</h1>
+
+        <div className="content-area-student">
+          <Timetable days={days} subjects={subjects} timetable={timetable} />
+        </div>
       </div>
     );
   } else if (selectedItem === "tutor") {
     return (
+      <div>
+      <h1>Tutor</h1>
+        
       <div className="content-area-student">
-        <h1>Welcome to the student dashboard</h1>
-        <p> Tutor *** Work Under Progress...</p>
-        <img
-          style={{ width: "300px" }}
-          src="https://static.vecteezy.com/system/resources/previews/002/315/143/original/under-construction-symbol-sign-free-vector.jpg"
-          alt="s"
-        />
+        <p> Under Implementation</p>
+        
+      </div>
       </div>
     );
   } else if (selectedItem === "classlinks") {
@@ -132,35 +133,52 @@ function ContentArea({ selectedItem }) {
     ];
     return (
       <div>
-      <h1>Class Links</h1>
-        
-      <div className="content-area-student">
-        <ClassLinks links = {classLinks}/>
-      </div>
+        <h1>Class Links</h1>
+
+        <div className="content-area-student">
+          <ClassLinks links={classLinks} />
+        </div>
       </div>
     );
   } else if (selectedItem === "reportcard") {
+    const dummyReportCardData = {
+      studentName: "John Doe",
+      subjects: [
+        {
+          name: "Math",
+          quizzes: ["Quiz 1", "Quiz 2"],
+          assignments: ["Assignment 1", "Assignment 2"],
+          midExam: 85,
+          finalExam: 92,
+        },
+        {
+          name: "Science",
+          quizzes: ["Quiz 1", "Quiz 2", "Quiz 3"],
+          assignments: ["Assignment 1", "Assignment 2", "Assignment 3"],
+          midExam: 78,
+          finalExam: 88,
+        },
+        // Add more subjects here...
+      ],
+    };
     return (
-      <div className="content-area-student">
-        <h1>Welcome to the student dashboard</h1>
-        <p> Report Card *** Work Under Progress...</p>
-        <img
-          style={{ width: "300px" }}
-          src="https://static.vecteezy.com/system/resources/previews/002/315/143/original/under-construction-symbol-sign-free-vector.jpg"
-          alt="s"
-        />
+      <div>
+        <h1>Report Card</h1>
+        <div className="content-area-student">
+          <ReportCard
+            studentName={dummyReportCardData.studentName}
+            subjects={dummyReportCardData.subjects}
+          />
+        </div>
       </div>
     );
   } else if (selectedItem === "settings") {
     return (
-      <div className="content-area-student">
-        <h1>Welcome to the student dashboard</h1>
-        <p>Settings *** Work Under Progress...</p>
-        <img
-          style={{ width: "300px" }}
-          src="https://static.vecteezy.com/system/resources/previews/002/315/143/original/under-construction-symbol-sign-free-vector.jpg"
-          alt="s"
-        />
+      <div>
+        <h1>Settings</h1>
+        <div className="content-area-student">
+          <Settings />
+        </div>
       </div>
     );
   } else {

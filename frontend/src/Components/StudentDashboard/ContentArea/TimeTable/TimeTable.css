@@ -10,7 +10,7 @@
     width: 200%;
     border-collapse: collapse;
     margin-top: 10px;
-    border: 1px red solid;
+    border: 1px #243047 solid;
   }
   
   
@@ -20,7 +20,7 @@
   }
   
   th {
-    background-color: #FF5B5B;
+    background-color: #243047;
     color: white;
   }
   
@@ -43,3 +43,16 @@
     font-size: 24px;
     color: #FF5B5B;
   }
+  /* Hover Effect */
+td:hover {
+  background-color: #d4d4d4;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Table Responsiveness */
+@media screen and (max-width: 600px) {
+  .timetable {
+    margin-left: 0;
+  }
+}
