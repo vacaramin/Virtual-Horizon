@@ -6,6 +6,7 @@ import ClassLinks from "./ClassLinks/ClassLinks";
 import ReportCard from "./ReportCard/ReportCard";
 import Settings from "./Settings/Settings";
 import Home from "./Home/Home";
+import Tutor from "./Tutor/Tutor";
 function ContentArea({ selectedItem }) {
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [subjectSelected, setSubjectSelected] = useState(false);
@@ -117,10 +118,9 @@ function ContentArea({ selectedItem }) {
   } else if (selectedItem === "tutor") {
     return (
       <div>
-      <h1>Tutor</h1>
         
       <div className="content-area-student">
-        <p> Under Implementation</p>
+        <Tutor/>
         
       </div>
       </div>

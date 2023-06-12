@@ -33,6 +33,7 @@
 .signinButton:hover {
     background: #f7cb46;
     color: black;
+    cursor: pointer;
 }
 
 .Welcome-Text {

@@ -1,35 +1,37 @@
 import React from "react";
 import "./ContentArea.css";
+import Home from "./Home/Home";
+import Settings from "./Settings/Settings";
+import Notifications from "./Notifications/Notifications";
+import Wallet from "./Wallet/Wallet";
+import Classes from "./Classes/Classes";
 function ContentArea({ selectedItem }) {
   if (selectedItem === "home") {
     return (
       <div className="content-area">
-        <h1>Home</h1>
-        <p>Work Under Progress...</p>
+        
+        <Home />
       </div>
     );
   } else if (selectedItem === "classes") {
     return (
       <div className="content-area">
-        <h1>Classes</h1>
-        <p>Work Under Progress...</p>
+        <Classes/>
       </div>
     );
   } else if (selectedItem === "notifications") {
     return (
       <div>
-        <h1>Notifications</h1>
         <div className="content-area">
-          <p>Work Under Progress...</p>
+          <Notifications/>
         </div>
       </div>
     );
   } else if (selectedItem === "wallet") {
     return (
       <div>
-        <h1>Wallet</h1>
         <div className="content-area">
-          <p>Work Under Progress...</p>
+          <Wallet/>
         </div>
       </div>
     );
@@ -38,7 +40,7 @@ function ContentArea({ selectedItem }) {
       <div>
         <h1>Settings</h1>
         <div className="content-area">
-          <p>Work Under Progress...</p>
+          <Settings/>
         </div>
       </div>
     );
