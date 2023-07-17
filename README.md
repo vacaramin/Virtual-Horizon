@@ -6,3 +6,11 @@ Virtual Horizon is a remote education startup with a React JS frontend and Golan
 Credentials
 username: admin
 Password: helloworld
+
+
+# Pre requirements
+1. Migrate CLI golang
+2. Node
+3. go
+4. make
+5. 
