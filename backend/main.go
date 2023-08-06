@@ -5,7 +5,6 @@ import (
 	"Virtual-Horizon/initializers"
 	"Virtual-Horizon/middleware"
 	"fmt"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -24,12 +23,7 @@ func main() {
 	r.GET("/ping", pong)
 
 	// listen and serve on
-	r.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.html", gin.H{
-			"title": "My Web Page",
-			"body":  "<h1>Hello World</h1>",
-		})
-	})
+
 	r.POST("/signup", controllers.Signup)
 	r.POST("/login", controllers.Login)
 	r.GET("/validate", middleware.RequireAuth, controllers.Validate)
