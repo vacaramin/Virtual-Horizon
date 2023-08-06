@@ -110,3 +110,17 @@ INSERT INTO submissions (assignment_id, user_id, submission_date, grade, feedbac
   (2, 2, '2023-06-20 12:00:00', NULL, NULL);
 
 -- Add any additional tables and relationships as per your virtual school's requirements
+
+ALTER TABLE users
+ADD COLUMN dob TIMESTAMPTZ,
+ADD COLUMN gender VARCHAR(10),
+ADD COLUMN parent_guardian_name VARCHAR(255),
+ADD COLUMN parent_guardian_email VARCHAR(255),
+ADD COLUMN parent_guardian_phone VARCHAR(20),
+ADD COLUMN grade_level VARCHAR(255),
+ADD COLUMN current_school VARCHAR(255),
+ADD COLUMN device VARCHAR(255),
+ADD COLUMN internet_connection VARCHAR(255),
+ADD COLUMN special_needs TEXT,
+ADD COLUMN accomodations TEXT,
+ADD COLUMN present_address TEXT;
