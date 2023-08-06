@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import logo from "./logo.svg";
 
 function App() {
+
+
   return (
     <div className="App">
       <p className='omage'>
@@ -16,7 +18,7 @@ function App() {
       </div>
       
       <Link to="/login-student">
-        <div className='Button1'>
+        <div className='Button1' >
           Student Login
         </div>
       </Link>
