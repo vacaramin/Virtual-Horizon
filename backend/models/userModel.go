@@ -1,8 +1,6 @@
 package models
 
 import (
-	"time"
-
 	"gorm.io/gorm"
 )
 
@@ -11,7 +9,7 @@ type User struct {
 	Email               string `gorm:"unique"`
 	Password            string
 	Name                string
-	Dob                 time.Time
+	Dob                 string
 	Gender              string
 	ParentGuardianName  string
 	ParentGuardianEmail string

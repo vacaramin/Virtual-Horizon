@@ -16,8 +16,21 @@ import (
 func Signup(c *gin.Context) {
 	fmt.Println("Signup")
 	var body struct {
-		Email    string
-		Password string
+		Email               string
+		Password            string
+		Name                string
+		Dob                 string
+		Gender              string
+		ParentGuardianName  string
+		ParentGuardianEmail string
+		ParentGuardianPhone string
+		GradeLevel          string
+		CurrentSchool       string
+		Device              string
+		InternetConnection  string
+		SpecialNeeds        string
+		Accomodations       string
+		PresentAddress      string
 	}
 	if c.Bind(&body) != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -35,8 +48,21 @@ func Signup(c *gin.Context) {
 	}
 	//Create a user
 	user := models.User{
-		Email:    body.Email,
-		Password: string(hash),
+		Email:               body.Email,
+		Password:            string(hash),
+		Name:                body.Name,
+		Dob:                 body.Dob,
+		Gender:              body.Gender,
+		ParentGuardianName:  body.ParentGuardianName,
+		ParentGuardianEmail: body.ParentGuardianEmail,
+		ParentGuardianPhone: body.ParentGuardianPhone,
+		GradeLevel:          body.GradeLevel,
+		CurrentSchool:       body.CurrentSchool,
+		Device:              body.Device,
+		InternetConnection:  body.InternetConnection,
+		SpecialNeeds:        body.SpecialNeeds,
+		Accomodations:       body.Accomodations,
+		PresentAddress:      body.PresentAddress,
 	}
 	//Save the user
 	result := initializers.DB.Create(&user)
