@@ -81,7 +81,17 @@ function Signin(props) {
         setError(error);
       });
   };
+  const handleEnterEmail = (e) => {
+    if (e.key === "Enter") {
+      document.getElementById("Password").focus();
+    }
+  };
 
+  const handleEnterPassword = (e) => {
+    if (e.key === "Enter") {
+      handleLogin_Student(); // You can adjust this to your needs
+    }
+  };
   if (props.type === "student") {
     return (
       <div className="left-rectangle">
@@ -109,6 +119,7 @@ function Signin(props) {
             style={{ marginTop: "20%", marginLeft: "32%" }}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={handleEnterEmail}
           />
           <br />
           <TextField
@@ -119,12 +130,14 @@ function Signin(props) {
             halfWidth
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={handleEnterPassword}
+            
           />
         </div>
         <div>
-          <div className="signinButton" onClick={handleLogin_Student}>
+          <button className="signinButton" onClick={handleLogin_Student} type= "submit">
             Sign in
-          </div>
+          </button>
         </div>
 
         <div className="sign-up-text">
@@ -164,6 +177,7 @@ function Signin(props) {
             style={{ marginTop: "20%", marginLeft: "32%" }}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={handleEnterEmail}
           />
           <br />
           <TextField
@@ -174,6 +188,7 @@ function Signin(props) {
             halfWidth
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={handleEnterPassword}
           />
         </div>
         <div>

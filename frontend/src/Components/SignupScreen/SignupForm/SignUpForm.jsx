@@ -1,25 +1,11 @@
 import React, { useState } from "react";
 import "./SignupForm.css";
+
 import { styled } from "@mui/system";
-import { Stepper, Step, StepLabel } from "@mui/material";
-
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-const [Name, setName] = useState("");
-const [Dob, setDob] = useState(""); // Assuming you'll handle date using a date picker
-const [Gender, setGender] = useState("");
-const [ParentGuardianName, setParentGuardianName] = useState("");
-const [ParentGuardianEmail, setParentGuardianEmail] = useState("");
-const [ParentGuardianPhone, setParentGuardianPhone] = useState("");
-const [GradeLevel, setGradeLevel] = useState("");
-const [CurrentSchool, setCurrentSchool] = useState("");
-const [Device, setDevice] = useState("");
-const [InternetConnection, setInternetConnection] = useState("");
-const [SpecialNeeds, setSpecialNeeds] = useState("");
-const [Accomodations, setAccomodations] = useState("");
-const [PresentAddress, setPresentAddress] = useState("");
-
 import {
+  Stepper,
+  Step,
+  StepLabel,
   Button,
   Typography,
   TextField,
@@ -28,6 +14,7 @@ import {
   RadioGroup,
   Radio,
 } from "@mui/material";
+import ErrorNotification from "../../ErrorNotification/ErrorNotification";
 
 const Container = styled("div")({
   width: "80%",
@@ -74,23 +61,6 @@ const Instructions = styled(Typography)({
   marginBottom: "20%",
 });
 
-const payload = {
-  email,
-  password,
-  Name,
-  Dob,
-  Gender,
-  ParentGuardianName,
-  ParentGuardianEmail,
-  ParentGuardianPhone,
-  GradeLevel,
-  CurrentSchool,
-  Device,
-  InternetConnection,
-  SpecialNeeds,
-  Accomodations,
-  PresentAddress,
-};
 
 const steps = [
   "Personal Information",
@@ -102,15 +72,68 @@ const steps = [
 ];
 
 const SignupForm = () => {
-  const [activeStep, setActiveStep] = useState(0);
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [Name, setName] = useState("");
+  const [Dob, setDob] = useState(""); // Assuming you'll handle date using a date picker
+  const [Gender, setGender] = useState("");
+  const [ParentGuardianName, setParentGuardianName] = useState("");
+  const [ParentGuardianEmail, setParentGuardianEmail] = useState("");
+  const [ParentGuardianPhone, setParentGuardianPhone] = useState("");
+  const [GradeLevel, setGradeLevel] = useState("");
+  const [CurrentSchool, setCurrentSchool] = useState("");
+  const [Device, setDevice] = useState("");
+  const [InternetConnection, setInternetConnection] = useState("");
+  const [SpecialNeeds, setSpecialNeeds] = useState("");
+  const [Accomodations, setAccomodations] = useState("");
+  const [PresentAddress, setPresentAddress] = useState("");
+  const [activeStep, setActiveStep] = useState(0);
+  const [error, setError] = useState("");
+
+  const payload = {
+    email,
+    password,
+    Name,
+    Dob,
+    Gender,
+    ParentGuardianName,
+    ParentGuardianEmail,
+    ParentGuardianPhone,
+    GradeLevel,
+    CurrentSchool,
+    Device,
+    InternetConnection,
+    SpecialNeeds,
+    Accomodations,
+    PresentAddress,
+  };
+  
   const handleNext = () => {
+    
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (activeStep === steps.length -1 ){
+      fetch("http://localhost:4000/signup", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(payload),
+                }).then((response) => response.json())
+                .then((data) => {
+                  //if responsce is ok
+                  console.log(data)
+                })
+                .catch((error) => {
+                  console.log(error);
+                  setError(error);
+                });
+    }
+    
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
+
 
   const renderStepContent = (step) => {
     const inputSpacing = {
@@ -129,6 +152,7 @@ const SignupForm = () => {
               fullWidth
               style={inputSpacing}
               onChange={(e) => setName(e.target.value)}
+              value={Name}
             />
             <TextField
               id="email"
@@ -136,6 +160,7 @@ const SignupForm = () => {
               fullWidth
               style={inputSpacing}
               onChange={(e) => setEmail(e.target.value)}
+              value={email}
             />
             <TextField
               id="password"
@@ -143,6 +168,8 @@ const SignupForm = () => {
               fullWidth
               style={inputSpacing}
               onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              type="password"
             />
             <TextField
               id="dateOfBirth"
@@ -150,6 +177,7 @@ const SignupForm = () => {
               fullWidth
               style={inputSpacing}
               onChange={(e) => setDob(e.target.value)}
+              value={Dob}
             />
             <FormControl component="fieldset" style={inputSpacing}>
               <RadioGroup row aria-label="gender">
@@ -164,6 +192,7 @@ const SignupForm = () => {
                   control={<Radio />}
                   label="Female"
                   onChange={(e) => setGender(e.target.value)}
+                  
                 />
               </RadioGroup>
             </FormControl>
@@ -178,6 +207,7 @@ const SignupForm = () => {
               fullWidth
               style={inputSpacing}
               onChange={(e) => setParentGuardianName(e.target.value)}
+              value={ParentGuardianName}
             />
             <TextField
               id="parentEmail"
@@ -185,6 +215,7 @@ const SignupForm = () => {
               fullWidth
               style={inputSpacing}
               onChange={(e) => setParentGuardianEmail(e.target.value)}
+              value = {ParentGuardianEmail}
             />
             <TextField
               id="parentPhone"
@@ -192,6 +223,7 @@ const SignupForm = () => {
               fullWidth
               style={inputSpacing}
               onChange={(e) => setParentGuardianPhone(e.target.value)}
+              value={ParentGuardianPhone}
             />
           </div>
         );
@@ -203,6 +235,7 @@ const SignupForm = () => {
               label="Current Grade Level"
               fullWidth
               onChange={(e) => setGradeLevel(e.target.value)}
+              value = {GradeLevel}
             />
             <br />
             <TextField
@@ -210,6 +243,7 @@ const SignupForm = () => {
               label="Name of Current School"
               fullWidth
               onChange={(e) => setCurrentSchool(e.target.value)}
+              value={CurrentSchool}
             />
           </div>
         );
@@ -221,6 +255,7 @@ const SignupForm = () => {
               label="Device"
               fullWidth
               onChange={(e) => setDevice(e.target.value)}
+              value = {Device}
             />
             <br />
             <TextField
@@ -228,6 +263,7 @@ const SignupForm = () => {
               label="Internet Connection"
               fullWidth
               onChange={(e) => setInternetConnection(e.target.value)}
+              value = {InternetConnection}
             />
           </div>
         );
@@ -239,6 +275,7 @@ const SignupForm = () => {
               label="Special Needs"
               fullWidth
               onChange={(e) => setSpecialNeeds(e.target.value)}
+              value = {SpecialNeeds}
             />
             <br />
             <TextField
@@ -246,6 +283,7 @@ const SignupForm = () => {
               label="Accommodations"
               fullWidth
               onChange={(e) => setAccomodations(e.target.value)}
+              value = {Accomodations}
             />
           </div>
         );
@@ -257,6 +295,7 @@ const SignupForm = () => {
               label="Present Address"
               fullWidth
               onChange={(e) => setPresentAddress(e.target.value)}
+              value = {PresentAddress}
             />
           </div>
         );
@@ -278,7 +317,10 @@ const SignupForm = () => {
       </StepperContainer>
       <div>
         {activeStep === steps.length ? (
+           
+        
           <div>
+            
             <Instructions>
               All steps completed - Sign up successful!
             </Instructions>
@@ -286,13 +328,8 @@ const SignupForm = () => {
               variant="contained"
               color="primary"
               onClick={() => {
-                setActiveStep(0);
-                fetch("https://localhost:4000/signup", {
-                  method: "POST",
-                  mode: "cors",
-                  body: JSON.stringify(payload),
-                });
-              }}
+               }
+              }
             >
               Reset
             </Button>
@@ -314,8 +351,12 @@ const SignupForm = () => {
             </div>
           </div>
         )}
+        
       </div>
+      <ErrorNotification error={error} color = "red" /> 
+      
     </Container>
+    
   );
 };
 
