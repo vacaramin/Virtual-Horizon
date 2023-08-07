@@ -4,8 +4,10 @@ import (
 	"Virtual-Horizon/initializers"
 	"Virtual-Horizon/models"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -162,4 +164,29 @@ func Validate(c *gin.Context) {
 		})
 
 	}
+}
+func GetProfileByID(c *gin.Context) {
+	idStr, _ := c.Params.Get("ID")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		log.Println("Invalid ID")
+		c.JSON(http.StatusNotFound, gin.H{
+			"msg": "ID is not valid",
+		})
+		return
+	}
+
+	var user models.User
+	result := initializers.DB.First(&user, id)
+	if result.Error != nil {
+		log.Println("Error fetching user:", result.Error)
+		c.JSON(http.StatusNotFound, gin.H{
+			"msg": "User not found",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"user": user,
+	})
 }
