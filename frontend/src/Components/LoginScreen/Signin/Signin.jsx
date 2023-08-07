@@ -101,6 +101,7 @@ function Signin(props) {
             alt="logo"
             width={"100%"}
             style={{ opacity: 0.05, marginBottom: "5%" }}
+         
           />
         </div>
 
