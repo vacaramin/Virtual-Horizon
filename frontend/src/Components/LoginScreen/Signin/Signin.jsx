@@ -46,6 +46,8 @@ function Signin(props) {
       });
   };
   const handleLogin_Student = () => {
+    
+    setError("");
     const payload = { email, password };
     fetch("http://localhost:4000/login", {
       method: "POST",
@@ -85,6 +87,7 @@ function Signin(props) {
     if (e.key === "Enter") {
       document.getElementById("Password").focus();
     }
+    
   };
 
   const handleEnterPassword = (e) => {
@@ -92,6 +95,8 @@ function Signin(props) {
       handleLogin_Student(); // You can adjust this to your needs
     }
   };
+  
+
   if (props.type === "student") {
     return (
       <div className="left-rectangle">
