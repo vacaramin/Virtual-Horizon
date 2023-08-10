@@ -6,11 +6,15 @@
     z-index: 9999;
     background-color: #b33c3c;
     color: #ffffff;
-    padding: 10px 20px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     opacity: 1;
     transition: opacity 0.3s ease;
+    width: 25%;
+    text-align: center;
+    margin:auto;
+    padding:12px;
+
   }
   
   .error-notification.show {
@@ -19,13 +23,15 @@
   
   .error-notification::before {
     content: "Error: ";
+    font-size: larger;
+    font-weight: bolder;
   }
   
   .error-notification .close-icon {
     position: absolute;
     top: 5px;
-    right: 5px;
-    font-size: 14px;
+    right: 10px;
+    font-size: 25px;
     cursor: pointer;
   }
   

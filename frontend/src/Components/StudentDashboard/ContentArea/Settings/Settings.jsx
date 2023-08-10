@@ -1,33 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Settings.css";
 
 function Settings() {
-  const [fullName, setFullName] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [user, setUser] = useState({});
+  const [editing, setEditing] = useState(false);
 
-  const handleFullNameChange = (e) => {
-    setFullName(e.target.value);
-  };
+  useEffect(() => {
+    fetch("http://localhost:4000/GetProfileByID/5")
+      .then(response => response.json())
+      .then(data => {
+        setUser(data.user);
+        console.log(data.user);
+      })
+      .catch(error => {
+        console.error("Error fetching user data:", error);
+      });
+  }, []);
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+  const handleEditClick = () => {
+    setEditing(true);
   };
 
   const handleUpdateInfo = () => {
-    // Handle update info logic here, e.g., make API request to update user info
-    console.log("Full Name:", fullName);
-    console.log("Password:", password);
-    console.log("Email:", email);
+    console.log("Updated user data:", user);
+    setEditing(false);
+    // Make API request to update user info
+    fetch("http://localhost:4000/UpdateProfile", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(user)
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log("Update successful:", data);
+      })
+      .catch(error => {
+        console.error("Error updating user data:", error);
+      });
   };
+
   const handleProfilePictureUpload = (e) => {
     const file = e.target.files[0];
-    // Handle the file upload logic here, e.g., make API request to upload the file
     console.log("Uploaded file:", file);
+    // Make API request to upload profile picture
+    // ...
   };
 
   return (
@@ -53,8 +71,9 @@ function Settings() {
           <input
             type="text"
             id="fullName"
-            value={fullName}
-            onChange={handleFullNameChange}
+            value={user.Name || ""}
+            readOnly={!editing}
+            onChange={(e) => setUser({ ...user, Name: e.target.value })}
           />
         </div>
         <div className="form-group">
@@ -62,8 +81,9 @@ function Settings() {
           <input
             type="password"
             id="password"
-            value={password}
-            onChange={handlePasswordChange}
+            value={user.Password || ""}
+            readOnly={!editing}
+            onChange={(e) => setUser({ ...user, Password: e.target.value })}
           />
         </div>
         <div className="form-group">
@@ -71,13 +91,21 @@ function Settings() {
           <input
             type="email"
             id="email"
-            value={email}
-            onChange={handleEmailChange}
+            value={user.Email || ""}
+            readOnly={!editing}
+            onChange={(e) => setUser({ ...user, Email: e.target.value })}
           />
         </div>
-        <button className="update-btn" onClick={handleUpdateInfo}>
-          Update Info
-        </button>
+        {/* Render other fields similarly */}
+        {editing ? (
+          <button className="update-btn" onClick={handleUpdateInfo}>
+            Save
+          </button>
+        ) : (
+          <button className="edit-btn" onClick={handleEditClick}>
+            Edit
+          </button>
+        )}
       </div>
     </div>
   );
