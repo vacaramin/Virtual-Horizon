@@ -21,31 +21,39 @@ function Settings() {
     setEditing(true);
   };
 
-  const handleUpdateInfo = () => {
-    console.log("Updated user data:", user);
-    setEditing(false);
-    // Make API request to update user info
-    fetch("http://localhost:4000/UpdateProfile", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(user)
+  const handleLogin_Teacher = () => {
+    const payload = { email, password };
+    fetch("http://localhost:4000/GetProfileByID/5", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log("Update successful:", data);
-      })
-      .catch(error => {
-        console.error("Error updating user data:", error);
-      });
-  };
+      .then((response) => response.json())
+      .then((data) => {
+        //if responsce is ok
+        if (data.status === "success") {
+          console.log("Login Successful");
+          //strong the recieving token in data to local browser cookies
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("username", data.username);
+          
+          //setting cookie authorization token
+          document.cookie = `authorization=${data.token}`;
+          document.cookie = `username=${data.username}`;
+          //redirect to home page
+          history("/home-teacher");
 
-  const handleProfilePictureUpload = (e) => {
-    const file = e.target.files[0];
-    console.log("Uploaded file:", file);
-    // Make API request to upload profile picture
-    // ...
+          //redirect to home page
+        }
+        if (data.status === "failed") {
+          console.log("Login Failed");
+          
+          console.log(data);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
