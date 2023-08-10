@@ -1,8 +1,14 @@
 import React from "react";
-const Container =  ()=> {
+const Container =  (props)=> {
 
     return(
-        <div></div>
-    )
+        <div className="Container" >
+            <div>
+
+            </div>
+            
+        </div>
+ 
+ )
 }
 export default Container;
