@@ -27,9 +27,15 @@ function TopBar() {
         >
           ☰
         </button>
-        <div className={`dropdown-content ${dropdownOpen ? 'show' : ''}`}>
+        <div className={`dropdown-content ${dropdownOpen ? "show" : ""}`}>
           <a href="s" className="dropdown-item">
             Log out
+          </a>
+          <a href="s" className="dropdown-item">
+            Log out
+          </a>
+          <a href="s" className="dropdown-item">
+            Log World out
           </a>
         </div>
       </div>
