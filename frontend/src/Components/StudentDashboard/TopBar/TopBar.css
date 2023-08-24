@@ -45,3 +45,49 @@
     font-weight: 600;
     color: #f7cb46;
   }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  /* Style for the dropdown button */
+  .dropdown-button {
+    background-color: #f7cb46; /* Match the top bar's background color */
+    color: white;
+    padding: 10px 25px;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+    margin-left: 8px;
+  }
+
+  /* Style for the dropdown content */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #243047; /* Match the top bar's background color */
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    top: 40px; /* Adjust the distance from the button */
+    border-radius: 10px;
+  }
+
+  /* Style for dropdown items */
+  .dropdown-item {
+    color: white; /* Change text color */
+    padding: 10px 16px; /* Adjust padding */
+    text-decoration: none;
+    display: block;
+    border-radius: 20px;
+  }
+  /* Change color on hover */
+  .dropdown-item:hover {
+    background-color: #1a2533; /* Change the color on hover */
+  }
+
+  /* Show dropdown content on hover */
+  .dropdown-content.show {
+    display: block;
+  }

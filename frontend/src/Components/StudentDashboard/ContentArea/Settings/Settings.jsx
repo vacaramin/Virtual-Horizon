@@ -4,7 +4,7 @@ import Container from "./Container/Container";
 import { List, ListItem, ListItemText } from "@mui/material";
 
 function Settings() {
-  const [editing, setEditing] = useState(false);
+  //const [editing, setEditing] = useState(false);
   const [user, setUser] = useState({});
   console.log(document.cookie)
   useEffect(() => {
