@@ -4,7 +4,9 @@ import Sidebar from './Sidebar/Sidebar';
 import TopBar from './TopBar/TopBar';
 import ContentArea from './ContentArea/ContentArea';
 
+
 function StudentDashboard() {
+  
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [selectedItem, setSelectedItem] = useState("home");
 
