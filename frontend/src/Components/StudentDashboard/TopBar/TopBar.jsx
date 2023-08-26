@@ -10,6 +10,7 @@ function TopBar() {
   const handleLogout = () => {
     fetch("http://localhost:4000/user/logout", {
       method: 'POST',
+      credentials: "include",
     })
       .then(response => response.json())
       .then(data => {

@@ -26,7 +26,7 @@ function Signin(props) {
           //strong the recieving token in data to local browser cookies
           localStorage.setItem("Authorization", data.Authorization);
           
-          //setting cookie authorization token
+           //setting cookie authorization token
           document.cookie = `Authorization=${data.Authorization}`;
          
           //redirect to home page
