@@ -6,7 +6,19 @@ import profilePic from "./profile-pic.jpg";
 
 function TopBar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const handleLogout = ()  =>{
+    fetch("http:localhost:4000/user/logout",{
+      method: 'POST',
+    })
+    .then(response => response.json())
+    .then(data =>{
+      if (data.success === 'success'){
+        localStorage.removeItem('token')
+        window.location.href = 'http://localhost:3000/'
+      }
 
+    })
+  }
   return (
     <div className="top-bar">
       <div className="logo-container1">
@@ -28,7 +40,7 @@ function TopBar() {
           ☰
         </button>
         <div className={`dropdown-content ${dropdownOpen ? "show" : ""}`}>
-          <a href="s" className="dropdown-item">
+          <a href="http://localhost:3000/" onClick={handleLogout} className="dropdown-item">
             Log out
           </a>
           <a href="s" className="dropdown-item">
