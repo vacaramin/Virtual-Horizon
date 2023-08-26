@@ -24,12 +24,11 @@ function Signin(props) {
         if (data.status === "success") {
           console.log("Login Successful");
           //strong the recieving token in data to local browser cookies
-          localStorage.setItem("token", data.token);
-          localStorage.setItem("username", data.username);
+          localStorage.setItem("Authorization", data.Authorization);
           
           //setting cookie authorization token
-          document.cookie = `authorization=${data.token}`;
-          document.cookie = `username=${data.username}`;
+          document.cookie = `Authorization=${data.Authorization}`;
+         
           //redirect to home page
           history("/home-teacher");
 
@@ -46,7 +45,6 @@ function Signin(props) {
       });
   };
   const handleLogin_Student = () => {
-    
     setError("");
     const payload = { email, password };
     fetch("http://localhost:4000/login", {
@@ -56,23 +54,13 @@ function Signin(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        //if responsce is ok
-        console.log(data);
         if (data.status === "success") {
           console.log("Login Successful");
-          //strong the recieving token in data to local browser cookies
-          localStorage.setItem("token", data.token);
-          localStorage.setItem("username", data.username);
-          console.log(data)
-          //setting cookie authorization token
-          document.cookie = `authorization=${data.token}`;
-          document.cookie = `username=${data.username}`;
-          //redirect to home page
+          localStorage.setItem("Authorization", data.Authorization);
+          // Setting authorization token cookie
+          document.cookie = `Authorization=${data.Authorization}`;
           history("/home-student");
-
-          //redirect to home page
-        }
-        if (data.status === "failed") {
+        } else if (data.status === "failed") {
           console.log("Login Failed");
           console.log(data);
           setError(data.error);
