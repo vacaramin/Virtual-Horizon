@@ -26,8 +26,9 @@ func main() {
 
 	r.POST("/signup", controllers.Signup)
 	r.POST("/login", controllers.Login)
-	r.GET("/validate", middleware.RequireAuth, controllers.Validate)
-	r.GET("/GetProfileByID/:ID", middleware.RequireAuth, controllers.GetProfileByID)
+	//r.GET("/validate", middleware.RequireAuth, controllers.Validate)
+	r.GET("/GetProfileByID/:ID", middleware.ValidateToken(), controllers.GetProfileByID)
+	r.POST("/user/logout", controllers.Logout)
 	r.Run()
 	fmt.Println("Hello, world!")
 }
@@ -39,11 +40,15 @@ func pong(c *gin.Context) {
 }
 func corsMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
 		c.Writer.Header().Set("Access-Control-Allow-Headers", "Origin, Authorization, Content-Type")
 
+		// Handle OPTIONS request
 		if c.Request.Method == "OPTIONS" {
+			c.Header("Access-Control-Allow-Origin", "http://localhost:3000")
+			c.Header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+			c.Header("Access-Control-Allow-Headers", "Origin, Authorization, Content-Type")
 			c.AbortWithStatus(204)
 			return
 		}

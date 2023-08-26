@@ -137,35 +137,15 @@ func Login(c *gin.Context) {
 	}
 	//send it back
 
-	c.SetCookie("Authorization", tokenString, 3600*24*7, "", "", false, true)
-	c.SetCookie("User", user.Name, 3600*24*7, "", "", false, true)
+	c.SetCookie("Authorization", tokenString, 3600*24*7, "/", "localhost", false, true)
 	//uncomment if jwt is to be sent in response body
 	c.JSON(http.StatusOK, gin.H{
-		"status":   "success",
-		"token":    tokenString,
-		"username": user.Name,
-		"user":     user,
+		"status":        "success",
+		"Authorization": tokenString,
 	})
 
 }
 
-func Validate(c *gin.Context) {
-	user, exist := c.Get("user")
-	if !exist {
-		c.JSON(http.StatusUnauthorized, gin.H{
-			"status": "fail",
-			"error":  "Invalid user",
-		})
-		return
-	} else {
-
-		c.JSON(http.StatusOK, gin.H{
-			"status":  "success",
-			"message": user,
-		})
-
-	}
-}
 func GetProfileByID(c *gin.Context) {
 	idStr, _ := c.Params.Get("ID")
 	id, err := strconv.Atoi(idStr)
@@ -225,9 +205,62 @@ func GetIdfromToken(c *gin.Context) {
 	}
 }
 func Logout(c *gin.Context) {
-	c.SetCookie("Authorization", "", -1, "", "", false, true)
-	c.JSON(http.StatusOK, gin.H{
-		"status":  "success",
-		"message": "logout successful",
-	})
+
+	if _, err := c.Cookie("Authorization"); err != nil {
+
+		log.Println("err = ", err)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status":  "fail",
+			"message": "you are already Logged out",
+		})
+	} else {
+		c.SetCookie("Authorization", "", -1, "/", "localhost", false, true)
+
+		c.JSON(http.StatusOK, gin.H{
+			"status":  "success",
+			"message": "logout successful",
+		})
+	}
+}
+
+func ValidateToken() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		tokenString, err := c.Cookie("Authorization")
+
+		if err != nil {
+			c.AbortWithStatus(http.StatusUnauthorized)
+			return
+		}
+
+		// Decode/validate the token
+		token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+				return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+			}
+			return []byte(os.Getenv("SECRET")), nil
+		})
+
+		if err != nil || !token.Valid {
+			c.AbortWithStatus(http.StatusUnauthorized)
+			return
+		}
+
+		claims, ok := token.Claims.(jwt.MapClaims)
+		if !ok {
+			c.AbortWithStatus(http.StatusUnauthorized)
+			return
+		}
+
+		userID := int(claims["sub"].(float64))
+		// Fetch the user from the database using userID and attach it to the context
+		var user models.User
+		initializers.DB.First(&user, userID)
+		if user.ID == 0 {
+			c.AbortWithStatus(http.StatusUnauthorized)
+			return
+		}
+
+		c.Set("user", user) // Attach the user to the context
+		c.Next()
+	}
 }

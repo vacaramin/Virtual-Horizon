@@ -1,24 +1,26 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import "./TopBar.css";
 import logo from "./logo.svg";
 import profilePic from "./profile-pic.jpg";
 
 function TopBar() {
+  const history = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const handleLogout = ()  =>{
-    fetch("http:localhost:4000/user/logout",{
+  const handleLogout = () => {
+    fetch("http://localhost:4000/user/logout", {
       method: 'POST',
     })
-    .then(response => response.json())
-    .then(data =>{
-      if (data.success === 'success'){
-        localStorage.removeItem('token')
-        window.location.href = 'http://localhost:3000/'
-      }
-
-    })
-  }
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          localStorage.removeItem("token");
+          // Removing authorization token cookie
+          document.cookie = "authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          history("/");
+        }
+      })
+  };
   return (
     <div className="top-bar">
       <div className="logo-container1">
@@ -40,9 +42,9 @@ function TopBar() {
           ☰
         </button>
         <div className={`dropdown-content ${dropdownOpen ? "show" : ""}`}>
-          <a href="http://localhost:3000/" onClick={handleLogout} className="dropdown-item">
+          <div  onClick={handleLogout} className="dropdown-item">
             Log out
-          </a>
+          </div>
           <a href="s" className="dropdown-item">
             Log out
           </a>
