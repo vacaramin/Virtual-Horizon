@@ -199,10 +199,16 @@ func GetProfileFromToken(c *gin.Context) {
 		var user models.User
 		initializers.DB.First(&user, claims["sub"])
 		if user.ID == 0 {
-			c.AbortWithStatus(http.StatusUnauthorized)
+			c.JSON(http.StatusUnauthorized, gin.H{
+				"status":  "fail",
+				"message": " User Not found with this token",
+			},
+			)
 		}
-		c.JSON(http.StatusNotFound, gin.H{
-			"user": user},
+		c.JSON(http.StatusOK, gin.H{
+			"status":  "success",
+			"message": "User Found Successfully",
+			"user":    user},
 		)
 
 	}

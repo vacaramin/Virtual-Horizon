@@ -19,7 +19,7 @@ func SetupRoutes(r *gin.Engine) {
 
 	// Grouped routes under /api/user
 	apiUserGroup.GET("/GetProfileByID/:ID", middleware.ValidateToken(), controllers.GetProfileByID)
-	apiUserGroup.GET("/GetProfileByToken", middleware.ValidateToken(), controllers.GetProfileFromToken)
+	apiUserGroup.GET("/GetProfileFromToken", middleware.ValidateToken(), controllers.GetProfileFromToken)
 	apiUserGroup.POST("/logout", controllers.Logout)
 }
 func pong(c *gin.Context) {

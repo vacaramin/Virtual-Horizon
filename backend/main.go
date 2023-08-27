@@ -3,7 +3,6 @@ package main
 import (
 	"Virtual-Horizon/initializers"
 	"Virtual-Horizon/routes"
-	"fmt"
 	"log"
 	"os"
 
@@ -22,5 +21,4 @@ func main() {
 		log.Fatal("Error Running Server")
 	}
 
-	fmt.Println("Hello, world!")
 }
