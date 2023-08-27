@@ -174,7 +174,7 @@ func GetProfileByID(c *gin.Context) {
 		"user":   user,
 	})
 }
-func GetProfilefromToken(c *gin.Context) {
+func GetProfileFromToken(c *gin.Context) {
 	tokenString, err := c.Cookie("Authorization")
 
 	if err != nil {

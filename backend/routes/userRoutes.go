@@ -10,7 +10,7 @@ func SetupRoutes(r *gin.Engine) {
 	// Add CORS middleware
 	r.Use(middleware.CorsMiddleware())
 
-	apiUserGroup := r.Group("/api/user") // Grouping under /api/user
+	apiUserGroup := r.Group("/user") // Grouping under /api/user
 
 	// Public routes
 	r.GET("/ping", pong)
@@ -19,7 +19,7 @@ func SetupRoutes(r *gin.Engine) {
 
 	// Grouped routes under /api/user
 	apiUserGroup.GET("/GetProfileByID/:ID", middleware.ValidateToken(), controllers.GetProfileByID)
-	apiUserGroup.GET("/GetProfileByToken", middleware.ValidateToken(), controllers.GetProfilefromToken)
+	apiUserGroup.GET("/GetProfileByToken", middleware.ValidateToken(), controllers.GetProfileFromToken)
 	apiUserGroup.POST("/logout", controllers.Logout)
 }
 func pong(c *gin.Context) {

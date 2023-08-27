@@ -4,7 +4,8 @@ import styles from "./TopBar.css";
 import logo from "./logo.svg";
 import profilePic from "./profile-pic.jpg";
 
-function TopBar() {
+function TopBar(props) {
+  const username = props.username
   const history = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const handleLogout = () => {
@@ -31,7 +32,7 @@ function TopBar() {
         <h2>Virtual Horizon</h2>
       </div>
       <div className="profile-info">
-        <p>Welcome, {localStorage.username}</p>
+        <p>Welcome, {username}</p>
         <img src={profilePic} alt="Profile" className="profile-pic" />
       </div>
       {/* Adding the dropdown */}
