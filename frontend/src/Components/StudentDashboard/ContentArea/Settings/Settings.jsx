@@ -8,7 +8,8 @@ function Settings() {
   const [user, setUser] = useState({});
   console.log(document.cookie)
   useEffect(() => {
-    fetch("http://localhost:4000/GetProfileByID/5", {method: "GET",
+    fetch("http://localhost:4000/user/GetProfileFromToken", {
+      method: "GET",
     credentials: "include",
     headers: {
       "Content-Type": "application/json"
@@ -16,9 +17,11 @@ function Settings() {
   })
       .then(response => response.json())
       .then(data => {
-        setUser(data.user);
-        console.log(data.user);
-        setUser(data.user)
+        if (data.status === "success"){
+          setUser(data.user);
+          console.log(data.user);
+            
+        }
       })
       .catch(error => {
         console.error("Error fetching user data:", error);
@@ -29,7 +32,8 @@ function Settings() {
     <Container>
       <List>
         <ListItem>
-          <ListItemText primary={`Name: ${user.Name}`} />
+          <ListItemText primary={`Name:`} />
+          ${user.Name}
         </ListItem>
         <ListItem>
           <ListItemText primary={`Email: ${user.Email}`} />

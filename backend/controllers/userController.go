@@ -83,6 +83,9 @@ func Signup(c *gin.Context) {
 }
 
 func Login(c *gin.Context) {
+	//Clearing Previously Logged-in User, If any.
+	c.SetCookie("Authorization", "", -1, "/", "localhost", false, true)
+
 	//get the email and pass of request body
 	var body struct {
 		Email    string
@@ -120,6 +123,7 @@ func Login(c *gin.Context) {
 		})
 		return
 	}
+
 	//generate jwt
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{

@@ -1,20 +1,20 @@
--- Drop the "submission" table
+-- Drop the "submissions" table
 DROP TABLE IF EXISTS submissions;
 
--- Drop the "assignment" table
+-- Drop the "assignments" table
 DROP TABLE IF EXISTS assignments;
 
--- Drop the "enrollment" table
+-- Drop the "enrollments" table
 DROP TABLE IF EXISTS enrollments;
 
--- Drop the "course" table
+-- Drop the "courses" table
 DROP TABLE IF EXISTS courses;
 
--- Drop the "student" table
+-- Drop the "students" table
 DROP TABLE IF EXISTS students;
 
--- Drop the "teacher" table
-DROP TABLE IF EXISTS teachers;
+-- Drop the "tutors" table
+DROP TABLE IF EXISTS tutors;
 
--- Drop the "user" table
+-- Drop the "users" table
 DROP TABLE IF EXISTS users;
