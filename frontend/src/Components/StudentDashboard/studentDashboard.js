@@ -19,7 +19,7 @@ function StudentDashboard() {
   };
 
   const getUserDetails = () => {
-    fetch("http://localhost:4000/GetProfileByID/5", {
+    fetch("http://localhost:4000/user/GetProfileFromToken", {
       method: "GET",
       credentials: "include",
     })
