@@ -152,7 +152,8 @@ func GetProfileByID(c *gin.Context) {
 	if err != nil {
 		log.Println("Invalid ID")
 		c.JSON(http.StatusNotFound, gin.H{
-			"msg": "ID is not valid",
+			"status": "fail",
+			"msg":    "ID is not valid",
 		})
 		return
 	}
@@ -162,16 +163,18 @@ func GetProfileByID(c *gin.Context) {
 	if result.Error != nil {
 		log.Println("Error fetching user:", result.Error)
 		c.JSON(http.StatusNotFound, gin.H{
-			"msg": "User not found",
+			"status": "fail",
+			"msg":    "User not found",
 		})
 		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"user": user,
+		"status": "success",
+		"user":   user,
 	})
 }
-func GetIdfromToken(c *gin.Context) {
+func GetProfilefromToken(c *gin.Context) {
 	tokenString, err := c.Cookie("Authorization")
 
 	if err != nil {
@@ -183,7 +186,7 @@ func GetIdfromToken(c *gin.Context) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok { //check the signing method
 			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 		}
-		//hmacSampl
+
 		return []byte(os.Getenv("SECRET")), nil
 	})
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
@@ -220,47 +223,5 @@ func Logout(c *gin.Context) {
 			"status":  "success",
 			"message": "logout successful",
 		})
-	}
-}
-
-func ValidateToken() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		tokenString, err := c.Cookie("Authorization")
-
-		if err != nil {
-			c.AbortWithStatus(http.StatusUnauthorized)
-			return
-		}
-
-		// Decode/validate the token
-		token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-				return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
-			}
-			return []byte(os.Getenv("SECRET")), nil
-		})
-
-		if err != nil || !token.Valid {
-			c.AbortWithStatus(http.StatusUnauthorized)
-			return
-		}
-
-		claims, ok := token.Claims.(jwt.MapClaims)
-		if !ok {
-			c.AbortWithStatus(http.StatusUnauthorized)
-			return
-		}
-
-		userID := int(claims["sub"].(float64))
-		// Fetch the user from the database using userID and attach it to the context
-		var user models.User
-		initializers.DB.First(&user, userID)
-		if user.ID == 0 {
-			c.AbortWithStatus(http.StatusUnauthorized)
-			return
-		}
-
-		c.Set("user", user) // Attach the user to the context
-		c.Next()
 	}
 }
