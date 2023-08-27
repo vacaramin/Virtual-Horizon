@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./TopBar.css";
+import styles from "./TopBar.css";
 import logo from "./logo.svg";
 import profilePic from "./profile-pic.jpg";
 
@@ -35,23 +35,19 @@ function TopBar() {
         <img src={profilePic} alt="Profile" className="profile-pic" />
       </div>
       {/* Adding the dropdown */}
-      <div className="dropdown">
+      <div className={styles["dropdown"]}>
         <button
-          className="dropdown-button"
+          className="dropdown-button" 
           onClick={() => setDropdownOpen(!dropdownOpen)}
         >
           ☰
         </button>
         <div className={`dropdown-content ${dropdownOpen ? "show" : ""}`}>
-          <div  onClick={handleLogout} className="dropdown-item">
+          
+          <div onClick={handleLogout} className="dropdown-item">
             Log out
           </div>
-          <a href="s" className="dropdown-item">
-            Log out
-          </a>
-          <a href="s" className="dropdown-item">
-            Log World out
-          </a>
+          
         </div>
       </div>
     </div>
