@@ -4,9 +4,17 @@ CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
+    gender VARCHAR(10),
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Create the "student" table
+CREATE TABLE IF NOT EXISTS students (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id),
     name VARCHAR(255) NOT NULL,
     dob TIMESTAMPTZ,
-    gender VARCHAR(10),
     parent_guardian_name VARCHAR(255),
     parent_guardian_email VARCHAR(255),
     parent_guardian_phone VARCHAR(20),
@@ -21,14 +29,22 @@ CREATE TABLE IF NOT EXISTS users (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Insert sample data into the "user" table
+-- Insert sample data into the "users" table
 INSERT INTO
-    users (
-        email,
-        password,
+    users (email, password, gender)
+VALUES
+    (
+        'vacaramin86@gmail.com',
+        '$2a$10$RoehRLxjbt1jHUT2j9Gihu6QYeRRa3xuycKs0GGDxpEb3dJFzo6ga',
+        'Male'
+    );
+
+-- Insert sample data into the "students" table
+INSERT INTO
+    students (
+        user_id,
         name,
         dob,
-        gender,
         parent_guardian_name,
         parent_guardian_email,
         parent_guardian_phone,
@@ -42,11 +58,9 @@ INSERT INTO
     )
 VALUES
     (
-        'vacaramin86@gmail.com',
-        '$2a$10$RoehRLxjbt1jHUT2j9Gihu6QYeRRa3xuycKs0GGDxpEb3dJFzo6ga',
+        1,
         'Waqar Amin',
         '1990-01-01',
-        'Male',
         'John Doe',
         'johndoe@example.com',
         '1234567890',
@@ -57,11 +71,9 @@ VALUES
         'None',
         'None',
         '123 Main St'
-    ),
-    -- Add more sample data here
-;
+    );
 
--- Create the "Tutor" table
+-- Create the "tutor" table
 CREATE TABLE IF NOT EXISTS tutors (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(id),
@@ -71,12 +83,12 @@ CREATE TABLE IF NOT EXISTS tutors (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Insert sample data into the "tutor" table
+-- Insert sample data into the "tutors" table
 INSERT INTO
     tutors (user_id, department, designation)
 VALUES
-    (3, 'Mathematics', 'Senior tutor'),
-    (4, 'Science', 'Assistant Professor');
+    (1, 'Mathematics', 'Senior tutor'),
+    (1, 'Science', 'Assistant Professor');
 
 -- Create the "course" table
 CREATE TABLE IF NOT EXISTS courses (
