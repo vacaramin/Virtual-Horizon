@@ -82,8 +82,9 @@ func Signup(c *gin.Context) {
 
 }
 
+// Login This controller function for user takes in 2 parameters email and password and authenticates the user
 func Login(c *gin.Context) {
-	//Clearing Previously Logged-in User, If any.
+	// Clearing Previously Logged-in User, If any.
 	c.SetCookie("Authorization", "", -1, "/", "localhost", false, true)
 
 	//get the email and pass of request body
@@ -179,6 +180,45 @@ func GetProfileByID(c *gin.Context) {
 	})
 }
 func GetProfileFromToken(c *gin.Context) {
+	tokenString, err := c.Cookie("Authorization")
+
+	if err != nil {
+		c.AbortWithStatus(http.StatusUnauthorized)
+	}
+
+	//Decode/Validate it
+	token, _ := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok { //check the signing method
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+		}
+
+		return []byte(os.Getenv("SECRET")), nil
+	})
+	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		//check exp
+		if time.Now().Unix() > int64(claims["exp"].(float64)) {
+			c.AbortWithStatus(http.StatusUnauthorized)
+		}
+
+		//find the user with token sub
+		var user models.User
+		initializers.DB.First(&user, claims["sub"])
+		if user.ID == 0 {
+			c.JSON(http.StatusUnauthorized, gin.H{
+				"status":  "fail",
+				"message": " User Not found with this token",
+			},
+			)
+		}
+		c.JSON(http.StatusOK, gin.H{
+			"status":  "success",
+			"message": "User Found Successfully",
+			"user":    user},
+		)
+
+	}
+}
+func UpdateProfileFromToken(c *gin.Context) {
 	tokenString, err := c.Cookie("Authorization")
 
 	if err != nil {
