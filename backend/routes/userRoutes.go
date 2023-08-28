@@ -17,10 +17,12 @@ func SetupRoutes(r *gin.Engine) {
 	r.POST("/signup", controllers.Signup)
 	r.POST("/login", controllers.Login)
 
-	// Grouped routes under /api/user
+	// Grouped routes under /user
 	apiUserGroup.GET("/GetProfileByID/:ID", middleware.ValidateToken(), controllers.GetProfileByID)
 	apiUserGroup.GET("/GetProfileFromToken", middleware.ValidateToken(), controllers.GetProfileFromToken)
 	apiUserGroup.POST("/logout", controllers.Logout)
+	apiUserGroup.PUT("/UpdateProfileFromToken", controllers.UpdateProfileFromToken)
+
 }
 func pong(c *gin.Context) {
 	c.JSON(200, gin.H{

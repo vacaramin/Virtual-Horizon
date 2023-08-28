@@ -246,14 +246,94 @@ func UpdateProfileFromToken(c *gin.Context) {
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"status":  "fail",
 				"message": " User Not found with this token",
-			},
-			)
+			})
+			return
 		}
+
+		type body struct {
+			Email               string
+			Password            string
+			Name                string
+			Dob                 string
+			Gender              string
+			ParentGuardianName  string
+			ParentGuardianEmail string
+			ParentGuardianPhone string
+			GradeLevel          string
+			CurrentSchool       string
+			Device              string
+			InternetConnection  string
+			SpecialNeeds        string
+			Accomodations       string
+			PresentAddress      string
+		}
+		var updatePayload body
+		if err := c.Bind(&updatePayload); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"status":  "fail",
+				"message": "Invalid Request Payload",
+			})
+			return
+		}
+		if updatePayload.Email != "" || updatePayload.Password != "" {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"status":  "fail",
+				"message": "Email & password can't be Updated",
+			})
+			return
+		}
+
+		if updatePayload.Name != "" {
+			user.Name = updatePayload.Name
+		}
+		if updatePayload.Dob != "" {
+			user.Dob = updatePayload.Dob
+		}
+
+		if updatePayload.Gender != "" {
+			user.Gender = updatePayload.Gender
+		}
+
+		if updatePayload.ParentGuardianName != "" {
+			user.ParentGuardianName = updatePayload.ParentGuardianName
+		}
+
+		if updatePayload.ParentGuardianEmail != "" {
+			user.ParentGuardianEmail = updatePayload.ParentGuardianEmail
+		}
+
+		if updatePayload.ParentGuardianPhone != "" {
+			user.ParentGuardianPhone = updatePayload.ParentGuardianPhone
+		}
+
+		if updatePayload.GradeLevel != "" {
+			user.GradeLevel = updatePayload.GradeLevel
+		}
+
+		if updatePayload.CurrentSchool != "" {
+			user.CurrentSchool = updatePayload.CurrentSchool
+		}
+		if updatePayload.Device != "" {
+			user.Device = updatePayload.Device
+		}
+		if updatePayload.InternetConnection != "" {
+			user.InternetConnection = updatePayload.InternetConnection
+		}
+		if updatePayload.SpecialNeeds != "" {
+			user.SpecialNeeds = updatePayload.SpecialNeeds
+		}
+		if updatePayload.Accomodations != "" {
+			user.Accomodations = updatePayload.Accomodations
+		}
+		if updatePayload.PresentAddress != "" {
+			user.PresentAddress = updatePayload.PresentAddress
+		}
+		initializers.DB.Save(&user)
+
 		c.JSON(http.StatusOK, gin.H{
-			"status":  "success",
-			"message": "User Found Successfully",
-			"user":    user},
-		)
+			"status": "success",
+			"user":   user,
+		})
 
 	}
 }
