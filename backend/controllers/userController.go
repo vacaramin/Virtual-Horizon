@@ -48,13 +48,16 @@ func Signup(c *gin.Context) {
 		})
 		return
 	}
-	//Create a user
 	user := models.User{
-		Email:               body.Email,
-		Password:            string(hash),
-		Name:                body.Name,
-		Dob:                 body.Dob,
-		Gender:              body.Gender,
+		Email:    body.Email,
+		Password: string(hash),
+		Name:     body.Name,
+		Dob:      body.Dob,
+		Gender:   body.Gender,
+	}
+	//Create a user
+	student := models.Student{
+		UserID:              user.ID,
 		ParentGuardianName:  body.ParentGuardianName,
 		ParentGuardianEmail: body.ParentGuardianEmail,
 		ParentGuardianPhone: body.ParentGuardianPhone,
@@ -67,7 +70,7 @@ func Signup(c *gin.Context) {
 		PresentAddress:      body.PresentAddress,
 	}
 	//Save the user
-	result := initializers.DB.Create(&user)
+	result := initializers.DB.Create(&student)
 	if result.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": "Error while creating the user",
@@ -223,118 +226,104 @@ func UpdateProfileFromToken(c *gin.Context) {
 
 	if err != nil {
 		c.AbortWithStatus(http.StatusUnauthorized)
+		return
 	}
 
-	//Decode/Validate it
+	// Decode/Validate the token
 	token, _ := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok { //check the signing method
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 		}
 
 		return []byte(os.Getenv("SECRET")), nil
 	})
+
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-		//check exp
+		// Check token expiration
 		if time.Now().Unix() > int64(claims["exp"].(float64)) {
 			c.AbortWithStatus(http.StatusUnauthorized)
+			return
+		}
+		type UpdatePayload struct {
+			Student models.Student
+			User    models.User
 		}
 
-		//find the user with token sub
+		// Find the user with token sub
 		var user models.User
+		var student models.Student
 		initializers.DB.First(&user, claims["sub"])
+		initializers.DB.First(&student, "user_id = ?", user.ID)
+
 		if user.ID == 0 {
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"status":  "fail",
-				"message": " User Not found with this token",
+				"message": "User not found with this token",
 			})
 			return
 		}
 
-		type body struct {
-			Email               string
-			Password            string
-			Name                string
-			Dob                 string
-			Gender              string
-			ParentGuardianName  string
-			ParentGuardianEmail string
-			ParentGuardianPhone string
-			GradeLevel          string
-			CurrentSchool       string
-			Device              string
-			InternetConnection  string
-			SpecialNeeds        string
-			Accomodations       string
-			PresentAddress      string
-		}
-		var updatePayload body
+		// Define a struct to hold update payload
+		var updatePayload UpdatePayload
 		if err := c.Bind(&updatePayload); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"status":  "fail",
-				"message": "Invalid Request Payload",
+				"message": "Invalid request payload",
 			})
 			return
 		}
-		if updatePayload.Email != "" || updatePayload.Password != "" {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"status":  "fail",
-				"message": "Email & password can't be Updated",
-			})
-			return
+		// Update user-specific fields
+		if updatePayload.User.Name != "" {
+			user.Name = updatePayload.User.Name
+		}
+		if updatePayload.User.Dob != "" {
+			user.Dob = updatePayload.User.Dob
+		}
+		if updatePayload.User.Gender != "" {
+			user.Gender = updatePayload.User.Gender
 		}
 
-		if updatePayload.Name != "" {
-			user.Name = updatePayload.Name
+		// Here, we update only student-specific fields
+		if updatePayload.Student.ParentGuardianName != "" {
+			student.ParentGuardianName = updatePayload.Student.ParentGuardianName
 		}
-		if updatePayload.Dob != "" {
-			user.Dob = updatePayload.Dob
+		if updatePayload.Student.ParentGuardianEmail != "" {
+			student.ParentGuardianEmail = updatePayload.Student.ParentGuardianEmail
 		}
-
-		if updatePayload.Gender != "" {
-			user.Gender = updatePayload.Gender
+		if updatePayload.Student.ParentGuardianPhone != "" {
+			student.ParentGuardianPhone = updatePayload.Student.ParentGuardianPhone
 		}
-
-		if updatePayload.ParentGuardianName != "" {
-			user.ParentGuardianName = updatePayload.ParentGuardianName
+		if updatePayload.Student.GradeLevel != "" {
+			student.GradeLevel = updatePayload.Student.GradeLevel
 		}
-
-		if updatePayload.ParentGuardianEmail != "" {
-			user.ParentGuardianEmail = updatePayload.ParentGuardianEmail
+		if updatePayload.Student.CurrentSchool != "" {
+			student.CurrentSchool = updatePayload.Student.CurrentSchool
 		}
-
-		if updatePayload.ParentGuardianPhone != "" {
-			user.ParentGuardianPhone = updatePayload.ParentGuardianPhone
+		if updatePayload.Student.Device != "" {
+			student.Device = updatePayload.Student.Device
 		}
-
-		if updatePayload.GradeLevel != "" {
-			user.GradeLevel = updatePayload.GradeLevel
+		if updatePayload.Student.InternetConnection != "" {
+			student.InternetConnection = updatePayload.Student.InternetConnection
 		}
-
-		if updatePayload.CurrentSchool != "" {
-			user.CurrentSchool = updatePayload.CurrentSchool
+		if updatePayload.Student.SpecialNeeds != "" {
+			student.SpecialNeeds = updatePayload.Student.SpecialNeeds
 		}
-		if updatePayload.Device != "" {
-			user.Device = updatePayload.Device
+		if updatePayload.Student.Accomodations != "" {
+			student.Accomodations = updatePayload.Student.Accomodations
 		}
-		if updatePayload.InternetConnection != "" {
-			user.InternetConnection = updatePayload.InternetConnection
+		if updatePayload.Student.PresentAddress != "" {
+			student.PresentAddress = updatePayload.Student.PresentAddress
 		}
-		if updatePayload.SpecialNeeds != "" {
-			user.SpecialNeeds = updatePayload.SpecialNeeds
-		}
-		if updatePayload.Accomodations != "" {
-			user.Accomodations = updatePayload.Accomodations
-		}
-		if updatePayload.PresentAddress != "" {
-			user.PresentAddress = updatePayload.PresentAddress
-		}
-		initializers.DB.Save(&user)
+		log.Println(student.GradeLevel, user.Name, updatePayload.Student.GradeLevel)
+		// Save the updated student information
+		initializers.DB.Save(&user).Save(&student)
 
 		c.JSON(http.StatusOK, gin.H{
-			"status": "success",
-			"user":   user,
+			"status":  "success",
+			"message": "Student profile updated successfully",
+			"student": student,
+			"user":    user,
 		})
-
 	}
 }
 func Logout(c *gin.Context) {

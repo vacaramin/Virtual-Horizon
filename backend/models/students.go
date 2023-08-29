@@ -4,7 +4,7 @@ import "time"
 
 type Student struct {
 	ID                  uint      `json:"id" gorm:"primaryKey"`
-	UserID              uint      `json:"user_id"`
+	UserID              uint      `json:"user_id" gorm:"foreignKey:UserID"`
 	ParentGuardianName  string    `json:"parent_guardian_name"`
 	ParentGuardianEmail string    `json:"parent_guardian_email"`
 	ParentGuardianPhone string    `json:"parent_guardian_phone"`
