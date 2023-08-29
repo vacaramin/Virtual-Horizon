@@ -22,6 +22,7 @@ func SetupRoutes(r *gin.Engine) {
 	apiUserGroup.GET("/GetProfileFromToken", middleware.ValidateToken(), controllers.GetProfileFromToken)
 	apiUserGroup.POST("/logout", controllers.Logout)
 	apiUserGroup.PUT("/UpdateProfileFromToken", middleware.ValidateToken(), controllers.UpdateProfileFromToken)
+	apiUserGroup.DELETE("/DeleteUserFromToken", middleware.ValidateToken(), controllers.DeleteUser)
 
 }
 func pong(c *gin.Context) {
