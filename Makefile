@@ -13,5 +13,13 @@ migrate-up:
 migrate-down:
 	migrate -database "postgres://postgres:helloworld@localhost:5432/postgres" -path backend/Migrations/ down
 
+migrate-up-force:
+	migrate -database "postgres://postgres:helloworld@localhost:5432/postgres" -path backend/Migrations/ -verbose up 
 
-.PHONY: frontend backend db migrate-up migrate-down
+migrate-down-force:
+	migrate -database "postgres://postgres:helloworld@localhost:5432/postgres" -path backend/Migrations/ -verbose down 
+
+migrate-fix:
+	migrate -database "postgres://postgres:helloworld@localhost:5432/postgres" -path backend/Migrations/ force 1
+
+.PHONY: frontend backend db migrate-up migrate-down migrate-up-force migrate-down-force
