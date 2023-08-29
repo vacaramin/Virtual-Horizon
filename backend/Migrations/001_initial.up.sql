@@ -5,6 +5,8 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     gender VARCHAR(10),
+    name VARCHAR(255) NOT NULL,
+    dob TIMESTAMPTZ,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -13,8 +15,6 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS students (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(id),
-    name VARCHAR(255) NOT NULL,
-    dob TIMESTAMPTZ,
     parent_guardian_name VARCHAR(255),
     parent_guardian_email VARCHAR(255),
     parent_guardian_phone VARCHAR(20),
@@ -31,20 +31,20 @@ CREATE TABLE IF NOT EXISTS students (
 
 -- Insert sample data into the "users" table
 INSERT INTO
-    users (email, password, gender)
+    users (email, password, gender, name, dob)
 VALUES
     (
         'vacaramin86@gmail.com',
         '$2a$10$RoehRLxjbt1jHUT2j9Gihu6QYeRRa3xuycKs0GGDxpEb3dJFzo6ga',
-        'Male'
+        'Male',
+        'Waqar Amin',
+        '1990-01-01'
     );
 
 -- Insert sample data into the "students" table
 INSERT INTO
     students (
         user_id,
-        name,
-        dob,
         parent_guardian_name,
         parent_guardian_email,
         parent_guardian_phone,
@@ -59,8 +59,6 @@ INSERT INTO
 VALUES
     (
         1,
-        'Waqar Amin',
-        '1990-01-01',
         'John Doe',
         'johndoe@example.com',
         '1234567890',

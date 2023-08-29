@@ -48,6 +48,7 @@ func Signup(c *gin.Context) {
 		})
 		return
 	}
+	// Create User Model
 	user := models.User{
 		Email:    body.Email,
 		Password: string(hash),
@@ -55,6 +56,7 @@ func Signup(c *gin.Context) {
 		Dob:      body.Dob,
 		Gender:   body.Gender,
 	}
+	initializers.DB.Create(&user)
 	//Create a user
 	student := models.Student{
 		UserID:              user.ID,
@@ -69,14 +71,9 @@ func Signup(c *gin.Context) {
 		Accomodations:       body.Accomodations,
 		PresentAddress:      body.PresentAddress,
 	}
-	//Save the user
-	result := initializers.DB.Create(&student)
-	if result.Error != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"error": "Error while creating the user",
-		})
-		return
-	}
+	initializers.DB.Create(&student)
+
+	initializers.DB.Save(&user).Save(&student)
 
 	//return the response
 	c.JSON(http.StatusOK, gin.H{
@@ -343,4 +340,39 @@ func Logout(c *gin.Context) {
 			"message": "logout successful",
 		})
 	}
+}
+func DeleteUser(c *gin.Context) {
+	tokenStr, err := c.Cookie("Authorization")
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"success": "fail",
+			"message": "UnAuthorized Request,  Please Log in!",
+		})
+		return
+	}
+	// Decode/Validate the token
+	token, _ := jwt.Parse(tokenStr, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+		}
+
+		return []byte(os.Getenv("SECRET")), nil
+	})
+
+	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		// Check token expiration
+		if time.Now().Unix() > int64(claims["exp"].(float64)) {
+			c.AbortWithStatus(http.StatusUnauthorized)
+			return
+		}
+		var user models.User
+		initializers.DB.First(&user, claims["sub"])
+		initializers.DB.Delete(&user)
+
+	}
+	// After Performing Validations
+	c.JSON(http.StatusOK, gin.H{
+		"status":  "success",
+		"message": "Successfully deleted user",
+	})
 }
