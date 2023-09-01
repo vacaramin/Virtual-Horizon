@@ -1,7 +1,7 @@
 package initializers
 
 import (
-	"Virtual-Horizon/models"
+	"Virtual-Horizon/src/user/models"
 	"log"
 )
 

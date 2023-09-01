@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"Virtual-Horizon/initializers"
-	"Virtual-Horizon/models"
+	"Virtual-Horizon/src/user/models"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
