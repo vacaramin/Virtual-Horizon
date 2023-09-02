@@ -1,10 +1,11 @@
-package controllers
+package userControllers
 
 import (
 	"Virtual-Horizon/initializers"
 	"Virtual-Horizon/src/student/models"
-	models2 "Virtual-Horizon/src/user/models"
+	model "Virtual-Horizon/src/user/models"
 	"fmt"
+	"golang.org/x/crypto/bcrypt"
 	"log"
 	"net/http"
 	"os"
@@ -13,9 +14,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
-	"golang.org/x/crypto/bcrypt"
 )
 
+// Signup This function takes in request body with information of a Student Profile and adds a User to the Database, and returns a jwt token
 func Signup(c *gin.Context) {
 	fmt.Println("Signup")
 	var body struct {
@@ -32,7 +33,7 @@ func Signup(c *gin.Context) {
 		Device              string
 		InternetConnection  string
 		SpecialNeeds        string
-		Accomodations       string
+		Accommodations      string
 		PresentAddress      string
 	}
 	if c.Bind(&body) != nil {
@@ -50,12 +51,21 @@ func Signup(c *gin.Context) {
 		return
 	}
 	// Create User Model
-	user := models2.User{
+	user := model.User{
 		Email:    body.Email,
 		Password: string(hash),
 		Name:     body.Name,
 		Dob:      body.Dob,
 		Gender:   body.Gender,
+	}
+	err = user.Validate()
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status": "fail",
+			"msg":    "Bad request, Please check for correct Validation, i.e email",
+			"error":  err,
+		})
+		return
 	}
 	initializers.DB.Create(&user)
 	//Create a user
@@ -69,7 +79,7 @@ func Signup(c *gin.Context) {
 		Device:              body.Device,
 		InternetConnection:  body.InternetConnection,
 		SpecialNeeds:        body.SpecialNeeds,
-		Accomodations:       body.Accomodations,
+		Accomodations:       body.Accommodations,
 		PresentAddress:      body.PresentAddress,
 	}
 	initializers.DB.Create(&student)
@@ -83,75 +93,7 @@ func Signup(c *gin.Context) {
 
 }
 
-// Login This controller function for user takes in 2 parameters email and password and authenticates the user
-func Login(c *gin.Context) {
-	// Clearing Previously Logged-in User, If any.
-	c.SetCookie("Authorization", "", -1, "/", "localhost", false, true)
-
-	//get the email and pass of request body
-	var body struct {
-		Email    string
-		Password string
-	}
-	c.Header("Access-Control-Allow-Methods", "POST") // Add other allowed methods if needed
-	c.Header("Access-Control-Allow-Headers", "Content-Type, Authorization")
-	c.Header("Access-Control-Allow-Origin", "*")
-	if c.Bind(&body) != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"status": "failed",
-			"error":  "Invalid request body",
-		})
-		return
-	}
-	//look up requested user
-
-	var user models2.User
-	initializers.DB.First(&user, "email = ?", body.Email)
-	if user.ID == 0 {
-		c.JSON(http.StatusUnauthorized, gin.H{
-			"status": "failed",
-			"error":  "Invalid Email or Password",
-		})
-		return
-	}
-
-	//compare sent in pass with user pass hash
-
-	err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(body.Password))
-	if err != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{
-			"status": "failed",
-			"error":  "Invalid Email or Password",
-		})
-		return
-	}
-
-	//generate jwt
-
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"sub": user.ID,
-		"exp": time.Now().Add(time.Hour * 24 * 7).Unix(),
-	})
-	//sign and get the complete encoded token as a string using the secret
-	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET")))
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"status": "failed",
-			"error":  "Error while generating token",
-		})
-		return
-	}
-	//send it back
-
-	c.SetCookie("Authorization", tokenString, 3600*24*7, "/", "localhost", false, true)
-	//uncomment if jwt is to be sent in response body
-	c.JSON(http.StatusOK, gin.H{
-		"status":        "success",
-		"Authorization": tokenString,
-	})
-
-}
-
+// GetProfileByID This Function returns the user data based on the ID
 func GetProfileByID(c *gin.Context) {
 	idStr, _ := c.Params.Get("ID")
 	id, err := strconv.Atoi(idStr)
@@ -164,7 +106,7 @@ func GetProfileByID(c *gin.Context) {
 		return
 	}
 
-	var user models2.User
+	var user model.User
 	result := initializers.DB.First(&user, id)
 	if result.Error != nil {
 		log.Println("Error fetching user:", result.Error)
@@ -202,7 +144,7 @@ func GetProfileFromToken(c *gin.Context) {
 		}
 
 		//find the user with token sub
-		var user models2.User
+		var user model.User
 		initializers.DB.First(&user, claims["sub"])
 		if user.ID == 0 {
 			c.JSON(http.StatusUnauthorized, gin.H{
@@ -244,11 +186,11 @@ func UpdateProfileFromToken(c *gin.Context) {
 		}
 		type UpdatePayload struct {
 			Student models.Student
-			User    models2.User
+			User    model.User
 		}
 
 		// Find the user with token sub
-		var user models2.User
+		var user model.User
 		var student models.Student
 		initializers.DB.First(&user, claims["sub"])
 		initializers.DB.First(&student, "user_id = ?", user.ID)
@@ -324,24 +266,6 @@ func UpdateProfileFromToken(c *gin.Context) {
 		})
 	}
 }
-func Logout(c *gin.Context) {
-
-	if _, err := c.Cookie("Authorization"); err != nil {
-
-		log.Println("err = ", err)
-		c.JSON(http.StatusBadRequest, gin.H{
-			"status":  "fail",
-			"message": "you are already Logged out",
-		})
-	} else {
-		c.SetCookie("Authorization", "", -1, "/", "localhost", false, true)
-
-		c.JSON(http.StatusOK, gin.H{
-			"status":  "success",
-			"message": "logout successful",
-		})
-	}
-}
 func DeleteUser(c *gin.Context) {
 	tokenStr, err := c.Cookie("Authorization")
 	if err != nil {
@@ -366,7 +290,7 @@ func DeleteUser(c *gin.Context) {
 			c.AbortWithStatus(http.StatusUnauthorized)
 			return
 		}
-		var user models2.User
+		var user model.User
 		initializers.DB.First(&user, claims["sub"])
 		initializers.DB.Delete(&user)
 

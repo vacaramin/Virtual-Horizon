@@ -2,7 +2,8 @@ package main
 
 import (
 	"Virtual-Horizon/initializers"
-	"Virtual-Horizon/src/user/routes"
+	"Virtual-Horizon/routes"
+
 	"log"
 	"os"
 
