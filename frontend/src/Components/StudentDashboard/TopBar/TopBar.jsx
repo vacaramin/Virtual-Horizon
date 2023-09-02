@@ -9,7 +9,7 @@ function TopBar(props) {
   const history = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const handleLogout = () => {
-    fetch("http://localhost:4000/user/logout", {
+    fetch("http://localhost:4000/logout", {
       method: 'POST',
       credentials: "include",
     })
