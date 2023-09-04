@@ -92,6 +92,7 @@ function Settings() {
               value={userInfo.email}
               onChange={handleInputChange}
               className="form-input"
+              
             />
           </div>
           {/* Add more fields using the same pattern */}
