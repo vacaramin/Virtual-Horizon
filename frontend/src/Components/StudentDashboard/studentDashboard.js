@@ -26,7 +26,7 @@ function StudentDashboard() {
     .then(response => response.json())
     .then(data => {
       if (data.status === "success") {
-        setUsername(data.user.Name);
+        setUsername(data.user.name);
       }
     })
     .catch(error => {
