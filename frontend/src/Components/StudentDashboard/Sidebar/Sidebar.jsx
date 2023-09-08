@@ -3,10 +3,7 @@ import "./Sidebar.css";
 import menuIcon from "./menu-icon.svg";
 import home from './Logo of Student Dashboard/Home.svg'
 import subjecticon from './Logo of Student Dashboard/Subjects.svg'
-import timetable from './Logo of Student Dashboard/Time-Table.svg'
 import Tutor from './Logo of Student Dashboard/Tutor.svg'
-import classlinks from './Logo of Student Dashboard/Class-links.svg'
-import reportcard from './Logo of Student Dashboard/Report-Card.svg'
 import settings from './Logo of Student Dashboard/Setting.svg'
 function Sidebar(props) {
   const { isSidebarOpen, toggleSidebar, handleItemClick, selectedItem} = props;
@@ -29,25 +26,15 @@ function Sidebar(props) {
           {isSidebarOpen && <span>Subjects</span>}
         </div>
 
-        <div className={`sidebar-item ${selectedItem === "timetable" ? "selected" : ""}`} onClick = {() => handleItemClick('timetable')}>
-          <img src={timetable} alt="Settings icon" />
-          {isSidebarOpen && <span>Time Table</span>}
-        </div>
+        
 
         <div className={`sidebar-item ${selectedItem === "tutor" ? "selected" : ""}`} onClick={ () => handleItemClick('tutor')}>
           <img src={Tutor} alt="Settings icon" />
-          {isSidebarOpen && <span>Tutor</span>}
+          {isSidebarOpen && <span>Hire a Tutor</span>}
         </div>
 
-        <div className={`sidebar-item ${selectedItem === "classlinks" ? "selected" : ""}`} onClick = {() => handleItemClick('classlinks')}>
-          <img src={classlinks} alt="Settings icon" />
-          {isSidebarOpen && <span>Class Links</span>}
-        </div>
-
-        <div className={`sidebar-item ${selectedItem === "reportcard" ? "selected" : ""}`} onClick = {() => handleItemClick('reportcard')}>
-          <img src={reportcard} alt="Settings icon" />
-          {isSidebarOpen && <span>Report Card</span>}
-        </div>
+        
+        
         <div className={`sidebar-item ${selectedItem === "settings" ? "selected" : ""}`} onClick={() => handleItemClick('settings')}>
           <img src={settings} alt="Settings icon" />
           {isSidebarOpen && <span>Settings</span>}
