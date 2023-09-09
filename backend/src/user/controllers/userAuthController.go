@@ -2,7 +2,7 @@ package userControllers
 
 import (
 	"Virtual-Horizon/initializers"
-	models2 "Virtual-Horizon/src/user/models"
+	model "Virtual-Horizon/src/user/models"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
@@ -36,7 +36,7 @@ func Login(c *gin.Context) {
 	}
 	//look up requested user
 
-	var user models2.User
+	var user model.User
 	initializers.DB.First(&user, "email = ?", body.Email)
 	if user.ID == 0 {
 		c.JSON(http.StatusUnauthorized, gin.H{

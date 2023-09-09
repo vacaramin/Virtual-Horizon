@@ -10,7 +10,10 @@
   right: 0;
   z-index: 999;
 }
-
+.profile-container {
+  position: relative;
+  display: inline-block;
+}
 .logo-container {
   width: 100px;
   margin-left: 35px;
@@ -24,6 +27,8 @@
   display: flex;
   align-items: center;
   color: white;
+  cursor: pointer;
+  margin-right: 25px;
 }
 
 .profile-pic {
@@ -55,11 +60,17 @@
 .dropdown-button {
   background-color: #f7cb46; /* Match the top bar's background color */
   color: white;
-  padding: 10px 25px;
+  padding: 5px 10px; /* Adjust padding */
+  font-size: 16px; /* Adjust font size */
   border: none;
   cursor: pointer;
   border-radius: 30px;
-  margin-left: 8px;
+  position: absolute;
+  bottom: 20px;
+  right: 32px;
+  font-size: 16px;
+  padding: 5px 10px;
+  background-color: #f7cb46;
 }
 
 /* Style for the dropdown content */
