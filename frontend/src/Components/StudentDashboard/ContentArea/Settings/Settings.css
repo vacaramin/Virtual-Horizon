@@ -1,4 +1,3 @@
-
 .profile-settings {
   display: flex;
   background-color: #ffffff;
@@ -8,7 +7,9 @@
   max-width: 1000px;
   margin: 0 auto;
 }
-
+.field{
+  text-align: left;
+}
 .profile-settings-left {
   flex: 1;
   padding: 30px;
@@ -51,17 +52,19 @@
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  width: 70%;;
 }
 
 .form-input {
-  width: 100%;
+  width: calc(100% );
   padding: 10px;
   border: 1px solid #e0e0e0;
   border-radius: 5px;
 }
 
-.update-btn {
+.update-btn,
+.edit-btn {
   background-color: #007bff;
   color: #ffffff;
   border: none;
@@ -71,6 +74,13 @@
   transition: background-color 0.3s ease;
 }
 
-.update-btn:hover {
+.update-btn:hover,
+.edit-btn:hover {
   background-color: #0056b3;
+}
+
+.profile-settings-left h2 {
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  color: #333;
 }
