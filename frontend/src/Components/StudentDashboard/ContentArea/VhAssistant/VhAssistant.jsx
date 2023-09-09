@@ -1,7 +1,7 @@
 import React from 'react';
-import './vhAssistant.css';
+import './VhAssistant.css';
 
-function vhAssistant() {
+function VhAssistant() {
   return (
     <div className="LanguageSupport-Container">
       <div className="topbar"> Language fjksdhfskdjhfskdjfhsdkjfhsdkjsfhSupport
@@ -11,4 +11,4 @@ function vhAssistant() {
   );
 }
 
-export default vhAssistant;
+export default VhAssistant;
