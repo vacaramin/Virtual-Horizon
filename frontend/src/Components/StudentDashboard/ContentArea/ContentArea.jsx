@@ -4,7 +4,7 @@ import { useState } from "react";
 import Settings from "./Settings/Settings";
 import Home from "./Home/Home";
 import Tutor from "./Tutor/Tutor";
-import vhAssistant from "./vhAssistant/vhAssistant";
+import VhAssistant from "./VhAssistant/VhAssistant";
 import Payment from "./Payment/Payment";
 import Workspace from "./Workspace/Workspace";
 
@@ -53,13 +53,37 @@ function ContentArea({ selectedItem }) {
       );
 
       //language support
-    } else if(selectedItem === "vhAssistant"){
+    }else {
+      return (
+        <div>
+         <h1>Subjects</h1>
+         
+        <div>
+          <div className="content-area-student">
+            <div className="subject-container">
+              {subjects.map((subject) => (
+                <span
+                  onClick={() => handleSubjectClick(subject)}
+                  key={subject.name}
+                  className="subject-item"
+                  style={{ backgroundColor: subject.color }}
+                >
+                  {subject.name}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+        </div>
+      );
+    }
+  } else if(selectedItem === "vhassistant"){
 
       return (
         <div>
-          <h1>Language Support</h1>
+          <h1>VH Support</h1>
           <div className="content-area-student">
-            <vhAssistant />
+            <VhAssistant />
           </div>
         </div>
       );
@@ -85,32 +109,7 @@ function ContentArea({ selectedItem }) {
           </div>
         </div>
       );
-    }
-    else {
-      return (
-        <div>
-         <h1>Subjects</h1>
-         
-        <div>
-          <div className="content-area-student">
-            <div className="subject-container">
-              {subjects.map((subject) => (
-                <span
-                  onClick={() => handleSubjectClick(subject)}
-                  key={subject.name}
-                  className="subject-item"
-                  style={{ backgroundColor: subject.color }}
-                >
-                  {subject.name}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-        </div>
-      );
-    }
-  } else if (selectedItem === "tutor") {
+    } else if (selectedItem === "tutor") {
     return (
       <div>
         

@@ -40,9 +40,9 @@ function Sidebar(props) {
           {isSidebarOpen && <span>Hire a Tutor</span>}
         </div>
 
-        <div className={`sidebar-item ${selectedItem === "vhAssistant" ? "selected" : ""}`} onClick = {() => handleItemClick('vhAssistant')}>
-          <img src={LanguageSupport} alt="Language_support" />
-          {isSidebarOpen && <span>Language Support</span>}
+        <div className={`sidebar-item ${selectedItem === "vhassistant" ? "selected" : ""}`} onClick = {() => handleItemClick('vhassistant')}>
+          <img src={LanguageSupport} alt="ch assistant" />
+          {isSidebarOpen && <span>VH Assistant</span>}
         </div>
 
         <div className={`sidebar-item ${selectedItem === "payment" ? "selected" : ""}`} onClick = {() => handleItemClick('payment')}>
