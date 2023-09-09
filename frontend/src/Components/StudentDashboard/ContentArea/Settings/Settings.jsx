@@ -74,18 +74,39 @@ function Settings() {
       <div className="profile-settings-right">
         <div className="profile-photo">
           <img
-            src="your-profile-photo-url"
+            src="https://avatars.githubusercontent.com/u/68877880?v=4"
             alt="Profile"
             className="profile-photo-img"
           />
         </div>
+
         <div className="photo-upload">
           <label htmlFor="profilePictureInput" className="upload-button">
             Upload New Picture
           </label>
           <input type="file" id="profilePictureInput" className="file-input" />
         </div>
+        <br /><br />
+        <div>
+          <label>
+            <b>About me</b>
+          </label>
+          {isEditing ? (
+            <input
+              type="text"
+              id="aboutme"
+              defaultValue={userInfo.aboutme}
+              onChange={handleInputChange}
+              className="form-input"
+            />
+          ) : (
+            <p className="field" id="aboutme">
+              {userInfo.aboutme}
+            </p>
+          )}
+        </div>
       </div>
+      
       <div className="profile-settings-left">
         <h2>Profile Settings</h2>
 
