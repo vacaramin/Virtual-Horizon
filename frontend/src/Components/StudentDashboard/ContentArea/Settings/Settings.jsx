@@ -1,34 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Settings.css";
 
 function Settings() {
-  const [userInfo, setUserInfo] = useState({
-    fullName: "",
-    password: "",
-    email: ""
-    // Add more fields here
-  });
+  const [userInfo, setUserInfo] = useState({});
+  const [isEditing, setIsEditing] = useState(false);
 
-  const handleUpdateInfo = async () => {
+
+  const GetUserData = async () => {
     try {
-      const response = await fetch("your-update-api-endpoint", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(userInfo)
+      const response = await fetch("http://localhost:4000/user/GetProfileFromToken", {
+        method: "GET",
+      credentials: "include",
       });
-
-      if (response.ok) {
-        console.log("User information updated successfully");
-        // You can update the UI or perform other actions after successful update
+      const data = await response.json();
+      if (data.status === "success") {
+        setUserInfo(data.user);
+        console.log(JSON.stringify(data.user, null, 2));
       } else {
-        console.error("Failed to update user information");
+        console.log("Failed to load user data");
       }
     } catch (error) {
-      console.error("Error updating user information:", error);
+      console.error("Error loading user data:", error);
     }
   };
+  
+  const handleUpdateInfo = async () => {
+    setIsEditing(false);
+  };
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+  useEffect(() => {
+    GetUserData();
+  }, []);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -65,40 +70,72 @@ function Settings() {
         <div className="profile-settings-left">
           <h2>Profile Settings</h2>
           <div className="form-group">
-            <label htmlFor="fullName">Full Name</label>
-            <input
+            <label htmlFor="fullName">Name</label>
+            {isEditing ? (<input
               type="text"
               id="fullName"
-              value={userInfo.fullName}
+              defaultValue={userInfo.name}
               onChange={handleInputChange}
               className="form-input"
-            />
+            />):(
+              <p id ="fullName">{userInfo.name}</p>
+            )}
           </div>
+
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="DOB">Date of Birth</label>
+            {isEditing ? (
             <input
-              type="password"
-              id="password"
-              value={userInfo.password}
+              type="DOB"
+              id="DOB"
+              value={userInfo.dob}
               onChange={handleInputChange}
               className="form-input"
             />
+            ):(
+              <p id="DOB">{userInfo.dob}</p>
+            )}
           </div>
+
           <div className="form-group">
-            <label htmlFor="email">Email Address</label>
+          <label>Email Address</label>
+          {isEditing ? (
             <input
               type="email"
               id="email"
               value={userInfo.email}
               onChange={handleInputChange}
               className="form-input"
-              
             />
+          ) : (
+            <p>{userInfo.email}</p>
+          )}
           </div>
-          {/* Add more fields using the same pattern */}
+          <div className="form-group">
+          <label>Gender</label>
+          {isEditing ? (
+            <input
+              type="text"
+              id="gender"
+              value={userInfo.gender}
+              onChange={handleInputChange}
+              className="form-input"
+            />
+          ) : (
+            <p>{userInfo.gender}</p>
+          )}
+          </div>
+
+          
+          {isEditing ? (
           <button className="update-btn" onClick={handleUpdateInfo}>
             Update Information
           </button>
+        ) : (
+          <button className="edit-btn" onClick={handleEditClick}>
+            Edit
+          </button>
+        )}
         </div>
       </div>
    
