@@ -4,6 +4,11 @@ import { useState } from "react";
 import Settings from "./Settings/Settings";
 import Home from "./Home/Home";
 import Tutor from "./Tutor/Tutor";
+import LanguageSupport from "./LanguageSupport/LanguageSupport";
+import Payment from "./Payment/Payment";
+import Workspace from "./Workspace/Workspace";
+
+
 function ContentArea({ selectedItem }) {
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [subjectSelected, setSubjectSelected] = useState(false);
@@ -46,7 +51,42 @@ function ContentArea({ selectedItem }) {
           <button onClick={handleGoBack}>Go Back</button>
         </div>
       );
-    } else {
+
+      //language support
+    } else if(selectedItem === "languagesupport"){
+
+      return (
+        <div>
+          <h1>Language Support</h1>
+          <div className="content-area-student">
+            <LanguageSupport />
+          </div>
+        </div>
+      );
+
+      //payment area
+    } else if(selectedItem === "payment1"){
+      return (
+        <div>
+          <h1>Payment</h1>
+          <div className="content-area-student">
+            <Payment />
+          </div>
+        </div>
+      );
+
+      //my workspace
+    } else if(selectedItem === "workspace"){
+      return (
+        <div>
+          <h1>Workspace</h1>
+          <div className="content-area-student">
+            <Workspace />
+          </div>
+        </div>
+      );
+    }
+    else {
       return (
         <div>
          <h1>Subjects</h1>
