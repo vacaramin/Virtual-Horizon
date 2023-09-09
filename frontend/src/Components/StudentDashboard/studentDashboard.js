@@ -16,6 +16,7 @@ function StudentDashboard() {
   
   const handleItemClick = (itemName) => {
     setSelectedItem(itemName);
+    console.log(itemName)
   };
 
   const getUserDetails = () => {
