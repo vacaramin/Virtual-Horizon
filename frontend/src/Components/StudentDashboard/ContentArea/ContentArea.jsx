@@ -4,9 +4,10 @@ import { useState } from "react";
 import Settings from "./Settings/Settings";
 import Home from "./Home/Home";
 import Tutor from "./Tutor/Tutor";
-import LanguageSupport from "./LanguageSupport/LanguageSupport";
+import vhAssistant from "./vhAssistant/vhAssistant";
 import Payment from "./Payment/Payment";
 import Workspace from "./Workspace/Workspace";
+
 
 function ContentArea({ selectedItem }) {
   const [selectedSubject, setSelectedSubject] = useState(null);
@@ -34,11 +35,11 @@ function ContentArea({ selectedItem }) {
   if (selectedItem === "home") {
     return (
       <div>
-        {/* <h1>Welcome to the student dashboard</h1> */}
-
-        <div className="content-area-student">
-          <Home />
-        </div>
+      {/* <h1>Welcome to the student dashboard</h1> */}
+        
+      <div className="content-area-student">
+        <Home />
+      </div>
       </div>
     );
   } else if (selectedItem === "subjects") {
@@ -52,67 +53,71 @@ function ContentArea({ selectedItem }) {
       );
 
       //language support
-    } else {
+    } else if(selectedItem === "vhAssistant"){
+
       return (
         <div>
-          <h1>Subjects</h1>
+          <h1>Language Support</h1>
+          <div className="content-area-student">
+            <vhAssistant />
+          </div>
+        </div>
+      );
 
-          <div>
-            <div className="content-area-student">
-              <div className="subject-container">
-                {subjects.map((subject) => (
-                  <span
-                    onClick={() => handleSubjectClick(subject)}
-                    key={subject.name}
-                    className="subject-item"
-                    style={{ backgroundColor: subject.color }}
-                  >
-                    {subject.name}
-                  </span>
-                ))}
-              </div>
-            </div>
+      //payment area
+    } else if(selectedItem === "payment"){
+      return (
+        <div>
+          <h1>Payment</h1>
+          <div className="content-area-student">
+            <Payment />
+          </div>
+        </div>
+      );
+
+      //my workspace
+    } else if(selectedItem === "workspace"){
+      return (
+        <div>
+          <h1>Workspace</h1>
+          <div className="content-area-student">
+            <Workspace />
           </div>
         </div>
       );
     }
-  } else if (selectedItem === "languagesupport") {
-    return (
-      <div>
-        <h1>Language Support</h1>
-        <div className="content-area-student">
-          <LanguageSupport />
+    else {
+      return (
+        <div>
+         <h1>Subjects</h1>
+         
+        <div>
+          <div className="content-area-student">
+            <div className="subject-container">
+              {subjects.map((subject) => (
+                <span
+                  onClick={() => handleSubjectClick(subject)}
+                  key={subject.name}
+                  className="subject-item"
+                  style={{ backgroundColor: subject.color }}
+                >
+                  {subject.name}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
-    );
-
-    //payment area
-  } else if (selectedItem === "payment") {
-    return (
-      <div>
-        <h1>Payment</h1>
-        <div className="content-area-student">
-          <Payment />
         </div>
-      </div>
-    );
-
-    //my workspace
-  } else if (selectedItem === "workspace") {
-    return (
-      <div>
-        <h1>Workspace</h1>
-        <div className="content-area-student">
-          <Workspace />
-        </div>
-      </div>
-    );
+      );
+    }
   } else if (selectedItem === "tutor") {
     return (
       <div>
-        <div className="content-area-student">
-          <Tutor />
-        </div>
+        
+      <div className="content-area-student">
+        <Tutor/>
+        
+      </div>
       </div>
     );
   } else if (selectedItem === "settings") {
