@@ -3,8 +3,8 @@ package controllers
 import (
 	"Virtual-Horizon/initializers"
 	"Virtual-Horizon/src/student/models"
-	models3 "Virtual-Horizon/src/tutor/models"
-	models2 "Virtual-Horizon/src/user/models"
+	tutormodel "Virtual-Horizon/src/tutor/models"
+	usermodel "Virtual-Horizon/src/user/models"
 	"fmt"
 	"log"
 	"net/http"
@@ -20,13 +20,10 @@ import (
 func TutorSignup(c *gin.Context) {
 	fmt.Println("Signup")
 	var body struct {
-		Email       string
-		Password    string
-		Name        string
-		Dob         string
-		Gender      string
-		Department  string
-		Designation string
+		usermodel.User
+		Subject    string
+		Experience string
+		Rating     string
 	}
 	if c.Bind(&body) != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -43,19 +40,28 @@ func TutorSignup(c *gin.Context) {
 		return
 	}
 	// Create User Model
-	user := models2.User{
+	user := usermodel.User{
 		Email:    body.Email,
 		Password: string(hash),
 		Name:     body.Name,
 		Dob:      body.Dob,
 		Gender:   body.Gender,
+		Role:     usermodel.Tutor,
 	}
 	initializers.DB.Create(&user)
 	//Create a user
-	tutor := models3.Tutor{
-		UserID:      user.ID,
-		Department:  body.Department,
-		Designation: body.Designation,
+	tutor := tutormodel.Tutor{
+		User: usermodel.User{
+			Email:    body.Email,
+			Password: string(hash),
+			Name:     body.Name,
+			Dob:      body.Dob,
+			Gender:   body.Gender,
+			Role:     "tutor",
+		},
+		Subject:    body.Subject,
+		Experience: body.Experience,
+		Rating:     "5",
 	}
 	initializers.DB.Create(&tutor)
 
@@ -80,7 +86,7 @@ func GetTutorProfileByID(c *gin.Context) {
 		return
 	}
 
-	var tutor models3.Tutor
+	var tutor tutormodel.Tutor
 	result := initializers.DB.First(&tutor, "user_id = ?", id)
 	if result.Error != nil {
 		log.Println("Error fetching user:", result.Error)
@@ -118,7 +124,7 @@ func GetTutorProfileFromToken(c *gin.Context) {
 		}
 
 		//find the user with token sub
-		var user models2.User
+		var user usermodel.User
 		initializers.DB.First(&user, claims["sub"])
 		if user.ID == 0 {
 			c.JSON(http.StatusUnauthorized, gin.H{
@@ -160,11 +166,11 @@ func UpdateTutorProfileFromToken(c *gin.Context) {
 		}
 		type UpdatePayload struct {
 			Student models.Student
-			User    models2.User
+			User    usermodel.User
 		}
 
 		// Find the user with token sub
-		var user models2.User
+		var user usermodel.User
 		var student models.Student
 		initializers.DB.First(&user, claims["sub"])
 		initializers.DB.First(&student, "user_id = ?", user.ID)
@@ -264,7 +270,7 @@ func DeleteTutor(c *gin.Context) {
 			c.AbortWithStatus(http.StatusUnauthorized)
 			return
 		}
-		var user models2.User
+		var user usermodel.User
 		initializers.DB.First(&user, claims["sub"])
 		initializers.DB.Delete(&user)
 
