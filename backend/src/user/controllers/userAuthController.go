@@ -19,7 +19,7 @@ func Login(c *gin.Context) {
 	// Clearing Previously Logged-in User, If any.
 	c.SetCookie("Authorization", "", -1, "/", "localhost", false, true)
 
-	//get the email and pass of request body
+	// body get the email and pass of request body
 	var body struct {
 		Email    string
 		Password string
@@ -27,6 +27,7 @@ func Login(c *gin.Context) {
 	c.Header("Access-Control-Allow-Methods", "POST") // Add other allowed methods if needed
 	c.Header("Access-Control-Allow-Headers", "Content-Type, Authorization")
 	c.Header("Access-Control-Allow-Origin", "*")
+
 	if c.Bind(&body) != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"status": "failed",
@@ -47,7 +48,6 @@ func Login(c *gin.Context) {
 	}
 
 	//compare sent in pass with user pass hash
-
 	err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(body.Password))
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{
@@ -72,10 +72,9 @@ func Login(c *gin.Context) {
 		})
 		return
 	}
-	//send it back
 
+	//send it back
 	c.SetCookie("Authorization", tokenString, 3600*24*7, "/", "localhost", false, true)
-	//uncomment if jwt is to be sent in response body
 	c.JSON(http.StatusOK, gin.H{
 		"status":        "success",
 		"Authorization": tokenString,

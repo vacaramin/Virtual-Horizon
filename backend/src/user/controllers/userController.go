@@ -2,8 +2,8 @@ package userControllers
 
 import (
 	"Virtual-Horizon/initializers"
-	"Virtual-Horizon/src/student/models"
-	model "Virtual-Horizon/src/user/models"
+	studentmodel "Virtual-Horizon/src/student/models"
+	usermodel "Virtual-Horizon/src/user/models"
 	"fmt"
 	"golang.org/x/crypto/bcrypt"
 	"log"
@@ -29,12 +29,6 @@ func Signup(c *gin.Context) {
 		ParentGuardianEmail string
 		ParentGuardianPhone string
 		GradeLevel          string
-		CurrentSchool       string
-		Device              string
-		InternetConnection  string
-		SpecialNeeds        string
-		Accommodations      string
-		PresentAddress      string
 	}
 	if c.Bind(&body) != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -51,12 +45,13 @@ func Signup(c *gin.Context) {
 		return
 	}
 	// Create User Model
-	user := model.User{
+	user := usermodel.User{
 		Email:    body.Email,
 		Password: string(hash),
 		Name:     body.Name,
 		Dob:      body.Dob,
 		Gender:   body.Gender,
+		Role:     "student", // Set role to "student" for a student signup
 	}
 	err = user.Validate()
 	if err != nil {
@@ -68,29 +63,28 @@ func Signup(c *gin.Context) {
 		return
 	}
 	initializers.DB.Create(&user)
-	//Create a user
-	student := models.Student{
-		UserID:              user.ID,
+
+	// Create a student
+	student := studentmodel.Student{
+		User: usermodel.User{
+			Email:    body.Email,
+			Password: string(hash),
+			Name:     body.Name,
+			Dob:      body.Dob,
+			Gender:   body.Gender,
+			Role:     "student", // Set role to "student" for a student signup
+		},
 		ParentGuardianName:  body.ParentGuardianName,
 		ParentGuardianEmail: body.ParentGuardianEmail,
 		ParentGuardianPhone: body.ParentGuardianPhone,
 		GradeLevel:          body.GradeLevel,
-		CurrentSchool:       body.CurrentSchool,
-		Device:              body.Device,
-		InternetConnection:  body.InternetConnection,
-		SpecialNeeds:        body.SpecialNeeds,
-		Accomodations:       body.Accommodations,
-		PresentAddress:      body.PresentAddress,
 	}
 	initializers.DB.Create(&student)
 
-	initializers.DB.Save(&user).Save(&student)
-
-	//return the response
+	// Return the response
 	c.JSON(http.StatusOK, gin.H{
 		"message": "User created successfully",
 	})
-
 }
 
 // GetProfileByID This Function returns the user data based on the ID
@@ -106,7 +100,7 @@ func GetProfileByID(c *gin.Context) {
 		return
 	}
 
-	var user model.User
+	var user usermodel.User
 	result := initializers.DB.First(&user, id)
 	if result.Error != nil {
 		log.Println("Error fetching user:", result.Error)
@@ -144,7 +138,7 @@ func GetProfileFromToken(c *gin.Context) {
 		}
 
 		//find the user with token sub
-		var user model.User
+		var user usermodel.User
 		initializers.DB.First(&user, claims["sub"])
 		if user.ID == 0 {
 			c.JSON(http.StatusUnauthorized, gin.H{
@@ -185,13 +179,13 @@ func UpdateProfileFromToken(c *gin.Context) {
 			return
 		}
 		type UpdatePayload struct {
-			Student models.Student
-			User    model.User
+			Student studentmodel.Student
+			User    usermodel.User
 		}
 
 		// Find the user with token sub
-		var user model.User
-		var student models.Student
+		var user usermodel.User
+		var student studentmodel.Student
 		initializers.DB.First(&user, claims["sub"])
 		initializers.DB.First(&student, "user_id = ?", user.ID)
 
@@ -236,24 +230,6 @@ func UpdateProfileFromToken(c *gin.Context) {
 		if updatePayload.Student.GradeLevel != "" {
 			student.GradeLevel = updatePayload.Student.GradeLevel
 		}
-		if updatePayload.Student.CurrentSchool != "" {
-			student.CurrentSchool = updatePayload.Student.CurrentSchool
-		}
-		if updatePayload.Student.Device != "" {
-			student.Device = updatePayload.Student.Device
-		}
-		if updatePayload.Student.InternetConnection != "" {
-			student.InternetConnection = updatePayload.Student.InternetConnection
-		}
-		if updatePayload.Student.SpecialNeeds != "" {
-			student.SpecialNeeds = updatePayload.Student.SpecialNeeds
-		}
-		if updatePayload.Student.Accomodations != "" {
-			student.Accomodations = updatePayload.Student.Accomodations
-		}
-		if updatePayload.Student.PresentAddress != "" {
-			student.PresentAddress = updatePayload.Student.PresentAddress
-		}
 		log.Println(student.GradeLevel, user.Name, updatePayload.Student.GradeLevel)
 		// Save the updated student information
 		initializers.DB.Save(&user).Save(&student)
@@ -290,7 +266,7 @@ func DeleteUser(c *gin.Context) {
 			c.AbortWithStatus(http.StatusUnauthorized)
 			return
 		}
-		var user model.User
+		var user usermodel.User
 		initializers.DB.First(&user, claims["sub"])
 		initializers.DB.Delete(&user)
 

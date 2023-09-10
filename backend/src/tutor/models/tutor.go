@@ -1,12 +1,15 @@
 package models
 
-import "time"
+import (
+	"Virtual-Horizon/src/user/models"
+	"time"
+)
 
 type Tutor struct {
-	ID          uint      `json:"id" gorm:"primaryKey"`
-	UserID      uint      `json:"user_id"`
-	Department  string    `json:"department"`
-	Designation string    `json:"designation"`
-	CreatedAt   time.Time `json:"created_at"`
-	UpdatedAt   time.Time `json:"updated_at"`
+	models.User
+	Subject    string    `json:"subject"`
+	Experience string    `json:"experience"`
+	Rating     string    `json:"rating"`
+	CreatedAt  time.Time `json:"created_at"`
+	UpdatedAt  time.Time `json:"updated_at"`
 }
