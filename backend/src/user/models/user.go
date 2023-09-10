@@ -14,13 +14,19 @@ type User struct {
 	Name     string `json:"name"`
 	Dob      string `json:"dob"`
 	Gender   string `json:"gender"`
+	About    string `json:"about"`
+	Role     string `json:"role"`
 }
 type Gender string
+type Role string
 
 const (
 	Male     Gender = "male"
 	Female   Gender = "female"
-	intersex Gender = "intersex"
+	Intersex Gender = "intersex"
+	Admin    Role   = "admin"
+	Student  Role   = "student"
+	Tutor    Role   = "tutor"
 )
 
 func (u *User) Validate() error {
