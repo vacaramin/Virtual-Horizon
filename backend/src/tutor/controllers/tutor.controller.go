@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"Virtual-Horizon/initializers"
-	"Virtual-Horizon/src/student/models"
 	tutormodel "Virtual-Horizon/src/tutor/models"
 	usermodel "Virtual-Horizon/src/user/models"
 	"fmt"
@@ -46,7 +45,7 @@ func TutorSignup(c *gin.Context) {
 		Name:     body.Name,
 		Dob:      body.Dob,
 		Gender:   body.Gender,
-		Role:     usermodel.Tutor,
+		Role:     usermodel.Role("Tutor"),
 	}
 	initializers.DB.Create(&user)
 	//Create a user
@@ -165,15 +164,15 @@ func UpdateTutorProfileFromToken(c *gin.Context) {
 			return
 		}
 		type UpdatePayload struct {
-			Student models.Student
-			User    usermodel.User
+			Tutor tutormodel.Tutor
+			User  usermodel.User
 		}
 
 		// Find the user with token sub
 		var user usermodel.User
-		var student models.Student
+		var tutor tutormodel.Tutor
 		initializers.DB.First(&user, claims["sub"])
-		initializers.DB.First(&student, "user_id = ?", user.ID)
+		initializers.DB.First(&tutor, "user_id = ?", user.ID)
 
 		if user.ID == 0 {
 			c.JSON(http.StatusUnauthorized, gin.H{
@@ -192,6 +191,7 @@ func UpdateTutorProfileFromToken(c *gin.Context) {
 			})
 			return
 		}
+
 		// Update user-specific fields
 		if updatePayload.User.Name != "" {
 			user.Name = updatePayload.User.Name
@@ -203,45 +203,24 @@ func UpdateTutorProfileFromToken(c *gin.Context) {
 			user.Gender = updatePayload.User.Gender
 		}
 
-		// Here, we update only student-specific fields
-		if updatePayload.Student.ParentGuardianName != "" {
-			student.ParentGuardianName = updatePayload.Student.ParentGuardianName
+		// Here, we update only tutor-specific fields
+		if updatePayload.Tutor.Subject != "" {
+			tutor.Subject = updatePayload.Tutor.Subject
 		}
-		if updatePayload.Student.ParentGuardianEmail != "" {
-			student.ParentGuardianEmail = updatePayload.Student.ParentGuardianEmail
+		if updatePayload.Tutor.Experience != "" {
+			tutor.Experience = updatePayload.Tutor.Experience
 		}
-		if updatePayload.Student.ParentGuardianPhone != "" {
-			student.ParentGuardianPhone = updatePayload.Student.ParentGuardianPhone
+		if updatePayload.Tutor.Rating != "" {
+			tutor.Rating = updatePayload.Tutor.Rating
 		}
-		if updatePayload.Student.GradeLevel != "" {
-			student.GradeLevel = updatePayload.Student.GradeLevel
-		}
-		if updatePayload.Student.CurrentSchool != "" {
-			student.CurrentSchool = updatePayload.Student.CurrentSchool
-		}
-		if updatePayload.Student.Device != "" {
-			student.Device = updatePayload.Student.Device
-		}
-		if updatePayload.Student.InternetConnection != "" {
-			student.InternetConnection = updatePayload.Student.InternetConnection
-		}
-		if updatePayload.Student.SpecialNeeds != "" {
-			student.SpecialNeeds = updatePayload.Student.SpecialNeeds
-		}
-		if updatePayload.Student.Accomodations != "" {
-			student.Accomodations = updatePayload.Student.Accomodations
-		}
-		if updatePayload.Student.PresentAddress != "" {
-			student.PresentAddress = updatePayload.Student.PresentAddress
-		}
-		log.Println(student.GradeLevel, user.Name, updatePayload.Student.GradeLevel)
-		// Save the updated student information
-		initializers.DB.Save(&user).Save(&student)
+
+		// Save the updated tutor information
+		initializers.DB.Save(&user).Save(&tutor)
 
 		c.JSON(http.StatusOK, gin.H{
 			"status":  "success",
-			"message": "Student profile updated successfully",
-			"student": student,
+			"message": " profile updated successfully",
+			"tutor":   tutor,
 			"user":    user,
 		})
 	}
