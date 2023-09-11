@@ -18,7 +18,7 @@ func SignupStudent(c *gin.Context) {
 		Password            string
 		Name                string
 		Dob                 string
-		Gender              string
+		Gender              usermodel.Gender
 		ParentGuardianName  string
 		ParentGuardianEmail string
 		ParentGuardianPhone string
@@ -66,7 +66,7 @@ func SignupStudent(c *gin.Context) {
 			Name:     body.Name,
 			Dob:      body.Dob,
 			Gender:   body.Gender,
-			Role:     "student", // Set role to "student" for a student signup
+			Role:     usermodel.Role("Student"),
 		},
 		ParentGuardianName:  body.ParentGuardianName,
 		ParentGuardianEmail: body.ParentGuardianEmail,
