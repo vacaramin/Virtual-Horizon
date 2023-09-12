@@ -6,7 +6,6 @@ import Home from "./Home/Home";
 import Tutor from "./Tutor/Tutor";
 import VhAssistant from "./VhAssistant/VhAssistant";
 import Payment from "./Payment/Payment";
-import Workspace from "./Workspace/Workspace";
 
 
 function ContentArea({ selectedItem }) {
@@ -52,7 +51,6 @@ function ContentArea({ selectedItem }) {
         </div>
       );
 
-      //language support
     }else {
       return (
         <div>
@@ -81,7 +79,7 @@ function ContentArea({ selectedItem }) {
 
       return (
         <div>
-          <h1>VH Support</h1>
+          <h1>Welcome to the VH Assistant</h1>
           <div className="content-area-student">
             <VhAssistant />
           </div>
@@ -99,20 +97,10 @@ function ContentArea({ selectedItem }) {
         </div>
       );
 
-      //my workspace
-    } else if(selectedItem === "workspace"){
-      return (
-        <div>
-          <h1>Workspace</h1>
-          <div className="content-area-student">
-            <Workspace />
-          </div>
-        </div>
-      );
     } else if (selectedItem === "tutor") {
     return (
       <div>
-        
+      <h1>Hire Tutors</h1>
       <div className="content-area-student">
         <Tutor/>
         

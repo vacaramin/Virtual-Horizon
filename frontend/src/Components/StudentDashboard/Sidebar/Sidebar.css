@@ -33,7 +33,7 @@
     align-items: center;
     height: 45px;
     background-color: black;
-    position: absolute;
+    position: flex;
     width: 100%;
     bottom: 0px;
     color: white;
