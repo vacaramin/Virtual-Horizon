@@ -11,11 +11,11 @@ function VhAssistant() {
             id="Input"
             type="text"
             label="Enter your query..."
-            style={{ marginTop: "10%", marginLeft: "40%" }}
+            style={{ marginTop: "10%", marginLeft: "25%" , width: "700px"}}
             halfWidth
             
           />
-
+        
       </div>
 
     
