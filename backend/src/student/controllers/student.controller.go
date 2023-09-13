@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 	"net/http"
+	"time"
 )
 
 // SignupStudent This function takes in request body with information of a Student Profile and adds a User to the Database, and returns a jwt token
@@ -19,6 +20,7 @@ func SignupStudent(c *gin.Context) {
 		Name                string
 		Dob                 string
 		Gender              usermodel.Gender
+		About               string
 		ParentGuardianName  string
 		ParentGuardianEmail string
 		ParentGuardianPhone string
@@ -40,12 +42,15 @@ func SignupStudent(c *gin.Context) {
 	}
 	// Create User Model
 	user := usermodel.User{
-		Email:    body.Email,
-		Password: string(hash),
-		Name:     body.Name,
-		Dob:      body.Dob,
-		Gender:   body.Gender,
-		Role:     "student", // Set role to "student" for a student signup
+		Email:     body.Email,
+		Password:  string(hash),
+		Name:      body.Name,
+		Dob:       body.Dob,
+		Gender:    body.Gender,
+		Role:      "student", // Set role to "student" for a student signup
+		About:     body.About,
+		CreatedAt: time.Now(),
+		UpdateAt:  time.Now(),
 	}
 	err = user.Validate()
 	if err != nil {
@@ -60,14 +65,7 @@ func SignupStudent(c *gin.Context) {
 
 	// Create a student
 	student := studentmodel.Student{
-		User: usermodel.User{
-			Email:    body.Email,
-			Password: string(hash),
-			Name:     body.Name,
-			Dob:      body.Dob,
-			Gender:   body.Gender,
-			Role:     usermodel.Role("Student"),
-		},
+		User:                user,
 		ParentGuardianName:  body.ParentGuardianName,
 		ParentGuardianEmail: body.ParentGuardianEmail,
 		ParentGuardianPhone: body.ParentGuardianPhone,
