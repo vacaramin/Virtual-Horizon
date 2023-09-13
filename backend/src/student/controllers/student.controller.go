@@ -32,6 +32,17 @@ func SignupStudent(c *gin.Context) {
 		})
 		return
 	}
+	// Check if the email already exists in the database
+	var existingUser usermodel.User
+	result := initializers.DB.Where("email = ?", body.Email).First(&existingUser)
+	if result.RowsAffected > 0 {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status": "fail",
+			"msg":    "Email already exists",
+		})
+		return
+	}
+
 	//Hash the body
 	hash, err := bcrypt.GenerateFromPassword([]byte(body.Password), 10)
 	if err != nil {
