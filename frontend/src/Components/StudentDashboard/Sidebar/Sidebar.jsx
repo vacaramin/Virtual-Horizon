@@ -5,7 +5,6 @@ import home from './Logo of Student Dashboard/Home.svg'
 import subjecticon from './Logo of Student Dashboard/Subjects.svg'
 import Tutor from './Logo of Student Dashboard/Tutor.svg'
 import settings from './Logo of Student Dashboard/Setting.svg'
-import VhAssistant from './Logo of Student Dashboard/Language_support.svg'
 import Payment from './Logo of Student Dashboard/Payment.svg'
 import vhAssistant from './Logo of Student Dashboard/VH.svg'
 
@@ -46,7 +45,6 @@ function Sidebar(props) {
           {isSidebarOpen && <span>Payment</span>}
         </div>
 
-        
         
         <div className={`sidebar-item ${selectedItem === "settings" ? "selected" : ""}`} onClick={() => handleItemClick('settings')}>
           <img src={settings} alt="Settings icon" />
