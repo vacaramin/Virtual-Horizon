@@ -18,6 +18,7 @@ import (
 
 func TutorSignup(c *gin.Context) {
 	fmt.Println("Signup")
+
 	var body struct {
 		usermodel.User
 		Subject    string
@@ -30,6 +31,18 @@ func TutorSignup(c *gin.Context) {
 		})
 		return
 	}
+
+	// Check if the email already exists in the database
+	var existingUser usermodel.User
+	result := initializers.DB.Where("email = ?", body.Email).First(&existingUser)
+	if result.RowsAffected > 0 {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"Status": "fail",
+			"msg":    "Email already exists",
+		})
+		return
+	}
+
 	//Hash the body
 	hash, err := bcrypt.GenerateFromPassword([]byte(body.Password), 10)
 	if err != nil {
@@ -38,26 +51,22 @@ func TutorSignup(c *gin.Context) {
 		})
 		return
 	}
+
 	// Create User Model
 	user := usermodel.User{
-		Email:    body.Email,
-		Password: string(hash),
-		Name:     body.Name,
-		Dob:      body.Dob,
-		Gender:   body.Gender,
-		Role:     usermodel.Role("Tutor"),
+		Email:     body.Email,
+		Password:  string(hash),
+		Name:      body.Name,
+		Dob:       body.Dob,
+		Gender:    body.Gender,
+		Role:      usermodel.Role("Tutor"),
+		CreatedAt: time.Now(),
+		UpdateAt:  time.Now(),
 	}
 	initializers.DB.Create(&user)
 	//Create a user
 	tutor := tutormodel.Tutor{
-		User: usermodel.User{
-			Email:    body.Email,
-			Password: string(hash),
-			Name:     body.Name,
-			Dob:      body.Dob,
-			Gender:   body.Gender,
-			Role:     "tutor",
-		},
+		User:       user,
 		Subject:    body.Subject,
 		Experience: body.Experience,
 		Rating:     "5",
