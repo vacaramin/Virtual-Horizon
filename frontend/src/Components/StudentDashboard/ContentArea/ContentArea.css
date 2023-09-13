@@ -68,3 +68,13 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+.center{
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-left: 35%;
+  margin-right: 60%;
+  margin-top: 2%;
+}
