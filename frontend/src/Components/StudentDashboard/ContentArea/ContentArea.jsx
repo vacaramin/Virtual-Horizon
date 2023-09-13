@@ -5,7 +5,7 @@ import Settings from "./Settings/Settings";
 import Home from "./Home/Home";
 import Tutor from "./Tutor/Tutor";
 import VhAssistant from "./VhAssistant/VhAssistant";
-import Payment from "./Payment/Payment";
+import payment from "./Payment/Payment";
 import vhAssistant from "/home/awais/Desktop/Virtual-Horizon/frontend/src/Components/StudentDashboard/Sidebar/Logo of Student Dashboard/vhassistant.svg";
 
 
@@ -42,8 +42,21 @@ function ContentArea({ selectedItem }) {
       </div>
       </div>
     );
-  } else if (selectedItem === "subjects") {
-    if (subjectSelected && selectedSubject) {
+  } else if(selectedItem === "payment"){
+    return (
+      <div>
+        <h1>Payment</h1>
+        <div className="content-area-student">
+          <payment />
+        </div>
+      </div>
+    );
+
+  }
+  else if (selectedItem === "subjects") 
+  {
+    if (subjectSelected && selectedSubject) 
+    {
       return (
         <div className="content-area-student">
           <h1>{selectedSubject.name}</h1>
@@ -89,18 +102,7 @@ function ContentArea({ selectedItem }) {
         </div>
       );
 
-      //payment area
-    } else if(selectedItem === "payment"){
-      return (
-        <div>
-          <h1>Payment</h1>
-          <div className="content-area-student">
-            <Payment />
-          </div>
-        </div>
-      );
-
-    } else if (selectedItem === "tutor") {
+    }  else if (selectedItem === "tutor") {
     return (
       <div>
       <h1>Hire Tutors</h1>
