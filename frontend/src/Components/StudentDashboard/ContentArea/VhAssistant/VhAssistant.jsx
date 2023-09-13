@@ -11,19 +11,17 @@ function VhAssistant() {
   return (
   
     <div>
-      <div className="topbar">Welcome to the Virtual Horizon Assistant. The VH Assistant is an AI based chatbot helping you in asking different sort of questions in order to resolve your queries.</div>
-      
-      
+    
       <TextField
             id="Input"
             type="text"
             label="Ask VH Assistant..."
             multiline
-            style={{ marginTop: "10%", marginLeft: "25%", marginRight: "25%" , width: "700px"}}
+            style={{ marginTop: "0%", marginLeft: "20%", marginRight: "25%" , width: "780px"}}
             halfWidth
           />  
 
-          <Stack spacing={2} direction="row" style={{ marginLeft: "25%"}}>
+          <Stack spacing={2} direction="row" style={{ marginLeft: "20%"}}>
             <Button variant="contained" endIcon={<sendIcon/>} style={{ marginTop: "2%", backgroundColor: "#243047", marginRight: "75%" }}>
              Send Query
            </Button>
