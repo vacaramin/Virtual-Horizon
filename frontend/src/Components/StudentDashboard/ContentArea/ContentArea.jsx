@@ -57,7 +57,7 @@ function ContentArea({ selectedItem }) {
   {
     if (subjectSelected && selectedSubject) 
     {
-      return (
+      return (        
         <div className="content-area-student">
           <h1>{selectedSubject.name}</h1>
           <p>{selectedSubject.content}</p>
@@ -94,9 +94,11 @@ function ContentArea({ selectedItem }) {
       return (
         <div>
           <h1>Welcome to the VH Assistant</h1>
-          <div className="topbar">Welcome to the Virtual Horizon Assistant. The VH Assistant is an AI based chatbot helping you in asking different sort of questions in order to resolve your queries.</div>
-          <img src= {vhAssistant} alt="VH Assistant" className="center" />
           <div className="content-area-student">
+            
+          <div>Welcome to the Virtual Horizon Assistant. The VH Assistant is an AI based chatbot helping you in asking different sort of questions in order to resolve your queries.</div>
+            <img src= {vhAssistant} alt="VH Assistant" className="center" />
+            
             <VhAssistant />
           </div>
         </div>
