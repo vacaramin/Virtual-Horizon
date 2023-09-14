@@ -75,11 +75,38 @@ func GetProfileFromToken(c *gin.Context) {
 			},
 			)
 		}
-		c.JSON(http.StatusOK, gin.H{
-			"status":  "success",
-			"message": "User Found Successfully",
-			"user":    user},
-		)
+		if user.Role == "student" {
+			var student studentmodel.Student
+			initializers.DB.First(&student, "ID = ?", user.ID)
+			log.Println("student id = ", student.ID)
+			if student.ID == 0 {
+				c.JSON(http.StatusUnauthorized, gin.H{
+					"status":  "fail",
+					"message": " Student Not found with this token",
+				})
+			} else {
+				c.JSON(http.StatusOK, gin.H{
+					"status":  "success",
+					"message": "Student Found Successfully",
+					"user":    user,
+					"student": student,
+				})
+			}
+		} else if user.Role == "tutor" {
+			c.JSON(http.StatusOK, gin.H{
+				"status":  "success",
+				"message": "User Found Successfully",
+				"user":    user},
+			)
+		} else if user.Role == "admin" {
+			c.JSON(http.StatusOK, gin.H{
+				"status":  "success",
+				"message": "User Found Successfully",
+				"user":    user},
+			)
+		} else {
+			c.AbortWithStatus(http.StatusBadRequest)
+		}
 
 	}
 }

@@ -6,7 +6,7 @@ import (
 )
 
 type Student struct {
-	models.User
+	models.User         `gorm:"primaryKey"`
 	ParentGuardianName  string    `json:"parent_guardian_name"`
 	ParentGuardianEmail string    `json:"parent_guardian_email"`
 	ParentGuardianPhone string    `json:"parent_guardian_phone"`

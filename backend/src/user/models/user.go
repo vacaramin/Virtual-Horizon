@@ -4,21 +4,17 @@ import (
 	"fmt"
 	"github.com/go-playground/validator"
 	"gorm.io/gorm"
-	"time"
 )
 
 type User struct {
 	gorm.Model
-	ID        uint   `json:"id" gorm:"primaryKey"`
-	Email     string `json:"email" gorm:"unique;not null" validate:"email"`
-	Password  string `json:"-"`
-	Name      string `json:"name"`
-	Dob       string `json:"dob"`
-	Gender    Gender `json:"gender"`
-	About     string `json:"about"`
-	Role      Role   `json:"role"`
-	CreatedAt time.Time
-	UpdateAt  time.Time
+	Email    string `json:"email" gorm:"unique;not null" validate:"email"`
+	Password string `json:"-"`
+	Name     string `json:"name"`
+	Dob      string `json:"dob"`
+	Gender   Gender `json:"gender"`
+	About    string `json:"about"`
+	Role     Role   `json:"role"`
 }
 type Gender string
 type Role string
