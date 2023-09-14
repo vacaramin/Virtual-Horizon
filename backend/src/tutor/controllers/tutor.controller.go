@@ -54,14 +54,12 @@ func TutorSignup(c *gin.Context) {
 
 	// Create User Model
 	user := usermodel.User{
-		Email:     body.Email,
-		Password:  string(hash),
-		Name:      body.Name,
-		Dob:       body.Dob,
-		Gender:    body.Gender,
-		Role:      usermodel.Role("Tutor"),
-		CreatedAt: time.Now(),
-		UpdateAt:  time.Now(),
+		Email:    body.Email,
+		Password: string(hash),
+		Name:     body.Name,
+		Dob:      body.Dob,
+		Gender:   body.Gender,
+		Role:     usermodel.Role("Tutor"),
 	}
 	initializers.DB.Create(&user)
 	//Create a user
