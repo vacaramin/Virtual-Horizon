@@ -64,7 +64,7 @@ func TutorSignup(c *gin.Context) {
 	initializers.DB.Create(&user)
 	//Create a user
 	tutor := tutormodel.Tutor{
-		User:       user,
+		ID:         user.ID,
 		Subject:    body.Subject,
 		Experience: body.Experience,
 		Rating:     "5",
