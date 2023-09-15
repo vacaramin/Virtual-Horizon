@@ -6,7 +6,7 @@ import Home from "./Home/Home";
 import Tutor from "./Tutor/Tutor";
 import VhAssistant from "./VhAssistant/VhAssistant";
 import payment from "./Payment/Payment";
-import vhAssistant from "/home/awais/Desktop/Virtual-Horizon/frontend/src/Components/StudentDashboard/Sidebar/Logo of Student Dashboard/vhassistant.svg";
+
 
 
 function ContentArea({ selectedItem }) {
@@ -95,10 +95,7 @@ function ContentArea({ selectedItem }) {
         <div>
           <h1>Welcome to the VH Assistant</h1>
           <div className="content-area-student">
-            
-          <div>Welcome to the Virtual Horizon Assistant. The VH Assistant is an AI based chatbot helping you in asking different sort of questions in order to resolve your queries.</div>
-            <img src= {vhAssistant} alt="VH Assistant" className="center" />
-            
+
             <VhAssistant />
           </div>
         </div>

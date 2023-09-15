@@ -15,12 +15,8 @@
 
 .chatResponse{
 
-    width: 100%;
-    height: fit-content;
-    margin-top: 5%;
-    border-radius: 5%;
-    background-color: #f7cb46;
-
+    scroll-behavior: smooth;
+    overflow: auto;
 
 }
   
@@ -31,4 +27,10 @@
       width: 100%; /* Full width on smaller screens */
     }
   }
+
   
+  .center{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
