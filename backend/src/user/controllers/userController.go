@@ -3,6 +3,7 @@ package userControllers
 import (
 	"Virtual-Horizon/initializers"
 	studentmodel "Virtual-Horizon/src/student/models"
+	tutormodel "Virtual-Horizon/src/tutor/models"
 	usermodel "Virtual-Horizon/src/user/models"
 	"fmt"
 	"log"
@@ -77,27 +78,59 @@ func GetProfileFromToken(c *gin.Context) {
 		}
 		if user.Role == "student" {
 			var student studentmodel.Student
-			initializers.DB.First(&student, "ID = ?", user.ID)
-			log.Println("student id = ", student.ID)
+			if err := initializers.DB.First(&student, user.ID).Error; err != nil {
+				// Handle the error
+				log.Println("Error:", err)
+				c.JSON(http.StatusInternalServerError, gin.H{
+					"status":  "error",
+					"message": "Internal Server Error",
+				})
+			}
+
+			log.Println("student id =", student.ID)
+
 			if student.ID == 0 {
 				c.JSON(http.StatusUnauthorized, gin.H{
 					"status":  "fail",
-					"message": " Student Not found with this token",
+					"message": "Student Not found with this token",
 				})
+				return
 			} else {
 				c.JSON(http.StatusOK, gin.H{
 					"status":  "success",
-					"message": "Student Found Successfully",
+					"message": "User Found Successfully",
 					"user":    user,
 					"student": student,
 				})
 			}
+
 		} else if user.Role == "tutor" {
-			c.JSON(http.StatusOK, gin.H{
-				"status":  "success",
-				"message": "User Found Successfully",
-				"user":    user},
-			)
+			var tutor tutormodel.Tutor
+			if err := initializers.DB.First(&tutor, user.ID).Error; err != nil {
+				// Handle the error
+				log.Println("Error:", err)
+				c.JSON(http.StatusInternalServerError, gin.H{
+					"status":  "error",
+					"message": "Internal Server Error",
+				})
+			}
+
+			log.Println("student id =", tutor.ID)
+
+			if tutor.ID == 0 {
+				c.JSON(http.StatusUnauthorized, gin.H{
+					"status":  "fail",
+					"message": "Student Not found with this token",
+				})
+				return
+			} else {
+				c.JSON(http.StatusOK, gin.H{
+					"status":  "success",
+					"message": "User Found Successfully",
+					"user":    user,
+					"tutor":   tutor,
+				})
+			}
 		} else if user.Role == "admin" {
 			c.JSON(http.StatusOK, gin.H{
 				"status":  "success",

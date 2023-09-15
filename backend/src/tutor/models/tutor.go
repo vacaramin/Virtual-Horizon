@@ -1,12 +1,11 @@
 package models
 
 import (
-	"Virtual-Horizon/src/user/models"
 	"time"
 )
 
 type Tutor struct {
-	models.User
+	ID         uint      `gorm:"primarykey"`
 	Subject    string    `json:"subject"`
 	Experience string    `json:"experience"`
 	Rating     string    `json:"rating"`
