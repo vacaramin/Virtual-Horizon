@@ -76,7 +76,7 @@ func SignupStudent(c *gin.Context) {
 
 	// Create a student
 	student := studentmodel.Student{
-		User:                user,
+		ID:                  user.ID,
 		ParentGuardianName:  body.ParentGuardianName,
 		ParentGuardianEmail: body.ParentGuardianEmail,
 		ParentGuardianPhone: body.ParentGuardianPhone,
