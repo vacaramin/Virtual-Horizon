@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS tutors (
 -- Create the "courses" table
 CREATE TABLE IF NOT EXISTS courses (
     course_id SERIAL PRIMARY KEY,
-    course_name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
     description TEXT,
     category VARCHAR(255),
     start_date TIMESTAMPTZ,
@@ -52,8 +52,8 @@ CREATE TABLE IF NOT EXISTS courses (
 -- Create the "tutor_courses" table
 CREATE TABLE IF NOT EXISTS tutor_courses (
     link_id SERIAL PRIMARY KEY,
-    tutor_id INT NOT NULL,
     course_id INT NOT NULL,
+    tutor_id INT NOT NULL,
     start_date TIMESTAMPTZ,
     end_date TIMESTAMPTZ,
     session_frequency VARCHAR(255),
@@ -182,7 +182,7 @@ VALUES
 -- Insert values into the "courses" table
 INSERT INTO
     courses (
-        course_name,
+        name,
         description,
         category,
         start_date,
