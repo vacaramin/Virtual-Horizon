@@ -5,7 +5,7 @@ import Settings from "./Settings/Settings";
 import Home from "./Home/Home";
 import Tutor from "./Tutor/Tutor";
 import VhAssistant from "./VhAssistant/VhAssistant";
-import payment from "./Payment/Payment";
+import Payment from "./Payment/Payment";
 
 
 
@@ -47,7 +47,7 @@ function ContentArea({ selectedItem }) {
       <div>
         <h1>Payment</h1>
         <div className="content-area-student">
-          <payment />
+          <Payment />
         </div>
       </div>
     );
