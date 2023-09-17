@@ -60,12 +60,12 @@ function Payment() {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-around' }}>
       <PaymentCard
-        iconUrl={CreditCard} // Pass the imported SVG as the iconUrl
+        iconUrl={CreditCard}
         title="Payment via credit card"
         onClick={handleCreditCardClick}
       />
       <PaymentCard
-        iconUrl={Easypaisa} // Pass the imported SVG as the iconUrl
+        iconUrl={Easypaisa} 
         title="Payment via Easypaisa"
         onClick={handleEasypaisaClick}
       />
