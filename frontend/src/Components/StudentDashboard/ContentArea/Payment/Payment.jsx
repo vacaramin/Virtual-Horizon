@@ -58,17 +58,25 @@ function Payment() {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-      <PaymentCard
-        iconUrl={CreditCard}
-        title="Payment via credit card"
-        onClick={handleCreditCardClick}
-      />
-      <PaymentCard
-        iconUrl={Easypaisa} 
-        title="Payment via Easypaisa"
-        onClick={handleEasypaisaClick}
-      />
+    <div>
+      <Typography variant="h4" gutterBottom>
+        Payment Options
+      </Typography>
+      <Typography variant="body1" paragraph>
+        Choose your preferred payment method below:<br />
+      </Typography>
+      <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+        <PaymentCard
+          iconUrl={CreditCard}
+          title="Payment via credit card"
+          onClick={handleCreditCardClick}
+        />
+        <PaymentCard
+          iconUrl={Easypaisa} 
+          title="Payment via Easypaisa"
+          onClick={handleEasypaisaClick}
+        />
+      </div>
     </div>
   );
 }
