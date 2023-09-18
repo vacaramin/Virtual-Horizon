@@ -1,7 +1,6 @@
 .content{
 
-    font-family: 'Courier New', Courier, monospace,'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif,'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
-    
-
-
+    font-family: '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
 }
