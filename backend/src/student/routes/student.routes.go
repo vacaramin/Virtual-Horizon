@@ -10,4 +10,5 @@ func SetupStudentRoutes(r *gin.Engine) {
 	StudentRoute := r.Group("/student")
 	StudentRoute.POST("/signup", controller.SignupStudent)
 	StudentRoute.POST("vh-assistant", controller.GetVirtualAssistantResponse)
+
 }
