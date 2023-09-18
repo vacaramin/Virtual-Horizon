@@ -31,6 +31,16 @@ function ContentArea({ selectedItem }) {
         profilePic: MyPic,
       },
     },
+    {
+      name: "English",
+      color: "#FFC93C",
+      content: "English Content",
+      teacher: {
+        name: "John Doe",
+        profilePic: MyPic,
+      },
+      
+    },
     // Add more subjects with teacher info here
   ];
 
