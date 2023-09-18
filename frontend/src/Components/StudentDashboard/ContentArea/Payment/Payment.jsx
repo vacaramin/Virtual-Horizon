@@ -66,15 +66,18 @@ function Payment() {
         Choose your preferred payment method below:<br />
       </Typography>
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+
         <PaymentCard
           iconUrl={CreditCard}
           title="Payment via credit card"
           onClick={handleCreditCardClick}
         />
+        
         <PaymentCard
           iconUrl={Easypaisa} 
           title="Payment via Easypaisa"
           onClick={handleEasypaisaClick}
+
         />
       </div>
     </div>
