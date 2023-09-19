@@ -11,6 +11,7 @@ import (
 	"time"
 )
 
+// GetUserFromToken This function uses the gin context and based on the cookie authentication key, it returns the user and an error.
 func GetUserFromToken(c *gin.Context) (*usermodel.User, error) {
 	var user usermodel.User
 	tokenString, err := c.Cookie("Authorization")
