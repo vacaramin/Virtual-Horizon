@@ -14,4 +14,4 @@ type Enrollment struct {
 	UpdatedAt      time.Time `json:"updated_at"`
 }
 
-var Enrollments []Enrollment
+var Enrollments *Enrollment
