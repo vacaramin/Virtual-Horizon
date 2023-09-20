@@ -32,7 +32,12 @@ func GetEnrollments(ctx *gin.Context) {
 	var enrollments models.Enrollments
 
 	log.Println("Reached up til here")
-	initializers.DB.Preload("Link").Where("student_id = ?", user.ID).Find(&enrollments)
+	initializers.DB.
+		Preload("Link.Tutor.User").
+		Preload("Link.Course").
+		Preload("Student.User").
+		Where("student_id = ?", user.ID).
+		Find(&enrollments)
 
 	ctx.JSON(http.StatusOK, gin.H{
 		"status":     "Success",
