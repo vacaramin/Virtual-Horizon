@@ -5,9 +5,10 @@ import (
 	enrollmentModel "Virtual-Horizon/src/Enrollments/models"
 	userModel "Virtual-Horizon/src/user/models"
 	"Virtual-Horizon/src/utils"
-	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 func GetEnrollments(ctx *gin.Context) {
@@ -27,7 +28,7 @@ func GetEnrollments(ctx *gin.Context) {
 	// the list of courses
 	// Get all the enrollments based on students. and extract all enrollment details
 	// which is placed within the enrollment table
-	var enrollments enrollmentModel.Enrollment
+	var enrollments *enrollmentModel.Enrollment
 
 	log.Println("Reached up til here")
 	initializers.DB.Find(&enrollments).Where("student_id = ?", user.ID)
