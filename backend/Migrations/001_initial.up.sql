@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS tutors (
 
 -- Create the "courses" table
 CREATE TABLE IF NOT EXISTS courses (
-    course_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT,
     category VARCHAR(255),
@@ -50,8 +50,8 @@ CREATE TABLE IF NOT EXISTS courses (
 );
 
 -- Create the "tutor_courses" table
-CREATE TABLE IF NOT EXISTS tutor_courses (
-    link_id SERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS tutor_course_links (
+    id SERIAL PRIMARY KEY,
     course_id INT NOT NULL,
     tutor_id INT NOT NULL,
     start_date TIMESTAMPTZ,
@@ -62,36 +62,36 @@ CREATE TABLE IF NOT EXISTS tutor_courses (
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW(),
     FOREIGN KEY (tutor_id) REFERENCES tutors (id) ON DELETE CASCADE,
-    FOREIGN KEY (course_id) REFERENCES courses (course_id) ON DELETE CASCADE
+    FOREIGN KEY (course_id) REFERENCES courses (id) ON DELETE CASCADE
 );
 
 -- Create the "enrollments" table
 CREATE TABLE IF NOT EXISTS enrollments (
-    enrollment_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     student_id INT NOT NULL,
     link_id INT NOT NULL,
     enrollment_date TIMESTAMPTZ,
     status VARCHAR(20),
     grade VARCHAR(10),
-    comments TEXT,
+    comment TEXT,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW(),
     FOREIGN KEY (student_id) REFERENCES students (id) ON DELETE CASCADE,
-    FOREIGN KEY (link_id) REFERENCES tutor_courses (link_id) ON DELETE CASCADE
+    FOREIGN KEY (link_id) REFERENCES tutor_course_links (id) ON DELETE CASCADE
 );
 
 -- Create the "chats" table
 CREATE TABLE IF NOT EXISTS chats (
-    chat_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     enrollment_id INT NOT NULL,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW(),
-    FOREIGN KEY (enrollment_id) REFERENCES enrollments (enrollment_id) ON DELETE CASCADE
+    FOREIGN KEY (enrollment_id) REFERENCES enrollments (id) ON DELETE CASCADE
 );
 
 -- Create the "messages" table
 CREATE TABLE IF NOT EXISTS messages (
-    message_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     chat_id INT NOT NULL,
     time TIMESTAMPTZ,
     message TEXT,
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS messages (
     recipient_id INT,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW(),
-    FOREIGN KEY (chat_id) REFERENCES chats (chat_id) ON DELETE CASCADE,
+    FOREIGN KEY (chat_id) REFERENCES chats (id) ON DELETE CASCADE,
     FOREIGN KEY (sender_id) REFERENCES users (id) ON DELETE
     SET
         NULL,
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS messages (
 
 -- Create the "resources" table
 CREATE TABLE IF NOT EXISTS resources (
-    resource_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     description TEXT,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS resources (
 
 -- Create the "resource_items" table
 CREATE TABLE IF NOT EXISTS resource_items (
-    item_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     resource_id INT NOT NULL,
     item_name VARCHAR(255),
     item_type VARCHAR(50),
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS resource_items (
     creator_id INT,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW(),
-    FOREIGN KEY (resource_id) REFERENCES resources (resource_id) ON DELETE CASCADE,
+    FOREIGN KEY (resource_id) REFERENCES resources (id) ON DELETE CASCADE,
     FOREIGN KEY (creator_id) REFERENCES users (id) ON DELETE
     SET
         NULL
@@ -214,7 +214,7 @@ VALUES
 -- Insert values into the "tutor_courses" table
 -- Insert values into the "tutor_courses" table
 INSERT INTO
-    tutor_courses (
+    tutor_course_links (
         tutor_id,
         course_id,
         start_date,
@@ -261,7 +261,7 @@ INSERT INTO
         enrollment_date,
         status,
         grade,
-        comments
+        comment
     )
 VALUES
     (

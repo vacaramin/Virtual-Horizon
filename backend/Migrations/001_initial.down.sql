@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS enrollments;
 
 
 -- Drop the "tutor_courses" table
-DROP TABLE IF EXISTS tutor_courses;
+DROP TABLE IF EXISTS tutor_course_links;
 
 -- Drop the "courses" table
 DROP TABLE IF EXISTS courses;
