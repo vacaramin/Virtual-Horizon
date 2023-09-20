@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"Virtual-Horizon/initializers"
-	enrollmentModel "Virtual-Horizon/src/Enrollments/models"
+	"Virtual-Horizon/src/Enrollments/models"
 	userModel "Virtual-Horizon/src/user/models"
 	"Virtual-Horizon/src/utils"
 	"log"
@@ -28,12 +28,12 @@ func GetEnrollments(ctx *gin.Context) {
 	// the list of courses
 	// Get all the enrollments based on students. and extract all enrollment details
 	// which is placed within the enrollment table
-	var enrollments enrollmentModel.Enrollment
+
+	var enrollments models.Enrollments
 
 	log.Println("Reached up til here")
-	initializers.DB.Joins("JOIN tutor_course_links ON enrollments.link_id = tutor_course_links.id").
-		Where("enrollments.student_id = ?", user.ID).
-		Find(&enrollments)
+	initializers.DB.Preload("Link").Where("student_id = ?", user.ID).Find(&enrollments)
+
 	ctx.JSON(http.StatusOK, gin.H{
 		"status":     "Success",
 		"Enrollment": enrollments,
