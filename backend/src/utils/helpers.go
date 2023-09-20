@@ -44,3 +44,11 @@ func GetUserFromToken(c *gin.Context) (*usermodel.User, error) {
 	return &user, nil
 
 }
+
+func GetUserRoleFromToken(c *gin.Context) (usermodel.Role, error) {
+	user, err := GetUserFromToken(c)
+	if err != nil {
+		return "", err
+	}
+	return user.Role, nil
+}
