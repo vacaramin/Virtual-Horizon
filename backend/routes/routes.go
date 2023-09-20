@@ -1,6 +1,7 @@
 package routes
 
 import (
+	enrollmentRoutes "Virtual-Horizon/src/Enrollments/routes"
 	courseRoutes "Virtual-Horizon/src/course/routes"
 	"Virtual-Horizon/src/middleware"
 	studentRoutes "Virtual-Horizon/src/student/routes"
@@ -18,4 +19,5 @@ func SetupRoutes(r *gin.Engine) {
 	studentRoutes.SetupStudentRoutes(r)
 	tutorRoutes.SetupRoutes(r)
 	courseRoutes.SetupRoutes(r)
+	enrollmentRoutes.SetupRoutes(r)
 }
