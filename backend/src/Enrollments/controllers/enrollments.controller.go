@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	initializers "Virtual-Horizon/initializers"
+	"Virtual-Horizon/initializers"
 	enrollmentModel "Virtual-Horizon/src/Enrollments/models"
 	userModel "Virtual-Horizon/src/user/models"
 	"Virtual-Horizon/src/utils"
@@ -27,11 +27,12 @@ func GetEnrollments(ctx *gin.Context) {
 	// the list of courses
 	// Get all the enrollments based on students. and extract all enrollment details
 	// which is placed within the enrollment table
-	var enrollments []enrollmentModel.Enrollments
+	var enrollments enrollmentModel.Enrollment
 
-	initializers.DB.Find(enrollments).Where("student_id = ?", user.ID)
+	log.Println("Reached up til here")
+	initializers.DB.Find(&enrollments).Where("student_id = ?", user.ID)
 	ctx.JSON(http.StatusOK, gin.H{
-		"status":      "Success",
-		"Enrollments": enrollments,
+		"status":     "Success",
+		"Enrollment": enrollments,
 	})
 }

@@ -2,7 +2,7 @@ package models
 
 import "time"
 
-type Enrollments struct {
+type Enrollment struct {
 	ID             uint      `json:"enrollment_id"`
 	StudentID      uint      `json:"student_id"`
 	LinkID         uint      `json:"link_id"`
@@ -13,3 +13,5 @@ type Enrollments struct {
 	CreatedAt      time.Time `json:"created_at"`
 	UpdatedAt      time.Time `json:"updated_at"`
 }
+
+var Enrollments []Enrollment
