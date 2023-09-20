@@ -45,6 +45,7 @@ func GetUserFromToken(c *gin.Context) (*usermodel.User, error) {
 
 }
 
+// GetUserRoleFromToken Helper Function to Get the role of user based on token, function made with intention to use it in the middleware
 func GetUserRoleFromToken(c *gin.Context) (usermodel.Role, error) {
 	user, err := GetUserFromToken(c)
 	if err != nil {
