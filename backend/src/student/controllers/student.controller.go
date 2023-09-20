@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"Virtual-Horizon/initializers"
+	"Virtual-Horizon/src/Enrollments/controllers"
 	studentmodel "Virtual-Horizon/src/student/models"
 	usermodel "Virtual-Horizon/src/user/models"
 	"context"
@@ -131,4 +132,7 @@ func GetVirtualAssistantResponse(c *gin.Context) {
 		"status": "success",
 		"msg":    message,
 	})
+}
+func GetEnrollments(c *gin.Context) {
+	controllers.GetEnrollments(c)
 }
