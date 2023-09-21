@@ -6,20 +6,42 @@ import Home from "./Home/Home";
 import Tutor from "./Tutor/Tutor";
 import VhAssistant from "./VhAssistant/VhAssistant";
 import Payment from "./Payment/Payment";
-import Workspace from "./Workspace/Workspace";
-
+import MyPic from "./Home/MyPic.svg";
 
 function ContentArea({ selectedItem }) {
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [subjectSelected, setSubjectSelected] = useState(false);
 
   const subjects = [
-    { name: "Math", color: "#FF5B5B", content: "Math Content" },
-    { name: "Science", color: "#3EC1D3", content: "Science Content" },
-    { name: "History", color: "#FFC870", content: "History Content" },
-    { name: "Art", color: "#C5C3FF", content: "Art Content" },
-    { name: "Music", color: "#FF94C2", content: "Music Content" },
-    { name: "Physical Education", color: "#A5D296", content: "PE Content" },
+    {
+      name: "Math",
+      color: "#FF5B5B",
+      content: "Math Content",
+      teacher: {
+        name: "John Doe",
+        profilePic: MyPic,
+      },
+    },
+    {
+      name: "Science",
+      color: "#3EC1D3",
+      content: "Science Content",
+      teacher: {
+        name: "Jane Smith",
+        profilePic: MyPic,
+      },
+    },
+    {
+      name: "English",
+      color: "#FFC93C",
+      content: "English Content",
+      teacher: {
+        name: "John Doe",
+        profilePic: MyPic,
+      },
+      
+    },
+    // Add more subjects with teacher info here
   ];
 
   const handleSubjectClick = (subject) => {
@@ -35,11 +57,19 @@ function ContentArea({ selectedItem }) {
   if (selectedItem === "home") {
     return (
       <div>
-      {/* <h1>Welcome to the student dashboard</h1> */}
-        
-      <div className="content-area-student">
-        <Home />
+        {/* <h1>Welcome to the student dashboard</h1> */}
+        <div className="content-area-student">
+          <Home />
+        </div>
       </div>
+    );
+  } else if (selectedItem === "payment") {
+    return (
+      <div>
+        <h1>Payment</h1>
+        <div className="content-area-student">
+          <Payment />
+        </div>
       </div>
     );
   } else if (selectedItem === "subjects") {
@@ -51,72 +81,63 @@ function ContentArea({ selectedItem }) {
           <button onClick={handleGoBack}>Go Back</button>
         </div>
       );
-
-      //language support
-    }else {
+    } else {
       return (
         <div>
-         <h1>Subjects</h1>
-         
-        <div>
-          <div className="content-area-student">
-            <div className="subject-container">
-              {subjects.map((subject) => (
-                <span
-                  onClick={() => handleSubjectClick(subject)}
-                  key={subject.name}
-                  className="subject-item"
-                  style={{ backgroundColor: subject.color }}
-                >
-                  {subject.name}
-                </span>
-              ))}
+          <h1>Subjects</h1>
+          <div>
+            <div className="content-area-student">
+              <div className="subject-container">
+                {subjects.map((subject) => (
+                  <div
+                    onClick={() => handleSubjectClick(subject)}
+                    key={subject.name}
+                    className="subject-card"
+                    style={{
+                      backgroundColor: subject.color,
+                      width: "30%", // Adjust card width in percentage
+                      height: "200px", // Adjust card height in pixels
+                    }}
+                  >
+                    <div className="subject-card-header">
+                      <div className="teacher-profile-pic">
+                        <img
+                          src={subject.teacher.profilePic}
+                          alt={subject.teacher.name}
+                        />
+                      </div>
+                      <div className="subject-header-details">
+                        <p>{subject.teacher.name}</p>
+                      </div>
+                    </div>
+                    <div className="subject-card-content">
+                      <p>{subject.name}</p> {/* Display subject name at the bottom center */}
+                      <p>{subject.content}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-        </div>
       );
     }
-  } else if(selectedItem === "vhassistant"){
-
-      return (
-        <div>
-          <h1>VH Support</h1>
-          <div className="content-area-student">
-            <VhAssistant />
-          </div>
-        </div>
-      );
-
-      //payment area
-    } else if(selectedItem === "payment"){
-      return (
-        <div>
-          <h1>Payment</h1>
-          <div className="content-area-student">
-            <Payment />
-          </div>
-        </div>
-      );
-
-      //my workspace
-    } else if(selectedItem === "workspace"){
-      return (
-        <div>
-          <h1>Workspace</h1>
-          <div className="content-area-student">
-            <Workspace />
-          </div>
-        </div>
-      );
-    } else if (selectedItem === "tutor") {
+  } else if (selectedItem === "vhassistant") {
     return (
       <div>
-        
-      <div className="content-area-student">
-        <Tutor/>
-        
+        <h1>Welcome to the VH Assistant</h1>
+        <div className="content-area-student">
+          <VhAssistant />
+        </div>
       </div>
+    );
+  } else if (selectedItem === "tutor") {
+    return (
+      <div>
+        <h1>Hire Tutors</h1>
+        <div className="content-area-student">
+          <Tutor />
+        </div>
       </div>
     );
   } else if (selectedItem === "settings") {

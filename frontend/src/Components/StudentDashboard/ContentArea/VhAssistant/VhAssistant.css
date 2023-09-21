@@ -1,19 +1,39 @@
 .topbar
 {
     width: 100%;
-    height: 5%;
-    margin-top: 30%;
-    background-color: #ad8e04;
-}
-
-.languages{
-    width: 50%;
-    height: 20%;
-    margin-left: 25%;
     margin-top: 5%;
-    background-color: #f5f5f5;
-    border-radius: 10px;
-    padding: 2%;
+    
+}
 
+.inputWithButton {
+    position: relative;
+    height: 100px;
+    width : 200px;
+    margin-left: 85%;
+    margin-top: 0%;
+}
+
+.chatResponse{
+
+    scroll-behavior: smooth;
+    overflow: auto;
 
 }
+  
+
+  /* Define styles for smaller screens */
+  @media (max-width: 767px) {
+    .responsive-textfield {
+      width: 100%; /* Full width on smaller screens */
+    }
+  }
+
+  
+  .center{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-left: 40%;
+    margin-right: 40%;
+    margin-top: 2%;
+  }

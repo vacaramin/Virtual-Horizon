@@ -5,9 +5,8 @@ import home from './Logo of Student Dashboard/Home.svg'
 import subjecticon from './Logo of Student Dashboard/Subjects.svg'
 import Tutor from './Logo of Student Dashboard/Tutor.svg'
 import settings from './Logo of Student Dashboard/Setting.svg'
-import LanguageSupport from './Logo of Student Dashboard/Language_support.svg'
 import Payment from './Logo of Student Dashboard/Payment.svg'
-import Workspace from './Logo of Student Dashboard/Workspace.svg'
+import vhAssistant from './Logo of Student Dashboard/VH.svg'
 
 function Sidebar(props) {
   const { isSidebarOpen, toggleSidebar, handleItemClick, selectedItem} = props;
@@ -30,10 +29,6 @@ function Sidebar(props) {
           {isSidebarOpen && <span>Subjects</span>}
         </div>
 
-        <div className={`sidebar-item ${selectedItem === "workspace" ? "selected" : ""}`} onClick = {() => handleItemClick('workspace')}>
-          <img src={Workspace} alt="Workspace" />
-          {isSidebarOpen && <span>My Workspace</span>}
-        </div>
 
         <div className={`sidebar-item ${selectedItem === "tutor" ? "selected" : ""}`} onClick={ () => handleItemClick('tutor')}>
           <img src={Tutor} alt="Settings icon" />
@@ -41,16 +36,15 @@ function Sidebar(props) {
         </div>
 
         <div className={`sidebar-item ${selectedItem === "vhassistant" ? "selected" : ""}`} onClick = {() => handleItemClick('vhassistant')}>
-          <img src={LanguageSupport} alt="ch assistant" />
+          <img src={vhAssistant} alt="VH Assistant Icon" />
           {isSidebarOpen && <span>VH Assistant</span>}
         </div>
 
         <div className={`sidebar-item ${selectedItem === "payment" ? "selected" : ""}`} onClick = {() => handleItemClick('payment')}>
-          <img src={Payment} alt="Payment" />
+          <img src={Payment} alt="Payment Icon" />
           {isSidebarOpen && <span>Payment</span>}
         </div>
 
-        
         
         <div className={`sidebar-item ${selectedItem === "settings" ? "selected" : ""}`} onClick={() => handleItemClick('settings')}>
           <img src={settings} alt="Settings icon" />
@@ -59,6 +53,7 @@ function Sidebar(props) {
       </div>
       <div className="sidebar-footer">
           <span>Report a problem</span>
+
       </div>
     </div>
   );

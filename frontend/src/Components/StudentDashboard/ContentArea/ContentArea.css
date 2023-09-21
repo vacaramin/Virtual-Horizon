@@ -1,5 +1,5 @@
 .content-area-student {
-  display: flex;
+  
   background-color: white;
   margin: 0 auto;
   padding: 20px;
@@ -7,6 +7,8 @@
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
   max-width: 100%; /* Set a max width for better layout on larger screens */
+  position: relative;
+
 }
 
 h1 {
@@ -67,4 +69,61 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+/* ContentArea.css */
+/* Add distance between cards */
+.subject-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5%; /* Adjust the gap as needed */
+}
+
+/* Style subject cards */
+.subject-card {
+  background-color: #fff; /* Background color for cards */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  width: 30%; /* Adjust the card width in percentage */
+  min-height: 200px; /* Adjust the minimum card height in pixels */
+}
+
+.subject-card:hover {
+  transform: translateY(-5px); /* Add a slight hover effect */
+}
+
+.subject-card-header {
+  display: flex;
+  justify-content: space-between; /* Adjust text positions */
+  align-items: center;
+  padding: 0%; /* Adjust padding in percentage */
+}
+
+.teacher-profile-pic {
+  width: 10%; /* Adjust the size as needed */
+  height: 10%; /* Adjust the size as needed */
+  border-radius: 50%; /* Circular profile picture */
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+.subject-header-details {
+  text-align: left; /* Adjust text positions */
+  margin-right: 50%;
+  margin-left: 50%;
+}
+
+.subject-header-details p {
+  margin: 0;
+  font-size: 1.2rem; /* Adjust font size as needed */
+  font-weight: bold;
+}
+
+.subject-card-content {
+  padding: 0% 5% 5% 5%; /* Adjust padding in percentage */
+  font-weight: bold;
+  font-size: 1.2rem;
 }
