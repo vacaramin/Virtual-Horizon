@@ -19,7 +19,14 @@ func GetTutorRegisteredCourses(c *gin.Context) {
 			"message": err,
 		})
 	}
-	var courses models.Course
-	initializers.DB.Preload("TutorCourseLink").Where("TutorCourseLink.TutorID = ?", user.ID).Find(&courses)
-	c.JSON(http.StatusOK, gin.H{"courses": courses})
+	var courses models.Courses
+	initializers.DB.
+		Joins("JOIN tutor_course_links ON courses.id = tutor_course_links.course_id").
+		Where("tutor_course_links.tutor_id = ?", user.ID).
+		Find(&courses)
+
+	c.JSON(http.StatusOK, gin.H{
+		"status": "success",
+		"links":  courses,
+	})
 }
