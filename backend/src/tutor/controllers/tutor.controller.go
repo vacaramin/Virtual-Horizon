@@ -2,9 +2,8 @@ package controllers
 
 import (
 	"Virtual-Horizon/initializers"
-	"Virtual-Horizon/src/student/models"
-	models3 "Virtual-Horizon/src/tutor/models"
-	models2 "Virtual-Horizon/src/user/models"
+	tutormodel "Virtual-Horizon/src/tutor/models"
+	usermodel "Virtual-Horizon/src/user/models"
 	"fmt"
 	"log"
 	"net/http"
@@ -19,14 +18,12 @@ import (
 
 func TutorSignup(c *gin.Context) {
 	fmt.Println("Signup")
+
 	var body struct {
-		Email       string
-		Password    string
-		Name        string
-		Dob         string
-		Gender      string
-		Department  string
-		Designation string
+		usermodel.User
+		Subject    string
+		Experience string
+		Rating     string
 	}
 	if c.Bind(&body) != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -34,6 +31,18 @@ func TutorSignup(c *gin.Context) {
 		})
 		return
 	}
+
+	// Check if the email already exists in the database
+	var existingUser usermodel.User
+	result := initializers.DB.Where("email = ?", body.Email).First(&existingUser)
+	if result.RowsAffected > 0 {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"Status": "fail",
+			"msg":    "Email already exists",
+		})
+		return
+	}
+
 	//Hash the body
 	hash, err := bcrypt.GenerateFromPassword([]byte(body.Password), 10)
 	if err != nil {
@@ -42,20 +51,23 @@ func TutorSignup(c *gin.Context) {
 		})
 		return
 	}
+
 	// Create User Model
-	user := models2.User{
+	user := usermodel.User{
 		Email:    body.Email,
 		Password: string(hash),
 		Name:     body.Name,
 		Dob:      body.Dob,
 		Gender:   body.Gender,
+		Role:     usermodel.Role("Tutor"),
 	}
 	initializers.DB.Create(&user)
 	//Create a user
-	tutor := models3.Tutor{
-		UserID:      user.ID,
-		Department:  body.Department,
-		Designation: body.Designation,
+	tutor := tutormodel.Tutor{
+		ID:         user.ID,
+		Subject:    body.Subject,
+		Experience: body.Experience,
+		Rating:     "5",
 	}
 	initializers.DB.Create(&tutor)
 
@@ -80,7 +92,7 @@ func GetTutorProfileByID(c *gin.Context) {
 		return
 	}
 
-	var tutor models3.Tutor
+	var tutor tutormodel.Tutor
 	result := initializers.DB.First(&tutor, "user_id = ?", id)
 	if result.Error != nil {
 		log.Println("Error fetching user:", result.Error)
@@ -118,7 +130,7 @@ func GetTutorProfileFromToken(c *gin.Context) {
 		}
 
 		//find the user with token sub
-		var user models2.User
+		var user usermodel.User
 		initializers.DB.First(&user, claims["sub"])
 		if user.ID == 0 {
 			c.JSON(http.StatusUnauthorized, gin.H{
@@ -159,15 +171,15 @@ func UpdateTutorProfileFromToken(c *gin.Context) {
 			return
 		}
 		type UpdatePayload struct {
-			Student models.Student
-			User    models2.User
+			Tutor tutormodel.Tutor
+			User  usermodel.User
 		}
 
 		// Find the user with token sub
-		var user models2.User
-		var student models.Student
+		var user usermodel.User
+		var tutor tutormodel.Tutor
 		initializers.DB.First(&user, claims["sub"])
-		initializers.DB.First(&student, "user_id = ?", user.ID)
+		initializers.DB.First(&tutor, "user_id = ?", user.ID)
 
 		if user.ID == 0 {
 			c.JSON(http.StatusUnauthorized, gin.H{
@@ -186,6 +198,7 @@ func UpdateTutorProfileFromToken(c *gin.Context) {
 			})
 			return
 		}
+
 		// Update user-specific fields
 		if updatePayload.User.Name != "" {
 			user.Name = updatePayload.User.Name
@@ -197,45 +210,24 @@ func UpdateTutorProfileFromToken(c *gin.Context) {
 			user.Gender = updatePayload.User.Gender
 		}
 
-		// Here, we update only student-specific fields
-		if updatePayload.Student.ParentGuardianName != "" {
-			student.ParentGuardianName = updatePayload.Student.ParentGuardianName
+		// Here, we update only tutor-specific fields
+		if updatePayload.Tutor.Subject != "" {
+			tutor.Subject = updatePayload.Tutor.Subject
 		}
-		if updatePayload.Student.ParentGuardianEmail != "" {
-			student.ParentGuardianEmail = updatePayload.Student.ParentGuardianEmail
+		if updatePayload.Tutor.Experience != "" {
+			tutor.Experience = updatePayload.Tutor.Experience
 		}
-		if updatePayload.Student.ParentGuardianPhone != "" {
-			student.ParentGuardianPhone = updatePayload.Student.ParentGuardianPhone
+		if updatePayload.Tutor.Rating != "" {
+			tutor.Rating = updatePayload.Tutor.Rating
 		}
-		if updatePayload.Student.GradeLevel != "" {
-			student.GradeLevel = updatePayload.Student.GradeLevel
-		}
-		if updatePayload.Student.CurrentSchool != "" {
-			student.CurrentSchool = updatePayload.Student.CurrentSchool
-		}
-		if updatePayload.Student.Device != "" {
-			student.Device = updatePayload.Student.Device
-		}
-		if updatePayload.Student.InternetConnection != "" {
-			student.InternetConnection = updatePayload.Student.InternetConnection
-		}
-		if updatePayload.Student.SpecialNeeds != "" {
-			student.SpecialNeeds = updatePayload.Student.SpecialNeeds
-		}
-		if updatePayload.Student.Accomodations != "" {
-			student.Accomodations = updatePayload.Student.Accomodations
-		}
-		if updatePayload.Student.PresentAddress != "" {
-			student.PresentAddress = updatePayload.Student.PresentAddress
-		}
-		log.Println(student.GradeLevel, user.Name, updatePayload.Student.GradeLevel)
-		// Save the updated student information
-		initializers.DB.Save(&user).Save(&student)
+
+		// Save the updated tutor information
+		initializers.DB.Save(&user).Save(&tutor)
 
 		c.JSON(http.StatusOK, gin.H{
 			"status":  "success",
-			"message": "Student profile updated successfully",
-			"student": student,
+			"message": " profile updated successfully",
+			"tutor":   tutor,
 			"user":    user,
 		})
 	}
@@ -264,7 +256,7 @@ func DeleteTutor(c *gin.Context) {
 			c.AbortWithStatus(http.StatusUnauthorized)
 			return
 		}
-		var user models2.User
+		var user usermodel.User
 		initializers.DB.First(&user, claims["sub"])
 		initializers.DB.Delete(&user)
 

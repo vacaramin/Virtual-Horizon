@@ -1,17 +1,27 @@
--- Drop the "class_participants" table
-DROP TABLE IF EXISTS class_participants;
 
 -- Drop the "messages" table
 DROP TABLE IF EXISTS messages;
 
--- Drop the "files" table
-DROP TABLE IF EXISTS files;
+-- Drop the "chats" table
+DROP TABLE IF EXISTS chats;
 
--- Drop the "class" table
-DROP TABLE IF EXISTS classes;
 
--- Drop the "course" table
+-- Drop the "resource_items" table
+DROP TABLE IF EXISTS resource_items;
+
+-- Drop the "resources" table
+DROP TABLE IF EXISTS resources;
+
+-- Drop the "enrollments" table
+DROP TABLE IF EXISTS enrollments;
+
+
+-- Drop the "tutor_courses" table
+DROP TABLE IF EXISTS tutor_course_links;
+
+-- Drop the "courses" table
 DROP TABLE IF EXISTS courses;
+
 
 -- Drop the "tutors" table
 DROP TABLE IF EXISTS tutors;
