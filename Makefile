@@ -14,7 +14,7 @@ migrate-up:
 
 migrate-down:
 
-	migrate -database "postgres://postgres:helloworld@localhost:5432/postgres" -path backend/Migrations/ down
+	yes | migrate -database "postgres://postgres:helloworld@localhost:5432/postgres" -path backend/Migrations/ down
 
 migrate-up-force:
 
