@@ -41,6 +41,16 @@ function ContentArea({ selectedItem }) {
       },
       
     },
+    {
+      name: "Computer Science",
+      color: "#FFC93D",
+      content: "English Content",
+      teacher: {
+        name: "Awais Mohammad",
+        profilePic: MyPic,
+      },
+      
+    },
     // Add more subjects with teacher info here
   ];
 
