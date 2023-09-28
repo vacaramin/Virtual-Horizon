@@ -8,8 +8,6 @@ import (
 
 // SetupUserRoutes this function sets All the User Routes with the baseUrl/user/`route`
 func SetupUserRoutes(r *gin.Engine) {
-	r.POST("/signup", controller.Signup)
-
 	UserRoute := r.Group("/user") // Grouping under /api/user
 
 	// Grouped routes for /user/

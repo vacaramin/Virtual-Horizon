@@ -2,10 +2,10 @@ package userControllers
 
 import (
 	"Virtual-Horizon/initializers"
-	"Virtual-Horizon/src/student/models"
-	model "Virtual-Horizon/src/user/models"
+	studentmodel "Virtual-Horizon/src/student/models"
+	tutormodel "Virtual-Horizon/src/tutor/models"
+	usermodel "Virtual-Horizon/src/user/models"
 	"fmt"
-	"golang.org/x/crypto/bcrypt"
 	"log"
 	"net/http"
 	"os"
@@ -15,83 +15,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
 )
-
-// Signup This function takes in request body with information of a Student Profile and adds a User to the Database, and returns a jwt token
-func Signup(c *gin.Context) {
-	fmt.Println("Signup")
-	var body struct {
-		Email               string
-		Password            string
-		Name                string
-		Dob                 string
-		Gender              string
-		ParentGuardianName  string
-		ParentGuardianEmail string
-		ParentGuardianPhone string
-		GradeLevel          string
-		CurrentSchool       string
-		Device              string
-		InternetConnection  string
-		SpecialNeeds        string
-		Accommodations      string
-		PresentAddress      string
-	}
-	if c.Bind(&body) != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Invalid request body",
-		})
-		return
-	}
-	//Hash the body
-	hash, err := bcrypt.GenerateFromPassword([]byte(body.Password), 10)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"error": "Error while hashing the password",
-		})
-		return
-	}
-	// Create User Model
-	user := model.User{
-		Email:    body.Email,
-		Password: string(hash),
-		Name:     body.Name,
-		Dob:      body.Dob,
-		Gender:   body.Gender,
-	}
-	err = user.Validate()
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"status": "fail",
-			"msg":    "Bad request, Please check for correct Validation, i.e email",
-			"error":  err,
-		})
-		return
-	}
-	initializers.DB.Create(&user)
-	//Create a user
-	student := models.Student{
-		UserID:              user.ID,
-		ParentGuardianName:  body.ParentGuardianName,
-		ParentGuardianEmail: body.ParentGuardianEmail,
-		ParentGuardianPhone: body.ParentGuardianPhone,
-		GradeLevel:          body.GradeLevel,
-		CurrentSchool:       body.CurrentSchool,
-		Device:              body.Device,
-		InternetConnection:  body.InternetConnection,
-		SpecialNeeds:        body.SpecialNeeds,
-		Accomodations:       body.Accommodations,
-		PresentAddress:      body.PresentAddress,
-	}
-	initializers.DB.Create(&student)
-
-	initializers.DB.Save(&user).Save(&student)
-
-	//return the response
-	c.JSON(http.StatusOK, gin.H{
-		"message": "User created successfully",
-	})
-
-}
 
 // GetProfileByID This Function returns the user data based on the ID
 func GetProfileByID(c *gin.Context) {
@@ -106,7 +29,7 @@ func GetProfileByID(c *gin.Context) {
 		return
 	}
 
-	var user model.User
+	var user usermodel.User
 	result := initializers.DB.First(&user, id)
 	if result.Error != nil {
 		log.Println("Error fetching user:", result.Error)
@@ -144,7 +67,7 @@ func GetProfileFromToken(c *gin.Context) {
 		}
 
 		//find the user with token sub
-		var user model.User
+		var user usermodel.User
 		initializers.DB.First(&user, claims["sub"])
 		if user.ID == 0 {
 			c.JSON(http.StatusUnauthorized, gin.H{
@@ -153,11 +76,70 @@ func GetProfileFromToken(c *gin.Context) {
 			},
 			)
 		}
-		c.JSON(http.StatusOK, gin.H{
-			"status":  "success",
-			"message": "User Found Successfully",
-			"user":    user},
-		)
+		if user.Role == "student" {
+			var student studentmodel.Student
+			if err := initializers.DB.First(&student, user.ID).Error; err != nil {
+				// Handle the error
+				log.Println("Error:", err)
+				c.JSON(http.StatusInternalServerError, gin.H{
+					"status":  "error",
+					"message": "Internal Server Error",
+				})
+			}
+
+			log.Println("student id =", student.ID)
+
+			if student.ID == 0 {
+				c.JSON(http.StatusUnauthorized, gin.H{
+					"status":  "fail",
+					"message": "Student Not found with this token",
+				})
+				return
+			} else {
+				c.JSON(http.StatusOK, gin.H{
+					"status":  "success",
+					"message": "User Found Successfully",
+					"user":    user,
+					"student": student,
+				})
+			}
+
+		} else if user.Role == "tutor" {
+			var tutor tutormodel.Tutor
+			if err := initializers.DB.First(&tutor, user.ID).Error; err != nil {
+				// Handle the error
+				log.Println("Error:", err)
+				c.JSON(http.StatusInternalServerError, gin.H{
+					"status":  "error",
+					"message": "Internal Server Error",
+				})
+			}
+
+			log.Println("student id =", tutor.ID)
+
+			if tutor.ID == 0 {
+				c.JSON(http.StatusUnauthorized, gin.H{
+					"status":  "fail",
+					"message": "Student Not found with this token",
+				})
+				return
+			} else {
+				c.JSON(http.StatusOK, gin.H{
+					"status":  "success",
+					"message": "User Found Successfully",
+					"user":    user,
+					"tutor":   tutor,
+				})
+			}
+		} else if user.Role == "admin" {
+			c.JSON(http.StatusOK, gin.H{
+				"status":  "success",
+				"message": "User Found Successfully",
+				"user":    user},
+			)
+		} else {
+			c.AbortWithStatus(http.StatusBadRequest)
+		}
 
 	}
 }
@@ -185,13 +167,13 @@ func UpdateProfileFromToken(c *gin.Context) {
 			return
 		}
 		type UpdatePayload struct {
-			Student models.Student
-			User    model.User
+			Student studentmodel.Student
+			User    usermodel.User
 		}
 
 		// Find the user with token sub
-		var user model.User
-		var student models.Student
+		var user usermodel.User
+		var student studentmodel.Student
 		initializers.DB.First(&user, claims["sub"])
 		initializers.DB.First(&student, "user_id = ?", user.ID)
 
@@ -236,24 +218,6 @@ func UpdateProfileFromToken(c *gin.Context) {
 		if updatePayload.Student.GradeLevel != "" {
 			student.GradeLevel = updatePayload.Student.GradeLevel
 		}
-		if updatePayload.Student.CurrentSchool != "" {
-			student.CurrentSchool = updatePayload.Student.CurrentSchool
-		}
-		if updatePayload.Student.Device != "" {
-			student.Device = updatePayload.Student.Device
-		}
-		if updatePayload.Student.InternetConnection != "" {
-			student.InternetConnection = updatePayload.Student.InternetConnection
-		}
-		if updatePayload.Student.SpecialNeeds != "" {
-			student.SpecialNeeds = updatePayload.Student.SpecialNeeds
-		}
-		if updatePayload.Student.Accomodations != "" {
-			student.Accomodations = updatePayload.Student.Accomodations
-		}
-		if updatePayload.Student.PresentAddress != "" {
-			student.PresentAddress = updatePayload.Student.PresentAddress
-		}
 		log.Println(student.GradeLevel, user.Name, updatePayload.Student.GradeLevel)
 		// Save the updated student information
 		initializers.DB.Save(&user).Save(&student)
@@ -290,7 +254,7 @@ func DeleteUser(c *gin.Context) {
 			c.AbortWithStatus(http.StatusUnauthorized)
 			return
 		}
-		var user model.User
+		var user usermodel.User
 		initializers.DB.First(&user, claims["sub"])
 		initializers.DB.Delete(&user)
 
