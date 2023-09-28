@@ -8,19 +8,27 @@ import (
 
 type User struct {
 	gorm.Model
-	ID       uint   `json:"id" gorm:"primaryKey"`
 	Email    string `json:"email" gorm:"unique;not null" validate:"email"`
 	Password string `json:"-"`
 	Name     string `json:"name"`
 	Dob      string `json:"dob"`
-	Gender   string `json:"gender"`
+	Gender   Gender `json:"gender"`
+	About    string `json:"about"`
+	Role     Role   `json:"role"`
 }
 type Gender string
+type Role string
 
 const (
 	Male     Gender = "male"
 	Female   Gender = "female"
-	intersex Gender = "intersex"
+	Intersex Gender = "intersex"
+)
+
+const (
+	Admin   Role = "admin"
+	Student Role = "student"
+	Tutor   Role = "tutor"
 )
 
 func (u *User) Validate() error {

@@ -1,20 +1,18 @@
 package models
 
-import "time"
+import (
+	"Virtual-Horizon/src/user/models"
+	"time"
+)
 
 type Student struct {
-	ID                  uint      `json:"id" gorm:"primaryKey"`
-	UserID              uint      `json:"user_id" gorm:"foreignKey:UserID"`
-	ParentGuardianName  string    `json:"parent_guardian_name"`
-	ParentGuardianEmail string    `json:"parent_guardian_email"`
-	ParentGuardianPhone string    `json:"parent_guardian_phone"`
-	GradeLevel          string    `json:"grade_level"`
-	CurrentSchool       string    `json:"current_school"`
-	Device              string    `json:"device"`
-	InternetConnection  string    `json:"internet_connection"`
-	SpecialNeeds        string    `json:"special_needs"`
-	Accomodations       string    `json:"accomodations"`
-	PresentAddress      string    `json:"present_address"`
-	CreatedAt           time.Time `json:"created_at"`
-	UpdatedAt           time.Time `json:"updated_at"`
+	ID                  uint        `gorm:"primaryKey"`
+	ParentGuardianName  string      `json:"parent_guardian_name"`
+	ParentGuardianEmail string      `json:"parent_guardian_email"`
+	ParentGuardianPhone string      `json:"parent_guardian_phone"`
+	GradeLevel          string      `json:"grade_level"`
+	CreatedAt           time.Time   `json:"created_at"`
+	UpdatedAt           time.Time   `json:"updated_at"`
+	DeletedAt           time.Time   `json:"deleted-at"`
+	User                models.User `json:"user" gorm:"foreignKey:ID"`
 }
