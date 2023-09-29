@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./TopBar.css";
 import logo from "./logo.svg";
-import profilePic from "./profile-pic.jpg";
+
 
 function TopBar(props) {
   const username = props.username;
