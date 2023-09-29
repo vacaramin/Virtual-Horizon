@@ -3,9 +3,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import CreditCard from '/home/awais/Desktop/Virtual-Horizon/frontend/src/Components/StudentDashboard/ContentArea/Payment/Creditcard.svg';
-import Easypaisa from '/home/awais/Desktop/Virtual-Horizon/frontend/src/Components/StudentDashboard/ContentArea/Payment/easypaisa.svg';
-
+import CreditCard from './Creditcard.svg';
+import Easypaisa from "./easypaisa.svg";
 // Create the PaymentCard component
 const PaymentCard = ({ iconUrl, title, onClick }) => {
   const [isHovered, setIsHovered] = useState(false);
