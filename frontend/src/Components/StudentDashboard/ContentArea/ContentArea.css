@@ -114,6 +114,7 @@ button:hover {
   text-align: left; /* Adjust text positions */
   margin-right: 50%;
   margin-left: 50%;
+  margin-top: 0%;
 }
 
 .subject-header-details p {
