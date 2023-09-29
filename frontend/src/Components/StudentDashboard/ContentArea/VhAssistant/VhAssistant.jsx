@@ -3,7 +3,7 @@ import { TextField } from "@mui/material";
 import './VhAssistant.css';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import vhAssistant from "/home/awais/Desktop/Virtual-Horizon/frontend/src/Components/StudentDashboard/Sidebar/Logo of Student Dashboard/vhassistant.svg";
+import vhAssistant from "./vhassistant.svg";
 
 function VhAssistant() {
 
@@ -15,7 +15,7 @@ function VhAssistant() {
     <div>
 
       <div>Welcome to the Virtual Horizon Assistant. The VH Assistant is an AI based chatbot helping you in asking different sort of questions in order to resolve your queries.</div>
-      <img src= {vhAssistant} className="center" />
+      <img src= {vhAssistant} className="center" alt='vhAssistant' />
       
       <TextField
          
