@@ -14,5 +14,5 @@ type Student struct {
 	CreatedAt           time.Time   `json:"created_at"`
 	UpdatedAt           time.Time   `json:"updated_at"`
 	DeletedAt           time.Time   `json:"deleted-at"`
-	User                models.User `json:"user" gorm:"foreignKey:ID"`
+	User                models.User `json:"-" gorm:"foreignKey:ID"`
 }
