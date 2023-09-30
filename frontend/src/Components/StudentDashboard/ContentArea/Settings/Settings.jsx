@@ -49,7 +49,7 @@ function Settings() {
       const data = await response.json();
       if (data.status === "success") {
         setIsEditing(false);
-        GetUserData();
+        localStorage.username = userInfo.name
       } else {
         console.error("Error Updating user data:", data.message);
       }
