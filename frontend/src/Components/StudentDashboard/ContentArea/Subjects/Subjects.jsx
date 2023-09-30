@@ -3,6 +3,7 @@ import { useState } from "react";
 import MyPic from "../Home/MyPic.svg";
 import CSS_Object from "./Subjects.css";
 
+
 function Subjects() {
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [subjectSelected, setSubjectSelected] = useState(false);
