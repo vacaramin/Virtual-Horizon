@@ -19,7 +19,6 @@ function Settings() {
       const data = await response.json();
       if (data.status === "success") {
         setUserInfo(data.user);
-        console.log(JSON.stringify(data.user, null, 2));
       } else {
         console.log("Failed to load user data");
       }
@@ -30,23 +29,35 @@ function Settings() {
 
   const handleUpdateInfo = async () => {
     try {
-      const response = fetch("http://localhost:4000/user/UpdateProfileFromToken", {
+      const response = await fetch(
+        "http://localhost:4000/user/UpdateProfileFromToken",
+        {
           method: "PUT",
           credentials: "include",
-        });
-        //need to write some logic here
-      setIsEditing(false);
-
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            User: {
+              Name: userInfo.name,
+              Dob: userInfo.dob,
+              Gender: userInfo.gender,
+            },
+          }),
+        }
+      );
       const data = await response.json();
-      if (data.status === "success"){
-        console.log(data.message)
-      }else{
-        console.log(data.message)
+      if (data.status === "success") {
+        setIsEditing(false);
+        GetUserData();
+      } else {
+        console.error("Error Updating user data:", data.message);
       }
     } catch (error) {
-      console.error("Error loading user data:", error);
+      console.error("Error Updating user data:", error);
     }
   };
+
   const handleEditClick = () => {
     setIsEditing(true);
   };
@@ -54,6 +65,7 @@ function Settings() {
   useEffect(() => {
     GetUserData();
   }, []);
+
   const handleDateChange = (date) => {
     setUserInfo((prevUserInfo) => ({
       ...prevUserInfo,
@@ -86,7 +98,8 @@ function Settings() {
           </label>
           <input type="file" id="profilePictureInput" className="file-input" />
         </div>
-        <br /><br />
+        <br />
+        <br />
         <div>
           <label>
             <b>About me</b>
@@ -106,7 +119,7 @@ function Settings() {
           )}
         </div>
       </div>
-      
+
       <div className="profile-settings-left">
         <h2>Profile Settings</h2>
 
@@ -117,13 +130,13 @@ function Settings() {
           {isEditing ? (
             <input
               type="text"
-              id="fullName"
-              defaultValue={userInfo.name}
+              id="name"
+              value={userInfo.name}
               onChange={handleInputChange}
               className="form-input"
             />
           ) : (
-            <p className="field" id="fullName">
+            <p className="field" id="name">
               {userInfo.name}
             </p>
           )}
@@ -154,17 +167,7 @@ function Settings() {
           <label>
             <b>Email Address</b>
           </label>
-          {isEditing ? (
-            <input
-              type="email"
-              id="email"
-              value={userInfo.email}
-              onChange={handleInputChange}
-              className="form-input"
-            />
-          ) : (
-            <p className="field">{userInfo.email}</p>
-          )}
+          <p className="field">{userInfo.email}</p>
         </div>
 
         <div className="form-group">
@@ -182,7 +185,9 @@ function Settings() {
               <option value="Female">Female</option>
             </select>
           ) : (
-            <p className="field">{userInfo.gender}</p>
+            <p className="field" id="gender">
+              {userInfo.gender}
+            </p>
           )}
         </div>
 
