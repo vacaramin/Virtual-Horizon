@@ -13,7 +13,7 @@ function Subjects() {
       color: "#FF5B5B",
       content: "Math Content",
       teacher: {
-        name: "John Doe",
+        name: "Awais Mohammad",
         profilePic: MyPic,
       },
     },
@@ -22,7 +22,7 @@ function Subjects() {
       color: "#3EC1D3",
       content: "Science Content",
       teacher: {
-        name: "Jane Smith",
+        name: "Waqar Amin",
         profilePic: MyPic,
       },
     },
@@ -31,7 +31,7 @@ function Subjects() {
       color: "#FFC93C",
       content: "English Content",
       teacher: {
-        name: "John Doe",
+        name: "Ali Zain",
         profilePic: MyPic,
       },
     },
