@@ -21,8 +21,8 @@ func init() {
 }
 func main() {
 	r := gin.Default()
-	docs.SwaggerInfo.BasePath = "/api/v1"
-	v1 := r.Group("/api/v1")
+	docs.SwaggerInfo.BasePath = "/"
+	v1 := r.Group("/")
 	{
 		eg := v1.Group("/example")
 		{
@@ -39,7 +39,7 @@ func main() {
 
 }
 
-// @BasePath /api/v1
+// @BasePath /
 
 // PingExample godoc
 // @Summary ping example
