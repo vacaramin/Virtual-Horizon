@@ -12,6 +12,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"net/http"
 	"os"
+	"time"
 )
 
 // SignupStudent This function takes in request body with information of a Student Profile and adds a User to the Database, and returns a jwt token
@@ -21,7 +22,7 @@ func SignupStudent(c *gin.Context) {
 		Email               string
 		Password            string
 		Name                string
-		Dob                 string
+		Dob                 time.Time
 		Gender              usermodel.Gender
 		About               string
 		ParentGuardianName  string
