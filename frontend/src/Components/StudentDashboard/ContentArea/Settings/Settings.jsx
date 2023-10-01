@@ -50,8 +50,6 @@ function Settings() {
       const data = await response.json();
       if (data.status === "success") {
         setIsEditing(false);
-        
-        GetUserData();
       } else {
         console.error("Error Updating user data:", data.message);
       }
