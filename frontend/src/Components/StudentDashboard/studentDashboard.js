@@ -3,13 +3,16 @@ import './studentDashboard.css';
 import Sidebar from './Sidebar/Sidebar';
 import TopBar from './TopBar/TopBar';
 import ContentArea from './ContentArea/ContentArea';
+import ErrorNotification from '../ErrorNotification/ErrorNotification';
+import { useNavigate } from "react-router-dom";
 
 function StudentDashboard() {
-  
+  const [error, setError] = useState("");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [selectedItem, setSelectedItem] = useState("home");
   const [username, setUsername] = useState("");
-
+  const history = useNavigate();
+  
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -28,10 +31,15 @@ function StudentDashboard() {
     .then(data => {
       if (data.status === "success") {
         setUsername(data.user.name);
+      }else{
+        console.log("hereeee")
+        setError("Please Login First!")
+        history("/login");
       }
     })
     .catch(error => {
-      console.error("Error fetching user details:", error);
+      console.error("Error fetching user details:", error); 
+      history("/");
     });
   };
 
@@ -48,6 +56,8 @@ function StudentDashboard() {
           <ContentArea selectedItem={selectedItem} />
         </div>
       </div>
+    
+      <ErrorNotification error = {error} />
     </div>
   );
 }
