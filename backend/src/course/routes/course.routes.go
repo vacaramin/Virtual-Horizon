@@ -8,4 +8,6 @@ import (
 func SetupRoutes(engine *gin.Engine) {
 	courseRouter := engine.Group("/courses")
 	courseRouter.POST("/getTutorCourses", controllers.GetTutorRegisteredCourses)
+	courseRouter.POST("/getStudentCourses", controllers.GetStudentCourses)
+
 }
