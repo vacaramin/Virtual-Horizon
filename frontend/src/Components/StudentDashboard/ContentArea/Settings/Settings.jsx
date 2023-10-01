@@ -42,6 +42,7 @@ function Settings() {
               Name: userInfo.name,
               Dob: userInfo.dob,
               Gender: userInfo.gender,
+              About: userInfo.about
             },
           }),
         }
@@ -49,6 +50,7 @@ function Settings() {
       const data = await response.json();
       if (data.status === "success") {
         setIsEditing(false);
+        
         GetUserData();
       } else {
         console.error("Error Updating user data:", data.message);
@@ -107,14 +109,14 @@ function Settings() {
           {isEditing ? (
             <input
               type="text"
-              id="aboutme"
-              defaultValue={userInfo.aboutme}
+              id="about"
+              defaultValue={userInfo.about}
               onChange={handleInputChange}
               className="form-input"
             />
           ) : (
             <p className="field" id="aboutme">
-              {userInfo.aboutme}
+              {userInfo.about}
             </p>
           )}
         </div>
