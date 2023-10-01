@@ -189,6 +189,9 @@ func UpdateProfileFromToken(c *gin.Context) {
 	if updatePayload.User.Gender != "" {
 		user.Gender = updatePayload.User.Gender
 	}
+	if updatePayload.User.About != "" {
+		user.About = updatePayload.User.About
+	}
 
 	// Here, we update only student-specific fields
 	if updatePayload.Student.ParentGuardianName != "" {
