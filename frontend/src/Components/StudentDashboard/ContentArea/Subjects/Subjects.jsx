@@ -6,6 +6,29 @@ import axios from 'axios';
 
 function Subjects() {
 
+  const getStudentCourses = async () => {
+    try {
+      const response = await axios.post('http://localhost:4000/courses/getStudentCourses', {
+        // Add your request data here if needed
+      }, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json', // Adjust content type as needed
+          // Add any other headers you need here
+        }
+      });
+  
+      // Handle the response here
+      console.log(response.data);
+    } catch (error) {
+      // Handle errors here
+      console.error(error);
+    }
+  };
+  
+  // Call the function
+  const response = getStudentCourses();
+  
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [subjectSelected, setSubjectSelected] = useState(false);
 
