@@ -17,7 +17,7 @@ type Enrollment struct {
 	CreatedAt      time.Time              `json:"created_at"`
 	UpdatedAt      time.Time              `json:"updated_at"`
 	Link           models.TutorCourseLink `json:"link" gorm:"foreignKey:LinkID"`
-	Student        studentmodel.Student   `json:"student" gorm:"foreignKey:StudentID"`
+	Student        studentmodel.Student   `json:"-" gorm:"foreignKey:StudentID"`
 }
 
 type Enrollments []Enrollment

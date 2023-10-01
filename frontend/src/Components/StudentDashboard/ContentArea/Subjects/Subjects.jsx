@@ -1,10 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import MyPic from "../Home/MyPic.svg";
-import CSS_Object from "./Subjects.css";
-
+//import CSS_Object from "./Subjects.css";
+import axios from 'axios';
 
 function Subjects() {
+
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [subjectSelected, setSubjectSelected] = useState(false);
 

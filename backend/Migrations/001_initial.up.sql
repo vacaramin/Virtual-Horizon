@@ -246,7 +246,7 @@ VALUES
     -- Updated tutor_id to 2
     (
         2,
-        1,
+        3,
         '2023-09-20',
         '2023-12-20',
         'Weekly',
