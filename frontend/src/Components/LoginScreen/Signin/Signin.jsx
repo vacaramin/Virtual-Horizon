@@ -5,11 +5,40 @@ import logo2 from "./Logo2.svg";
 import { Link } from "react-router-dom";
 import { TextField } from "@mui/material";
 import ErrorNotification from "../../ErrorNotification/ErrorNotification";
+
 function Signin(props) {
   const history = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const fetchData = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/user/GetProfileFromToken", {
+        method: "GET",
+        credentials: "include",
+      });
+  
+      if (response.status === 401) {
+        // Handle unauthorized access
+        console.error("Unauthorized access");
+        return;
+      }
+  
+      const data = await response.json();
+  
+      if (data.status === "success") {
+        if (data.user.role === "student") {
+          history.push("/home-student");
+        } else if (data.user.role === "teacher") {
+          history.push("/home-teacher");
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  
+  fetchData();
 
   const handleLogin_Teacher = () => {
     const payload = { email, password };
@@ -25,10 +54,10 @@ function Signin(props) {
           console.log("Login Successful");
           //strong the recieving token in data to local browser cookies
           localStorage.setItem("Authorization", data.Authorization);
-          
-           //setting cookie authorization token
+
+          //setting cookie authorization token
           document.cookie = `Authorization=${data.Authorization}`;
-         
+
           //redirect to home page
           history("/home-teacher");
 
@@ -36,7 +65,7 @@ function Signin(props) {
         }
         if (data.status === "failed") {
           console.log("Login Failed");
-          
+
           console.log(data);
         }
       })
@@ -75,7 +104,6 @@ function Signin(props) {
     if (e.key === "Enter") {
       document.getElementById("Password").focus();
     }
-    
   };
 
   const handleEnterPassword = (e) => {
@@ -83,122 +111,124 @@ function Signin(props) {
       handleLogin_Student(); // You can adjust this to your needs
     }
   };
-  
 
   if (props.type === "student") {
     return (
-      <div className="left-rectangle">
-        <div className="rectangle">
-          <img
-            src={logo2}
-            alt="logo"
-            width={"100%"}
-            style={{ opacity: 0.05, marginBottom: "5%" }}
-         
-          />
-        </div>
-
-        <div>
-          <div className="Welcome-Text">
-            Welcome to Virtual Horizon
-            <br />{" "}
+      <div className="login">
+        <div className="left-rectangle">
+          <div className="rectangle">
+            <img
+              src={logo2}
+              alt="logo"
+              width={"100%"}
+              style={{ opacity: 0.05, marginBottom: "5%" }}
+            />
           </div>
-        </div>
 
-        <div>
-          <TextField
-            id="Email"
-            label="Email"
-            halfWidth
-            style={{ marginTop: "20%", marginLeft: "32%" }}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            onKeyDown={handleEnterEmail}
-          />
-          <br />
-          <TextField
-            id="Password"
-            type="password"
-            label="Password"
-            style={{ marginTop: "3%", marginLeft: "32%" }}
-            halfWidth
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            onKeyDown={handleEnterPassword}
-            
-          />
-        </div>
-        <div>
-          <button className="signinButton" onClick={handleLogin_Student} type= "submit">
-            Sign in
-          </button>
-        </div>
+          <div>
+            <div className="Welcome-Text">
+              Welcome to Virtual Horizon
+              <br />{" "}
+            </div>
+          </div>
 
-        <div className="sign-up-text">
-          <i>
-            new here? <Link to="/sign-up">Sign up</Link>
-          </i>
+          <div>
+            <TextField
+              id="Email"
+              label="Email"
+              halfWidth
+              style={{ marginTop: "20%", marginLeft: "32%" }}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={handleEnterEmail}
+            />
+            <br />
+            <TextField
+              id="Password"
+              type="password"
+              label="Password"
+              style={{ marginTop: "3%", marginLeft: "32%" }}
+              halfWidth
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={handleEnterPassword}
+            />
+          </div>
+          <div>
+            <button
+              className="signinButton"
+              onClick={handleLogin_Student}
+              type="submit"
+            >
+              Sign in
+            </button>
+          </div>
+
+          <div className="sign-up-text">
+            <i>
+              new here? <Link to="/sign-up">Sign up</Link>
+            </i>
+          </div>
+          <ErrorNotification error={error} color="red" />
         </div>
-        <ErrorNotification error={error} color = "red" /> 
-      
       </div>
-      
     );
   } else if (props.type === "teacher") {
     return (
-      <div className="left-rectangle">
-        <div className="rectangle">
-          <img
-            src={logo2}
-            alt="logo"
-            width={"100%"}
-            style={{ opacity: 0.05, marginBottom: "5%" }}
-          />
-        </div>
-
-        <div>
-          <div className="Welcome-Text">
-            Welcome to Virtual Horizon
-            <br />{" "}
+      <div className="login">
+        <div className="left-rectangle">
+          <div className="rectangle">
+            <img
+              src={logo2}
+              alt="logo"
+              width={"100%"}
+              style={{ opacity: 0.05, marginBottom: "5%" }}
+            />
           </div>
-        </div>
 
-        <div>
-          <TextField
-            id="Email"
-            label="Email"
-            halfWidth
-            style={{ marginTop: "20%", marginLeft: "32%" }}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            onKeyDown={handleEnterEmail}
-          />
-          <br />
-          <TextField
-            id="Password"
-            type="password"
-            label="Password"
-            style={{ marginTop: "3%", marginLeft: "32%" }}
-            halfWidth
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            onKeyDown={handleEnterPassword}
-          />
-        </div>
-        <div>
-          <div className="signinButton" onClick={handleLogin_Teacher}>
-            Sign in
+          <div>
+            <div className="Welcome-Text">
+              Welcome to Virtual Horizon
+              <br />{" "}
+            </div>
           </div>
-        </div>
 
-        <div className="sign-up-text">
-          <i>
-            new here? <Link to="/sign-up">Sign up</Link>
-          </i>
+          <div>
+            <TextField
+              id="Email"
+              label="Email"
+              halfWidth
+              style={{ marginTop: "20%", marginLeft: "32%" }}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={handleEnterEmail}
+            />
+            <br />
+            <TextField
+              id="Password"
+              type="password"
+              label="Password"
+              style={{ marginTop: "3%", marginLeft: "32%" }}
+              halfWidth
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={handleEnterPassword}
+            />
+          </div>
+          <div>
+            <div className="signinButton" onClick={handleLogin_Teacher}>
+              Sign in
+            </div>
+          </div>
+
+          <div className="sign-up-text">
+            <i>
+              new here? <Link to="/sign-up">Sign up</Link>
+            </i>
+          </div>
+          <ErrorNotification error={error} />
         </div>
-        <ErrorNotification error={error} />
       </div>
-      
     );
   } else {
     console.log(
