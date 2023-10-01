@@ -55,7 +55,7 @@ func GetStudentCourses(ctx *gin.Context) {
 		Find(&Courses)
 
 	ctx.JSON(http.StatusOK, gin.H{
-		"status":     "Success",
-		"Enrollment": Courses,
+		"status":  "Success",
+		"Courses": Courses,
 	})
 }
