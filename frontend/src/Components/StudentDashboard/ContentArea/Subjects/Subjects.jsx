@@ -1,16 +1,39 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MyPic from "../Home/MyPic.svg";
-import CSS_Object from "./Subjects.css";
-
+//import CSS_Object from "./Subjects.css";
+import axios from "axios";
 
 function Subjects() {
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [subjectSelected, setSubjectSelected] = useState(false);
+  const [studentSubjects, setStudentSubjects] = useState({});
+
+  const getStudentCourses = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/courses/getStudentCourses",
+        {
+          // Add your request data here if needed
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json", // Adjust content type as needed
+            // Add any other headers you need here
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
 
   const subjects = [
     {
-      name: "Math",
+      name: "Alizains",
       color: "#FF5B5B",
       content: "Math Content",
       teacher: {
@@ -38,6 +61,17 @@ function Subjects() {
     },
     // Add more subjects with teacher info here
   ];
+  useEffect(() => {
+    (async () => {
+      try {
+        const subjectsData = await getStudentCourses();
+        setStudentSubjects(subjectsData);
+        console.log(subjectsData); // Log the data after updating the state
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    })();
+  }, []);
 
   const handleSubjectClick = (subject) => {
     setSelectedSubject(subject);
@@ -63,35 +97,23 @@ function Subjects() {
         <div>
           <div className="content-area-student">
             <div className="subject-container">
-              {subjects.map((subject) => (
-                <div
-                  onClick={() => handleSubjectClick(subject)}
-                  key={subject.name}
-                  className="subject-card"
-                  style={{
-                    backgroundColor: subject.color,
-                    width: "30%", // Adjust card width in percentage
-                    height: "200px", // Adjust card height in pixels
-                  }}
-                >
-                  <div className="subject-card-header">
-                    <div className="teacher-profile-pic">
-                      <img
-                        src={subject.teacher.profilePic}
-                        alt={subject.teacher.name}
-                      />
-                    </div>
-                    <div className="subject-header-details">
-                      <p>{subject.teacher.name}</p>
-                    </div>
+              {studentSubjects.Courses &&
+                studentSubjects.Courses.map((course) => (
+                  <div
+                    key={course.id}
+                    className="subject-card"
+                    style={{
+                      backgroundColor: "#FF5B5B", // Set a default color if needed
+                      width: "30%",
+                      height: "200px",
+                    }}
+                  >
+                    <div className="subject-card-content">
+                      <p>{course.name}</p>
+                      <p>{course.description}</p>
+                      </div>
                   </div>
-                  <div className="subject-card-content">
-                    <p>{subject.name}</p>{" "}
-                    {/* Display subject name at the bottom center */}
-                    <p>{subject.content}</p>
-                  </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         </div>
