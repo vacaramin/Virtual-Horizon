@@ -182,7 +182,8 @@ func UpdateProfileFromToken(c *gin.Context) {
 	if updatePayload.User.Name != "" {
 		user.Name = updatePayload.User.Name
 	}
-	if updatePayload.User.Dob != "" {
+	var zeroTime time.Time
+	if updatePayload.User.Dob != zeroTime {
 		user.Dob = updatePayload.User.Dob
 	}
 	if updatePayload.User.Gender != "" {
