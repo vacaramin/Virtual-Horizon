@@ -42,6 +42,7 @@ function Settings() {
               Name: userInfo.name,
               Dob: userInfo.dob,
               Gender: userInfo.gender,
+              About: userInfo.about
             },
           }),
         }
@@ -107,14 +108,14 @@ function Settings() {
           {isEditing ? (
             <input
               type="text"
-              id="aboutme"
-              defaultValue={userInfo.aboutme}
+              id="about"
+              defaultValue={userInfo.about}
               onChange={handleInputChange}
               className="form-input"
             />
           ) : (
             <p className="field" id="aboutme">
-              {userInfo.aboutme}
+              {userInfo.about}
             </p>
           )}
         </div>
