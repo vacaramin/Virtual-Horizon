@@ -1,10 +1,40 @@
 import './App.css';
 import React from 'react';
-
 import { Link } from 'react-router-dom';
 import logo from "./logo.svg";
+import { useNavigate } from "react-router-dom";
 
 function App() {
+  const history = useNavigate();
+
+  const fetchData = async () => {
+      try {
+          const response = await fetch("http://localhost:4000/user/GetProfileFromToken", {
+              method: "GET",
+              credentials: "include",
+          });
+
+          if (response.status === 401) {
+              return;
+          }
+
+          const data = await response.json();
+
+          if (data.status === "success") {
+              console.log("success")
+              if (data.user.role === "student") {
+                  console.log("student")
+                  history("/home-student");
+              } else if (data.user.role === "teacher") {
+                  history("/home-teacher");
+              }
+          }
+      } catch (error) {
+          console.error("Error fetching data:", error);
+      }
+  };
+
+  fetchData();
 
 
   return (
