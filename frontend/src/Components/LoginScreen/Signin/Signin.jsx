@@ -1,45 +1,16 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "./Signin.css";
 import logo2 from "./Logo2.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TextField } from "@mui/material";
 import ErrorNotification from "../../ErrorNotification/ErrorNotification";
 
 function Signin(props) {
-  const history = useNavigate();
+  const history = useNavigate()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const fetchData = async () => {
-    try {
-      const response = await fetch("http://localhost:4000/user/GetProfileFromToken", {
-        method: "GET",
-        credentials: "include",
-      });
   
-      if (response.status === 401) {
-        // Handle unauthorized access
-        console.error("Unauthorized access");
-        return;
-      }
-  
-      const data = await response.json();
-  
-      if (data.status === "success") {
-        if (data.user.role === "student") {
-          history.push("/home-student");
-        } else if (data.user.role === "teacher") {
-          history.push("/home-teacher");
-        }
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-  
-  fetchData();
-
   const handleLogin_Teacher = () => {
     const payload = { email, password };
     fetch("http://localhost:4000/login", {
