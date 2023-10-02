@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import MyPic from "../Home/MyPic.svg";
-import "./Subjects.css";
+import styles from "./Subjects.module.css";
 import axios from "axios";
 
 function Subjects() {
@@ -55,7 +54,7 @@ function Subjects() {
 
   if (subjectSelected && selectedSubject) {
     return (
-      <div className="content-area-student">
+      <div className={styles.contentAreaStudent}>
         <h1>{selectedSubject.name}</h1>
         <p>{selectedSubject.content}</p>
         <button onClick={handleGoBack}>Go Back</button>
@@ -65,23 +64,38 @@ function Subjects() {
     return (
       <div>
         <div>
-          <div className="content-area-student">
-            <div className="subject-container">
+          <div className={styles.contentAreaStudent}>
+            <div className={styles.subjectContainer}>
               {studentSubjects.Courses &&
                 studentSubjects.Courses.map((course) => (
-                  <div
-                    key={course.id}
-                    className="subject-card"
-                    style={{
-                      backgroundColor: "#FF5B5B", // Set a default color if needed
-                      width: "25%",
-                      height: "200px",
-                    }}
-                  >
-                    <div className="subject-card-content">
-                      <p classname = "course-name">{course.name}</p>
-                      <p classname = "course-description">{course.description}</p>
+                  <div className={styles.subjectCard}>
+                    <div
+                      key={course.id}
+                      style={{
+                        border: "1px solid blue",
+                        borderRadius: "8px",
+                        padding: "10px",
+                        cursor: "pointer",
+                        position: "relative", // Added position relative for absolute positioning
+                      }}
+                      className={styles.subjectCardContent}
+                      onClick={() => handleSubjectClick(course)} // Added onClick handler
+                    >
+                      <div
+                        className={styles.tutorBanner}
+                        style={{ backgroundColor: "#f7cb46" }} 
+                      >
+                        <img
+                          src="https://avatars.githubusercontent.com/u/94608299?v=4" 
+                          alt="Tutor Profile"
+                          className={styles.profilePicture}
+                        />
+                        <div className={styles.tutorName}>Awais Muhammad</div>
                       </div>
+                      <br /><br />
+                      <p className={styles.courseName}>{course.name}</p>
+                      <p className={styles.courseDescription}>{course.description}</p>
+                    </div>
                   </div>
                 ))}
             </div>

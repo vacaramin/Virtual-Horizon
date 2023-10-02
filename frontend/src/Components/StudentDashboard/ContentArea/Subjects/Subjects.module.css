@@ -1,0 +1,104 @@
+/* Tutor Banner Styles */
+.tutorBanner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px; /* Adjust the height as needed */
+  border-radius: 8px 8px 0 0; /* Rounded corners on top */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Center elements with space in between */
+  padding: 0 10px; /* Add some padding for spacing */
+}
+
+/* Profile Picture Styles */
+.profilePicture {
+  width: 50px; /* Adjust the size of the profile picture as needed */
+  height: 50px; /* Adjust the size of the profile picture as needed */
+  border-radius: 50%; /* Make it circular */
+}
+
+/* Tutor Name Styles */
+.tutorName {
+  font-style: italic;
+  margin-left: px; /* Add some space between the picture and the name */
+}
+
+/* Common Styles */
+.subjectCardContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.subjectCardContent p {
+  margin: 0;
+}
+
+.subjectCardContent p.courseDescription {
+  font-style: italic;
+  font-size: smaller;
+}
+
+/* Subject Card Styles */
+.subjectCard {
+  width: 30%;
+  height: 250px;
+  margin-right: 10px; /* Add some space between cards */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s;
+  display: flex; /* Add this */
+}
+
+.subjectCard:last-child {
+  margin-right: 0; /* Remove margin from the last card */
+}
+
+.subjectCard:hover {
+  transform: scale(1.05);
+}
+
+.subjectCardContent {
+  padding: 10px;
+  height: auto;
+}
+
+.subjectCardContent p.courseName {
+  font-weight: bold;
+  color:#243047
+}
+
+/* Course Description Styles */
+.subjectCardContent p.courseDescription {
+  font-style: italic;
+  font-size: smaller;
+  color:#243047
+
+}
+
+/* Button Styles */
+button {
+  background-color: #3ec1d3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #2e8ca6;
+}
+.subjectContainer {
+  display: flex;
+}
