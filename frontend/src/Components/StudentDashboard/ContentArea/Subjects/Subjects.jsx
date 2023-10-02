@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MyPic from "../Home/MyPic.svg";
-//import CSS_Object from "./Subjects.css";
+import "./Subjects.css";
 import axios from "axios";
 
 function Subjects() {
@@ -31,36 +31,6 @@ function Subjects() {
     }
   };
 
-  const subjects = [
-    {
-      name: "Alizains",
-      color: "#FF5B5B",
-      content: "Math Content",
-      teacher: {
-        name: "Awais Mohammad",
-        profilePic: MyPic,
-      },
-    },
-    {
-      name: "Science",
-      color: "#3EC1D3",
-      content: "Science Content",
-      teacher: {
-        name: "Waqar Amin",
-        profilePic: MyPic,
-      },
-    },
-    {
-      name: "English",
-      color: "#FFC93C",
-      content: "English Content",
-      teacher: {
-        name: "Ali Zain",
-        profilePic: MyPic,
-      },
-    },
-    // Add more subjects with teacher info here
-  ];
   useEffect(() => {
     (async () => {
       try {
@@ -104,13 +74,13 @@ function Subjects() {
                     className="subject-card"
                     style={{
                       backgroundColor: "#FF5B5B", // Set a default color if needed
-                      width: "30%",
+                      width: "25%",
                       height: "200px",
                     }}
                   >
                     <div className="subject-card-content">
-                      <p>{course.name}</p>
-                      <p>{course.description}</p>
+                      <p classname = "course-name">{course.name}</p>
+                      <p classname = "course-description">{course.description}</p>
                       </div>
                   </div>
                 ))}
