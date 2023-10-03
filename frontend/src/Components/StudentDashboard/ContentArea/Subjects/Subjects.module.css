@@ -28,6 +28,7 @@
 /* Common Styles */
 .subjectCardContent {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
@@ -47,7 +48,7 @@
 .subjectCard {
   width: 30%;
   height: 250px;
-  margin-right: 10px; /* Add some space between cards */
+  margin : 10px; /* Add some space between cards */
   border: 1px solid #ccc;
   border-radius: 8px;
   overflow: hidden;
@@ -101,4 +102,5 @@ button:hover {
 }
 .subjectContainer {
   display: flex;
+  flex-wrap: wrap;
 }
