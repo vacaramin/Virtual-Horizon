@@ -52,57 +52,115 @@ function Subjects() {
     setSubjectSelected(false);
   };
 
+
+  //Selected subject it will include the students activity, tasks, quizzes, video conferencing, etc.
   if (subjectSelected && selectedSubject) {
     return (
       <div className={styles.contentAreaStudent}>
-        <h1>{selectedSubject.name}</h1>
-        <p>{selectedSubject.content}</p>
-        <button onClick={handleGoBack}>Go Back</button>
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <div>
-          <div className={styles.contentAreaStudent}>
-            <div className={styles.subjectContainer}>
-              {studentSubjects.Courses &&
-                studentSubjects.Courses.map((course) => (
-                  <div className={styles.subjectCard}>
-                    <div
-                      key={course.id}
-                      style={{
-                        border: "1px solid blue",
-                        borderRadius: "8px",
-                        padding: "10px",
-                        cursor: "pointer",
-                        position: "relative", // Added position relative for absolute positioning
-                      }}
-                      className={styles.subjectCardContent}
-                      onClick={() => handleSubjectClick(course)} // Added onClick handler
-                    >
-                      <div
-                        className={styles.tutorBanner}
-                        style={{ backgroundColor: "#f7cb46" }} 
-                      >
-                        <img
-                          src="https://avatars.githubusercontent.com/u/94608299?v=4" 
-                          alt="Tutor Profile"
-                          className={styles.profilePicture}
-                        />
-                        <div className={styles.tutorName}>Awais Muhammad</div>
-                      </div>
-                      <br /><br />
-                      <p className={styles.courseName}>{course.name}</p>
-                      <p className={styles.courseDescription}>{course.description}</p>
-                    </div>
-                  </div>
-                ))}
+      <h1>{selectedSubject.name}</h1>
+      <p>{selectedSubject.content}</p>
+
+      <div className={styles.activitySection}>
+        {/* Activity and Comment Section */}
+        <div className={styles.activityContainer}>
+          {/* Activity Feed */}
+          <div className={styles.activityFeed}>
+            {/* Activity items go here */}
+            <div className={styles.activityItem}>
+              {/* Activity item content */}
+              <p>Activity 1: Lorem ipsum dolor sit amet.</p>
             </div>
+            {/* Add more activity items as needed */}
+          </div>
+
+          {/* Comment Section */}
+          <div className={styles.commentSection}>
+            {/* Comments go here */}
+            <div className={styles.comment}>
+              {/* Comment content */}
+              <p>User 1: Comment 1</p>
+            </div>
+            {/* Add more comments as needed */}
+          </div>
+        </div>
+
+        {/* Vertical Bar with Icons */}
+        <div className={styles.verticalBar}>
+          <div className={styles.icon}>
+            {/* Icon for Video Conferencing */}
+            <i className="fa fa-video-camera" aria-hidden="true"></i>
+            <p>Video Conferencing</p>
+          </div>
+          <div className={styles.icon}>
+            {/* Icon for Quizzes */}
+            <i className="fa fa-question-circle" aria-hidden="true"></i>
+            <p>Quizzes</p>
+          </div>
+          <div className={styles.icon}>
+            {/* Icon for Class Tasks */}
+            <i className="fa fa-tasks" aria-hidden="true"></i>
+            <p>Class Tasks</p>
           </div>
         </div>
       </div>
+
+      {/* Message Box at Bottom Right */}
+      <div className={styles.messageBox}>
+        {/* Message content */}
+        <textarea placeholder="Type your message..."></textarea>
+        <button>Send</button>
+      </div>
+
+      <button onClick={handleGoBack}>Go Back</button>
+    </div>
     );
+  } else {
+    return (
+  <div>
+    <div>
+      <div className={styles.contentAreaStudent}>
+        <div className={styles.subjectContainer}>
+          {studentSubjects.Courses &&
+            studentSubjects.Courses.map((course) => (
+              <div className={styles.subjectCard}>
+                <div
+                  key={course.id}
+                  style={{
+                    border: "1px solid blue",
+                    borderRadius: "8px",
+                    padding: "10px",
+                    cursor: "pointer",
+                    position: "relative", // Added position relative for absolute positioning
+                    backgroundImage: `url(${course.backgroundImage})`, // Add background image URL here
+                    backgroundSize: "cover", // Optional: Adjust background size as needed
+                    backgroundPosition: "center", // Optional: Adjust background position as needed
+                  }}
+                  className={styles.subjectCardContent}
+                  onClick={() => handleSubjectClick(course)} // Added onClick handler
+                >
+                  <div
+                    className={styles.tutorBanner}
+                    style={{ backgroundColor: "#f7cb46" }}
+                  >
+                    <img
+                      src="https://avatars.githubusercontent.com/u/94608299?v=4"
+                      alt="Tutor Profile"
+                      className={styles.profilePicture}
+                    />
+                    <div className={styles.tutorName}>Awais Mohammad</div>
+                  </div>
+                  <br /><br />
+                  <p className={styles.courseName}>{course.name}</p>
+                  <p className={styles.courseDescription}>{course.description}</p>
+                </div>
+              </div>
+            ))}
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
   }
 }
 export default Subjects;
