@@ -59,6 +59,7 @@ function Subjects() {
       <div className={styles.contentAreaStudent}>
       <h1>{selectedSubject.name}</h1>
       <p>{selectedSubject.content}</p>
+      <button style={{ backgroundColor: "#243047"  }} onClick={handleGoBack}> Go Back</button>
 
       <div className={styles.activitySection}>
         {/* Activity and Comment Section */}
@@ -68,7 +69,7 @@ function Subjects() {
             {/* Activity items go here */}
             <div className={styles.activityItem}>
               {/* Activity item content */}
-              <p>Activity 1: Lorem ipsum dolor sit amet.</p>
+              <p>Activity 1: Any activity that will be done.</p>
             </div>
             {/* Add more activity items as needed */}
           </div>
@@ -82,37 +83,62 @@ function Subjects() {
             </div>
             {/* Add more comments as needed */}
           </div>
+
+          {/* Add Comment Form */}
+          <form className={styles.commentForm}>
+            <input
+              type="text"
+              placeholder="Add a comment..."
+              className={styles.commentInput}
+            />
+            <button type="submit" className={styles.commentSubmit}>
+              <i className="fa fa-paper-plane" aria-hidden="true"></i> Send
+            </button>
+          </form>
         </div>
 
-        {/* Vertical Bar with Icons */}
+        {/* Vertical Bar with Long Buttons */}
         <div className={styles.verticalBar}>
-          <div className={styles.icon}>
-            {/* Icon for Video Conferencing */}
-            <i className="fa fa-video-camera" aria-hidden="true"></i>
-            <p>Video Conferencing</p>
-          </div>
-          <div className={styles.icon}>
-            {/* Icon for Quizzes */}
-            <i className="fa fa-question-circle" aria-hidden="true"></i>
-            <p>Quizzes</p>
-          </div>
-          <div className={styles.icon}>
-            {/* Icon for Class Tasks */}
-            <i className="fa fa-tasks" aria-hidden="true"></i>
-            <p>Class Tasks</p>
-          </div>
+          <button
+            className={styles.longButton}
+            style={{ backgroundColor: "#243047", width: "100%" , marginRight: "20%" }}
+          >
+            <i className="fa fa-video-camera" aria-hidden="true"></i> Video Conferencing
+          </button>
+          <button
+            className={styles.longButton}
+            style={{ backgroundColor: "#243047" , width: "100%", marginRight: "20%" }}
+          >
+            <i className="fa fa-question-circle" aria-hidden="true"></i> Quizzes
+          </button>
+          <button
+            className={styles.longButton}
+            style={{ backgroundColor: "#243047", width: "100%" , marginRight: "20%"  }}
+          >
+            <i className="fa fa-tasks" aria-hidden="true"></i> Class Tasks
+          </button>
         </div>
       </div>
-
+    
       {/* Message Box at Bottom Right */}
       <div className={styles.messageBox}>
-        {/* Message content */}
+        <h2>Private Message</h2>
         <textarea placeholder="Type your message..."></textarea>
-        <button>Send</button>
+        <button
+          style={{
+            backgroundColor: "#243047",
+            color: "#fff",
+            padding: "10px 30px",
+          }}
+        >
+          Send
+          <i className="fa fa-paper-plane" aria-hidden="true"></i>
+        </button>
       </div>
-
-      <button onClick={handleGoBack}>Go Back</button>
     </div>
+    
+
+
     );
   } else {
     return (
