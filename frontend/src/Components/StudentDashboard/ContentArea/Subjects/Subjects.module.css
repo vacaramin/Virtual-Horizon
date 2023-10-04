@@ -155,7 +155,23 @@ p {
   margin-bottom: 10px;
 }
 
-/* Vertical Bar with Icons */
+/* ... Previous CSS styles ... */
+
+/* Message Box at Bottom Right */
+.messageBox {
+  position: fixed;
+  bottom: 2%;
+  right: calc(1%); /* Start where the discussion tab's width is full */
+  width: 20%; /* Decreased width */
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Icon Buttons */
 .verticalBar {
   width: 20%;
   display: flex;
@@ -168,39 +184,44 @@ p {
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
+  background-color: #243047;
+  border-radius: 1000px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.icon:hover {
+  background-color: #243047;
 }
 
 .icon i {
   font-size: 24px;
+  color: #fff;
 }
 
-/* Message Box at Bottom Right */
-.messageBox {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  padding: 10px;
+
+/* Add Comment Form */
+.commentForm {
   display: flex;
-  flex-direction: column;
+  margin-top: 20px;
 }
 
-.messageBox textarea {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
+.commentInput {
+  flex-grow: 1;
+  padding: 12px; /* Increase padding for the input field */
   border: 1px solid #ccc;
   border-radius: 4px;
-  resize: none;
+  margin-right: 10px;
+  font-size: 18px; /* Increase font size */
 }
 
-.messageBox button {
-  background-color: #007bff;
+.commentSubmit {
+  background-color: #243047;
   color: #fff;
   border: none;
-  border-radius: 4px;
-  padding: 8px 16px;
+  border-radius: 8px;
+  padding: 14px 15px; /* Increase padding for the button */
   cursor: pointer;
 }
+
