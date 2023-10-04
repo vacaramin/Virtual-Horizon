@@ -62,6 +62,7 @@ function Subjects() {
       <button style={{ backgroundColor: "#243047"  }} onClick={handleGoBack}> Go Back</button>
 
       <div className={styles.activitySection}>
+        
         {/* Activity and Comment Section */}
         <div className={styles.activityContainer}>
           {/* Activity Feed */}
@@ -99,6 +100,7 @@ function Subjects() {
 
         {/* Vertical Bar with Long Buttons */}
         <div className={styles.verticalBar}>
+          <h2>Dashboard</h2>
           <button
             className={styles.longButton}
             style={{ backgroundColor: "#243047", width: "100%" , marginRight: "20%" }}
