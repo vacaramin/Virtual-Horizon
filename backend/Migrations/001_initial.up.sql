@@ -209,7 +209,14 @@ VALUES
         'Science',
         '2023-09-20',
         '2023-12-20'
-    );
+    ),
+    (
+        'M-CAT',
+        'Some medical thing.',
+        'biology',
+        '2023-09-20',
+        '2023-12-20'
+    );;
 
 -- Insert values into the "tutor_courses" table
 -- Insert values into the "tutor_courses" table
@@ -252,6 +259,15 @@ VALUES
         'Weekly',
         12,
         6
+    ),
+    (
+        2,
+        4,
+        '2023-09-20',
+        '2023-12-20',
+        'Weekly',
+        12,
+        6
     );
 -- Insert values into the "enrollments" table
 INSERT INTO
@@ -283,6 +299,14 @@ VALUES
     (
         1,
         3,
+        '2023-09-21',
+        'Enrolled',
+        'A+',
+        'Exemplary performance.'
+    ),
+    (
+        1,
+        4,
         '2023-09-21',
         'Enrolled',
         'A+',
