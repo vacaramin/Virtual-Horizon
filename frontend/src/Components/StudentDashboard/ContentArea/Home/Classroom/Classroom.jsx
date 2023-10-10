@@ -8,7 +8,7 @@ function Classroom(props){
     const [subjectSelected, setSubjectSelected] = useState(false);
 
     const handleGoBack = () => {
-        setSelectedSubject(null);
+        setSelectedSubject(null);   
         setSubjectSelected(false);
       };
   
