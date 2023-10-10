@@ -57,7 +57,7 @@ function Subjects() {
     return(
 
       <div>
-        <Classroom></Classroom>
+        <Classroom name = {selectedSubject} content = {selectedSubject}></Classroom>
       </div>
 
     );
