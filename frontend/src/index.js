@@ -33,6 +33,11 @@ const router = createBrowserRouter([
 
   },
   {
+    path: "/home-student",
+    element: <StudentDashboard/>,
+
+  },
+  {
     path: "/subjects",
     element: <StudentDashboard/>,
   },
