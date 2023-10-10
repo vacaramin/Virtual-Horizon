@@ -28,7 +28,12 @@ const router = createBrowserRouter([
     element: <LoginScreen type = 'student'/>,
   },
   {
-    path: "/home-student",
+    path: "/home-student/:component",
+    element: <StudentDashboard/>,
+
+  },
+  {
+    path: "/subjects",
     element: <StudentDashboard/>,
   },
   {
