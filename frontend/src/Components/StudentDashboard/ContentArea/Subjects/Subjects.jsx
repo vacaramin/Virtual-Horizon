@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Subjects.module.css";
 import axios from "axios";
-import Classroom from "../Home/Classroom/Classroom";
+import Classroom from "./Classroom/Classroom";
 
 function Subjects() {
   const [selectedSubject, setSelectedSubject] = useState(null);
@@ -52,12 +52,12 @@ function Subjects() {
 
 
   //Selected subject it will include the students activity, tasks, quizzes, video conferencing, etc.
-  if (subjectSelected && selectedSubject) {
+  if (subjectSelected) {
    
     return(
 
       <div>
-        <Classroom name = {selectedSubject} content = {selectedSubject}></Classroom>
+        <Classroom name = {selectedSubject.name} content = "temps"></Classroom>
       </div>
 
     );
