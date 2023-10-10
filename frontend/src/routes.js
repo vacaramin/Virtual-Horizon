@@ -8,6 +8,7 @@ const AppRoutes = () => {
     <Router>
       <Routes>
         <Route exact path='/signup' element={<SignupScreen />} />
+
         <Route exact path='/login' element={<LoginScreen />} />
       </Routes>
     </Router>
