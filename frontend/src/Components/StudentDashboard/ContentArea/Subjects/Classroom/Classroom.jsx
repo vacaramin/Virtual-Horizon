@@ -1,6 +1,6 @@
 import styles from "./Classroom.css";
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, /*useEffect*/ } from "react";
+//import axios from "axios";
 
 function Classroom(props){
 
