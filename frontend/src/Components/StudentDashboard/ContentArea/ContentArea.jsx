@@ -7,7 +7,10 @@ import VhAssistant from "./VhAssistant/VhAssistant";
 import Payment from "./Payment/Payment";
 import Subjects from "./Subjects/Subjects";
 
-function ContentArea({ selectedItem }) {
+function ContentArea({ selectedItem, onComponentChange }) {
+  const handleItemClick = (itemName) => {
+    onComponentChange(itemName); // Notify parent component about the change
+  };
 
   if (selectedItem === "home") {
     return (

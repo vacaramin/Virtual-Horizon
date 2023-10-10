@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 function StudentDashboard() {
   const [error, setError] = useState("");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [selectedItem, setSelectedItem] = useState("home");
+  const [selectedItem, setSelectedItem] = useState(localStorage.getItem('selectedItem') || "home");
   const [username, setUsername] = useState("");
   const history = useNavigate();
   
@@ -18,8 +18,14 @@ function StudentDashboard() {
   };
   
   const handleItemClick = (itemName) => {
-    setSelectedItem(itemName);
-    console.log(itemName)
+      setSelectedItem(itemName);
+      history(`/home-student/${itemName}`); // Update the URL path
+      localStorage.setItem('selectedItem', itemName); // Update localStorage
+ 
+  };
+  const handleComponentChange = (newComponent) => {
+    setSelectedItem(newComponent);
+    history(`/subjects/${newComponent}`);
   };
 
   const getUserDetails = () => {
@@ -53,7 +59,7 @@ function StudentDashboard() {
       <div className="content-wrapper">
         <TopBar username = {username}/>
         <div className="main-content">
-          <ContentArea selectedItem={selectedItem} />
+          <ContentArea selectedItem={selectedItem} onComponentChange={handleComponentChange} />
         </div>
       </div>
     
