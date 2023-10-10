@@ -1,119 +1,107 @@
-  /*New CSS files added*/
-  
-  h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  p {
-    font-size: 16px;
-  }
-  
-  /* Activity and Comment Section */
-  .activitySection {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 20px;
-  }
-  
-  .activityContainer {
-    width: 70%;
-    background-color: #f5f5f5;
-    padding: 20px;
-    border-radius: 8px;
-  }
-  
-  .activityFeed {
-    margin-bottom: 20px;
-  }
-  
-  .activityItem {
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .commentSection {
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .comment {
-    margin-bottom: 10px;
-  }
-  
-  .messageBox {
-    position: fixed;
-    bottom: 2%;
-    right: calc(1%); 
-    width: 20%; 
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Icon Buttons */
-  .verticalBar {
-    width: 20%;
-    display: absolute;
-    flex-direction: column;
-    align-items: right;
-    margin-right: 2%;
-  }
-  
-  .icon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-    background-color: #243047;
-    border-radius: 1000px;
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .icon:hover {
-    background-color: #243047;
-  }
-  
-  .icon i {
-    font-size: 24px;
-    color: #fff;
-  }
-  
-  
-  /* Add Comment Form */
-  .commentForm {
-    display: flex;
-    margin-top: 20px;
-  }
-  
-  .commentInput {
-    flex-grow: 1;
-    padding: 12px; /* Increase padding for the input field */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-right: 10px;
-    font-size: 18px; /* Increase font size */
-  }
-  
-  .commentSubmit {
-    background-color: #243047;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 14px 15px; /* Increase padding for the button */
-    cursor: pointer;
-  }
-  
-  
-  
+/* Classroom.css */
+
+/* Styles for the main container */
+.activitySection {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* Styles for the activity and comment section */
+.activityContainer {
+  flex: 2;
+}
+
+/* Styles for the activity feed */
+.activityFeed {
+  border: 1px solid #e5e5e5;
+  padding: 10px;
+}
+
+/* Styles for individual activity items */
+.activityItem {
+  margin: 10px 0;
+}
+
+/* Styles for the comment section */
+.commentSection {
+  border: 1px solid #e5e5e5;
+  padding: 10px;
+}
+
+/* Styles for individual comments */
+.comment {
+  margin: 10px 0;
+}
+
+/* Styles for the comment form */
+.commentForm {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.commentInput {
+  flex: 1;
+  border: 1px solid #e5e5e5;
+  padding: 5px;
+}
+
+.commentSubmit {
+  background-color: #243047;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* Styles for the vertical bar with long buttons */
+.verticalBar {
+  flex: 1;
+  background-color: #f5f5f5;
+  padding: 10px;
+}
+
+/* Styles for long buttons in the vertical bar */
+.longButton {
+  background-color: #243047;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  margin-right: 20%;
+  text-align: left;
+}
+
+/* Styles for the message box at the bottom right */
+.messageBox {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #f5f5f5;
+  padding: 10px;
+  border: 1px solid #e5e5e5;
+  text-align: center;
+}
+
+/* Styles for the message box header */
+.messageBox h2 {
+  margin-bottom: 10px;
+}
+
+/* Styles for the message input area */
+.messageBox textarea {
+  width: 100%;
+  border: 1px solid #e5e5e5;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Styles for the message send button */
+.messageBox button {
+  background-color: #243047;
+  color: #fff;
+  padding: 10px 30px;
+  border: none;
+  cursor: pointer;
+}
