@@ -53,7 +53,7 @@ function Signin(props) {
           localStorage.setItem("Authorization", data.Authorization);
           // Setting authorization token cookie
           document.cookie = `Authorization=${data.Authorization}`;
-          history("/home-student");
+          history("/home-student/home");
         } else if (data.status === "failed") {
           console.log("Login Failed");
           console.log(data);
