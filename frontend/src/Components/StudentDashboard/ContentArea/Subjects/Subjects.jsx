@@ -57,7 +57,7 @@ function Subjects() {
     return(
 
       <div>
-        <Classroom name = {selectedSubject.name} content = "temps"></Classroom>
+        <Classroom name = {selectedSubject.name} ></Classroom>
       </div>
 
     );
@@ -67,7 +67,6 @@ function Subjects() {
     return (
   <div>
     <div>
-      <div className={styles.contentAreaStudent}>
         <div className={styles.subjectContainer}>
           {studentSubjects.Courses &&
             studentSubjects.Courses.map((course) => (
@@ -106,7 +105,6 @@ function Subjects() {
             ))}
         </div>
       </div>
-    </div>
   </div>
 );
 

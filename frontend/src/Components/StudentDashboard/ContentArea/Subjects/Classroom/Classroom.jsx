@@ -15,8 +15,7 @@ function Classroom(props){
 
 return (
 
-      
-    <div className={styles.contentAreaStudent}>
+    <div>
     <h1>{props.name}</h1>
     <p>{props.content}</p>
     <button style={{ backgroundColor: "#243047"  }} onClick={handleGoBack}> Go Back</button>
