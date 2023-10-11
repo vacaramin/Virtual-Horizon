@@ -1,3 +1,32 @@
+/*Vertical bar for icons*/
+/*.verticalBar{
+  margin-left: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 20%;
+
+}*/
+
+/*Buttons quiz and tasks, video*/
+/*.Buttons{
+
+  width: auto;
+  height: 10px;
+  color:#243047;
+}*/
+
+/*Classroom bar*/
+/*.ClassroomBar{
+
+  width: 85%;
+  height : 10%;
+  color:#243047;
+
+}
+
+*/
+/*New CSS Files*/
 /* Classroom.css */
 
 /* Styles for the main container */
