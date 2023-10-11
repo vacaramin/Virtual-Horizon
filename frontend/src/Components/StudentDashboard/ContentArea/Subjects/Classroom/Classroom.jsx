@@ -1,4 +1,4 @@
-import styles from "./Classroom.css";
+import styles from "./Classroom.module.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 

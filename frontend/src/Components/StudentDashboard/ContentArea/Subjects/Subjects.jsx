@@ -57,7 +57,7 @@ function Subjects() {
     return(
 
       <div>
-        <Classroom name = {selectedSubject.name} ></Classroom>
+        <Classroom name = {selectedSubject.name} id = {selectedSubject.id} backgroundImage = {selectedSubject.backgroundImage}></Classroom>
       </div>
 
     );
