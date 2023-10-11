@@ -33,18 +33,18 @@
 .activitySection {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: right;
 }
 
 /* Styles for the activity and comment section */
 .activityContainer {
-  flex: 2;
+  flex: 50%;
 }
 
 /* Styles for the activity feed */
 .activityFeed {
-  border: 1px solid #e5e5e5;
-  padding: 10px;
+  border: 2px solid #e5e5e5;
+  padding: 20px;
 }
 
 /* Styles for individual activity items */
@@ -54,33 +54,33 @@
 
 /* Styles for the comment section */
 .commentSection {
-  border: 1px solid #e5e5e5;
-  padding: 10px;
+  border: 2px solid #e5e5e5;
+  padding: 20px;
 }
 
 /* Styles for individual comments */
 .comment {
-  margin: 10px 0;
+  margin: 20px 0;
 }
 
 /* Styles for the comment form */
 .commentForm {
   display: flex;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 5%;
 }
 
 .commentInput {
   flex: 1;
-  border: 1px solid #e5e5e5;
-  padding: 5px;
+  border: 2px solid #e5e5e5;
+  padding: 15px;
 }
 
 .commentSubmit {
   background-color: #243047;
   color: #fff;
   border: none;
-  padding: 5px 10px;
+  padding: 15px 20px;
   cursor: pointer;
 }
 
@@ -88,7 +88,9 @@
 .verticalBar {
   flex: 1;
   background-color: #f5f5f5;
-  padding: 10px;
+  padding: 15px;
+  margin-left: 5%;
+  height: fit-content;
 }
 
 /* Styles for long buttons in the vertical bar */
@@ -105,23 +107,26 @@
 /* Styles for the message box at the bottom right */
 .messageBox {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  left: 78%;
+  bottom: 60%;
+  height: 23%;
+  width: 18%;
   background-color: #f5f5f5;
   padding: 10px;
   border: 1px solid #e5e5e5;
-  text-align: center;
+  text-align: left;
 }
 
+/*-------------------------------------------------Message Box------------------------------------------------*/
 /* Styles for the message box header */
 .messageBox h2 {
-  margin-bottom: 10px;
+  margin-bottom: 5%;
 }
 
 /* Styles for the message input area */
 .messageBox textarea {
-  width: 100%;
-  border: 1px solid #e5e5e5;
+  width: 90%;
+  border: 2px solid #e5e5e5;
   padding: 10px;
   margin-bottom: 10px;
 }

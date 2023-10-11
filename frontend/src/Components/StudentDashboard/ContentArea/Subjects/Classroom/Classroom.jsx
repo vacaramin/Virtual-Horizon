@@ -39,7 +39,7 @@ return (
           {/* Comments go here */}
           <div className={styles.comment}>
             {/* Comment content */}
-            <p>User 1: Comment 1</p>
+            <p>Awais Mohammad: Hello sir!!</p>
           </div>
           {/* Add more comments as needed */}
         </div>
