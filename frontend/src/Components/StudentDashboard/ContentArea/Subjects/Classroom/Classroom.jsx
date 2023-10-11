@@ -59,6 +59,7 @@ return (
 
       {/* Vertical Bar with Long Buttons */}
       <div className={styles.verticalBar}>
+        
         <h2>Dashboard</h2>
         <button
           className={styles.longButton}
