@@ -1,28 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./ClassroomFeatures.module.css";
-import VideoMeeting from "../Video meeting/VideoMeeting";
-import Quizzes from "../Quizzess/Quizzes";
-import Chat from "../Chat/Chat";
 
 function ClassroomFeatures(props) {
-  const [selectedSubject, setSelectedSubject] = useState(null);
-  const [subjectSelected, setSubjectSelected] = useState(false);
 
   const handleVideoConferencing = () => {
-    setSelectedSubject("Video Conferencing");
-    setSubjectSelected(true);
     props.setSelectedFeature("Video Conferencing");
   };
 
   const handleQuizzes = () => {
-    setSelectedSubject("Quizzes");
-    setSubjectSelected(true);
     props.setSelectedFeature("Quizzes");
   };
 
   const handleChat = () => {
-    setSelectedSubject("Chat");
-    setSubjectSelected(true);
     props.setSelectedFeature("Chat");
   };
 
