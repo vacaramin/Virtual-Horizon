@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './TeacherDashboard.css';
 import Sidebar from './Sidebar/Sidebar';
-import TopBar from './TopBar/TopBar';
+import TopBar from '../StudentDashboard/TopBar/TopBar';
 import ContentArea from './ContentArea/ContentArea';
 
 function TeacherDashboard() {
