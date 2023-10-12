@@ -38,8 +38,8 @@
   box-shadow: 0 0 0 2px white;
 }
 .center-text {
-  flex: 1;
-  display: flex;
+  position: relative;
+  left:4%;
   justify-content: center;
   align-items: center;
   color: white;

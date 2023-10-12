@@ -6,6 +6,7 @@ import LoadingOverlay from "../../../LoadingOverlay/LoadingOverlay";
 import ClassroomFeatures from "./Classroom/ClassroomFeatures/ClassroomFeatures";
 import Quizzes from "./Classroom/Quizzess/Quizzes";
 import Chat from "./Classroom/Chat/Chat";
+import VideoMeeting from "./Classroom/VideoMeeting/VideoMeeting";
 
 function Subjects() {
   const [isPending, setIsPending] = useState(false);
@@ -94,8 +95,10 @@ function Subjects() {
           />
         </div>
         <div className={styles.ContainerSubject}>
-          {selectedFeature === "Quizzes" && <Quizzes />}
+        {selectedFeature === "Quizzes" && <Quizzes />}
           {selectedFeature === "Chat" && <Chat />}
+          {selectedFeature === "VideoMeeting" && <VideoMeeting />}
+        
         </div>
     
       </div>
@@ -135,7 +138,7 @@ function Subjects() {
                           className={styles.profilePicture}
                         />
                         <div className={styles.tutorName}>
-                          Awais Mohammad YOLO
+                          Awais Mohammad
                         </div>
                       </div>
                       <br />

@@ -1,83 +1,29 @@
-/* Styling for the entire MessagingInbox component */
-.messageContainer {
-    max-height: 400px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .messageInput {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-  }
-  
-  /* Styling for individual messages */
-  .sent, .received {
-    display: flex;
-    align-items: flex-start;
-    margin: 5px;
-  }
-  
-  .sent {
-    justify-content: flex-end;
-  }
-  
-  .received {
-    justify-content: flex-start;
-  }
-  
-  .profile-pic {
-    width: 40px; /* Adjust the size of the profile picture */
-    height: 40px;
-    border-radius: 50%; /* Creates a circular profile picture */
-    margin-right: 10px;
-  }
-  
-  .message-content {
-    background-color: #f0f0f0;
-    color: #333;
-    border-radius: 5px;
-    padding: 10px;
-    max-width: 70%;
-    word-wrap: break-word;
-  }
-  
-  .timestamp {
-    font-size: 12px;
-    text-align: right;
-    margin-top: 5px;
-  }
-  
-  /* Styling for the message input area */
-  textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    resize: none;
-    margin-right: 10px;
-  }
-  
-  input[type="file"] {
-    margin-right: 10px;
-  }
-  
-  button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-  
-  /* Styling for a circular and smaller profile picture */
-.profilePic {
-    width: 40px; /* Adjust the size of the profile picture as needed */
-    height: 40px;
-    border-radius: 50%; /* Creates a circular profile picture */
-    object-fit: cover; /* Ensures the image maintains its aspect ratio and covers the entire container */
-  }
-  
+.sent img,
+.received img {
+  width: 32px; /* Adjust the size of the profile picture */
+  height: 32px;
+  border-radius: 50%; /* Creates a circular profile picture */
+  object-fit: cover; /* Ensures the image maintains its aspect ratio and covers the entire container */
+  margin-right: 8px; /* Add some spacing between the image and message */
+}
+
+.sent div,
+.received div {
+  background-color: #f0f0f0;
+  color: #333;
+  border-radius: 5px;
+  padding: 8px; /* Adjust padding */
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+.timestamp {
+  font-size: 12px;
+  text-align: right;
+  margin-top: 5px;
+}
+
+/* Add some margin to separate messages */
+.sent, .received {
+  margin-bottom: 8px;
+}
