@@ -1,4 +1,4 @@
-import styles from "./Classroom.css";
+import styles from "./Classroom.module.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -15,8 +15,7 @@ function Classroom(props){
 
 return (
 
-      
-    <div className={styles.contentAreaStudent}>
+    <div>
     <h1>{props.name}</h1>
     <p>{props.content}</p>
     <button style={{ backgroundColor: "#243047"  }} onClick={handleGoBack}> Go Back</button>
@@ -40,7 +39,7 @@ return (
           {/* Comments go here */}
           <div className={styles.comment}>
             {/* Comment content */}
-            <p>User 1: Comment 1</p>
+            <p>Awais Mohammad: Hello sir!!</p>
           </div>
           {/* Add more comments as needed */}
         </div>
@@ -60,6 +59,7 @@ return (
 
       {/* Vertical Bar with Long Buttons */}
       <div className={styles.verticalBar}>
+        
         <h2>Dashboard</h2>
         <button
           className={styles.longButton}
