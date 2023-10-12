@@ -15,12 +15,13 @@ function Chat() {
         sender: {
           username: "User1", // Replace with the sender's username or identifier
           profilePic: "https://avatars.githubusercontent.com/u/94608299?v=4", // Replace with the URL of the sender's profile picture
-          
+          className: ChatCSS.profilePic,
           
         },
         receiver: {
           username: "User2", // Replace with the receiver's username or identifier
           profilePic: "https://avatars.githubusercontent.com/u/94608299?v=4", // Replace with the URL of the receiver's profile picture
+          className: ChatCSS.profilePic,
         },
         timestamp: new Date().toLocaleString(),
       };
