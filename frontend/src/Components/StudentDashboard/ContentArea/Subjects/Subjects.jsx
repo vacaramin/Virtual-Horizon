@@ -2,14 +2,18 @@ import React, { useState, useEffect } from "react";
 import styles from "./Subjects.module.css";
 import axios from "axios";
 import Classroom from "./Classroom/Classroom";
+import LoadingOverlay from "../../../LoadingOverlay/LoadingOverlay";
 
 function Subjects() {
+  const [isPending, setIsPending] = useState(false);
+
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [subjectSelected, setSubjectSelected] = useState(false);
   const [studentSubjects, setStudentSubjects] = useState({});
 
   const getStudentCourses = async () => {
     try {
+      setIsPending(true);
       const response = await axios.post(
         "http://localhost:4000/courses/getStudentCourses",
         {
@@ -23,6 +27,7 @@ function Subjects() {
           },
         }
       );
+      setIsPending(false);
 
       return response.data;
     } catch (error) {
@@ -48,21 +53,13 @@ function Subjects() {
     setSubjectSelected(true);
   };
 
- 
-
-
   //Selected subject it will include the students activity, tasks, quizzes, video conferencing, etc.
   if (subjectSelected) {
-   
-    return(
-
+    return (
       <div>
         <Classroom name = {selectedSubject.name} id = {selectedSubject.id} backgroundImage = {selectedSubject.backgroundImage}></Classroom>
       </div>
-
     );
-  
-
   } else {
     return (
   <div>
@@ -97,13 +94,11 @@ function Subjects() {
                     />
                     <div className={styles.tutorName}>Awais Mohammad</div>
                   </div>
-                  <br /><br />
-                  <p className={styles.courseName}>{course.name}</p>
-                  <p className={styles.courseDescription}>{course.description}</p>
-                </div>
-              </div>
-            ))}
+                ))}
+            </div>
+          </div>
         </div>
+        {isPending && <LoadingOverlay />}
       </div>
   </div>
 );
