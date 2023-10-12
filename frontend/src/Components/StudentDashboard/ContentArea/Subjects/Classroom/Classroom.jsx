@@ -1,5 +1,4 @@
-import styles from "./Classroom.module.css";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 function Classroom(props) {
 
