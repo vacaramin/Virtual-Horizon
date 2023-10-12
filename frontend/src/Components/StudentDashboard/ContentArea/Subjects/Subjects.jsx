@@ -3,6 +3,7 @@ import styles from "./Subjects.module.css";
 import axios from "axios";
 import Classroom from "./Classroom/Classroom";
 import LoadingOverlay from "../../../LoadingOverlay/LoadingOverlay";
+import ClassroomFeatures from "./Classroom/ClassroomFeatures/ClassroomFeatures";
 
 function Subjects() {
   const [isPending, setIsPending] = useState(false);
@@ -57,13 +58,14 @@ function Subjects() {
   if (subjectSelected) {
     return (
       <div>
-
-        <Classroom name={selectedSubject.name} content="temps"></Classroom>
+        <Classroom name={selectedSubject.name} content="temps" className = {styles.Classroom}></Classroom>
+        <ClassroomFeatures  className = {styles.ClassroomFeatures}/>
       </div>
     );
   } else {
     return (
       <div>
+        <h1>Subjects</h1>
         <div>
           <div className={styles.contentAreaStudent}>
             <div className={styles.subjectContainer}>

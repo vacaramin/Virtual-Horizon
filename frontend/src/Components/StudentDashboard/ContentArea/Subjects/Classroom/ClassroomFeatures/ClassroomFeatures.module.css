@@ -1,0 +1,117 @@
+/*New CSS Files*/
+/* Classroom.css */
+
+/* Styles for the main container */
+.activitySection {
+    display: flex;
+    justify-content: space-between;
+    align-items: right;
+  }
+  
+  /* Styles for the activity and comment section */
+  .activityContainer {
+    flex: 50%;
+  }
+  
+  /* Styles for the activity feed */
+  .activityFeed {
+    border: 2px solid #e5e5e5;
+    padding: 20px;
+  }
+  
+  /* Styles for individual activity items */
+  .activityItem {
+    margin: 10px 0;
+  }
+  
+  /* Styles for the comment section */
+  .commentSection {
+    border: 2px solid #e5e5e5;
+    padding: 20px;
+  }
+  
+  /* Styles for individual comments */
+  .comment {
+    margin: 20px 0;
+  }
+  
+  /* Styles for the comment form */
+  .commentForm {
+    display: flex;
+    align-items: center;
+    margin-top: 5%;
+  }
+  
+  .commentInput {
+    flex: 1;
+    border: 2px solid #e5e5e5;
+    padding: 15px;
+  }
+  
+  .commentSubmit {
+    background-color: #243047;
+    color: #fff;
+    border: none;
+    padding: 15px 20px;
+    cursor: pointer;
+  }
+  
+  /* Styles for the vertical bar with long buttons */
+  .verticalBar {
+    flex: 1;
+    background-color: #f5f5f5;
+    padding: 15px;
+    margin-left: 5%;
+    border: 2px solid #e5e5e5;
+    margin-top: 5%;
+    margin-left: 5%;
+  }
+  
+  /* Styles for long buttons in the vertical bar */
+  .longButton {
+    background-color: #243047;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    margin-right: 20%;
+    text-align: left;
+  }
+  
+  /* Styles for the message box at the bottom right */
+  .messageBox {
+    flex: 1;
+    position: fixed;
+    left: 78%;
+    bottom: 55%;
+    height: 25%;
+    width: 18%;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border: 2px solid #e5e5e5;
+    text-align: left;
+  }
+  
+  /*-------------------------------------------------Message Box------------------------------------------------*/
+  /* Styles for the message box header */
+  .messageBox h2 {
+    margin-bottom: 5%;
+  }
+  
+  /* Styles for the message input area */
+  .messageBox textarea {
+    width: 90%;
+    border: 2px solid #e5e5e5;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  /* Styles for the message send button */
+  .messageBox button {
+    background-color: #243047;
+    color: #fff;
+    padding: 10px 30px;
+    border: none;
+    cursor: pointer;
+  }
+  

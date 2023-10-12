@@ -1,3 +1,7 @@
+.ClassroomFeatures{
+  display: flex;
+}
+
 /* Tutor Banner Styles */
 .tutorBanner {
   position: absolute;
