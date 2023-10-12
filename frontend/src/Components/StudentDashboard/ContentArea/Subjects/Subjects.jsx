@@ -115,7 +115,7 @@ function Subjects() {
                           alt="Tutor Profile"
                           className={styles.profilePicture}
                         />
-                        <div className={styles.tutorName}>Awais Mohammad</div>
+                        <div className={styles.tutorName}>Awais Mohammad YOLO</div>
                       </div>
                       <br />
                       <br />
