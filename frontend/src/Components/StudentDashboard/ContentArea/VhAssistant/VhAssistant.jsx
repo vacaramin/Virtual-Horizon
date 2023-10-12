@@ -57,6 +57,8 @@ function VhAssistant() {
       <img src={vhAssistantImage} className={styles.center} alt="vhAssistant" />
       <div className={styles.topbar}>
         Welcome to the Virtual Horizon Assistant. The VH Assistant is an AI based chatbot helping you in asking different sort of questions in order to resolve your queries.
+      <br></br>
+      <br></br>
       </div>
 
       {firstmessage ? <div className={styles.messageContainer}>
