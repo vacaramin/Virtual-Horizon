@@ -1,14 +1,20 @@
 
 import './LoginScreen.css';
-import React from 'react';
+import React,{useState} from 'react';
 import logo from './logo.svg'
 import Signin from './Signin/Signin';
 import { useNavigate } from "react-router-dom";
+import LoadingOverlay from '../LoadingOverlay/LoadingOverlay';
 
 function LoginScreen(props) {
+    const [isPending, setIsPending] = useState(false);
+
+    
     const history = useNavigate();
 
     const fetchData = async () => {
+        
+        setIsPending(true);
         try {
             const response = await fetch("http://localhost:4000/user/GetProfileFromToken", {
                 method: "GET",
@@ -33,6 +39,8 @@ function LoginScreen(props) {
         } catch (error) {
             console.error("Error fetching data:", error);
         }
+        setIsPending(false);
+        
     };
 
     fetchData();
@@ -46,9 +54,11 @@ function LoginScreen(props) {
                 <div className='background'></div>
                 <img src={logo} alt='logo' className='login-logo1' />
             </div>
-
+            {isPending && <LoadingOverlay />}
         </div>
+        
     );
+
 }
 
 export default LoginScreen;
