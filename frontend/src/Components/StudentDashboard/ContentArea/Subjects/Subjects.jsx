@@ -7,10 +7,11 @@ import ClassroomFeatures from "./Classroom/ClassroomFeatures/ClassroomFeatures";
 
 function Subjects() {
   const [isPending, setIsPending] = useState(false);
-
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [subjectSelected, setSubjectSelected] = useState(false);
   const [studentSubjects, setStudentSubjects] = useState({});
+  const [selectedFeature, setSelectedFeature] = useState("");
+
   const handleGoBack = () => {
     setSelectedSubject(null);
     setSubjectSelected(false);
@@ -51,25 +52,33 @@ function Subjects() {
       }
     })();
   }, []);
-
   const handleSubjectClick = (subject) => {
     setSelectedSubject(subject);
     setSubjectSelected(true);
+    setSelectedFeature(""); // Reset selected feature when a new subject is selected
   };
-
   //Selected subject it will include the students activity, tasks, quizzes, video conferencing, etc.
   if (subjectSelected) {
     return (
+      <div>
+        <div className={styles.ContainerSubject}>
+          <button style={styles.BackButton} onClick={handleGoBack}>
+            {" "}
+            Go Back
+          </button>
 
-
-      <div className={styles.ContainerSubject}>
-      <button style={{ backgroundColor: "#243047" }} onClick={handleGoBack}>
-        {" "}
-        Go Back
-      </button>
-
-        <Classroom name={selectedSubject.name} content="temps" className = {styles.ClassroomSubjected}></Classroom>
-        <ClassroomFeatures  className = {styles.ClassroomFeatures}/>
+          <Classroom
+            name={selectedSubject.name}
+            content="temps"
+            className={styles.ClassroomSubjected}
+          ></Classroom>
+          <ClassroomFeatures
+            className={styles.ClassroomFeatures}
+            selectedFeature={selectedFeature}
+            setSelectedFeature={setSelectedFeature} // Pass setSelectedFeature function
+          />
+        </div>
+        <div className={styles.ContainerSubject}></div>
       </div>
     );
   } else {
