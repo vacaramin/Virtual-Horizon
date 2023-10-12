@@ -7,7 +7,6 @@ function ClassroomFeatures(props) {
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [subjectSelected, setSubjectSelected] = useState(false);
 
-  // Add functionality for quizzes here
   const handleVideoConferencing = () => {
     setSelectedSubject("Video Conferencing");
     setSubjectSelected(true);
@@ -22,8 +21,9 @@ function ClassroomFeatures(props) {
     setSelectedSubject("Chat");
     setSubjectSelected(true);
   };
+
   return (
-    <div className={styles.verticalBar}>
+    <div className={props.className}>
       <h2>Dashboard</h2>
       <button
         className={styles.longButton}

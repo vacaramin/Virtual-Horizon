@@ -1,5 +1,3 @@
-/*New CSS Files*/
-/* Classroom.css */
 
 /* Styles for the main container */
 .activitySection {
@@ -73,7 +71,7 @@
     color: #fff;
     border: none;
     padding: 10px;
-    width: 100%;
+    width: 30%;
     margin-right: 20%;
     text-align: left;
   }
