@@ -6,7 +6,9 @@ import Chat from "../Chat/Chat";
 function ClassroomFeatures(props) {
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [subjectSelected, setSubjectSelected] = useState(false);
-
+  const handleSelectFeature = (feature) => {
+    props.setSelectedFeature(feature);
+  };
   const handleVideoConferencing = () => {
     setSelectedSubject("Video Conferencing");
     setSubjectSelected(true);
@@ -62,9 +64,17 @@ function ClassroomFeatures(props) {
       {/* Render the selected subject component */}
       {subjectSelected && (
         <div>
+          {/* Render the selected subject component */}
           {selectedSubject === "Video Conferencing" && <VideoMeeting />}
           {selectedSubject === "Quizzes" && <Quizzes />}
           {selectedSubject === "Chat" && <Chat />}
+
+          {/* Render the selected feature component */}
+          {props.selectedFeature === "Video Conferencing" && (
+            <VideoMeeting />
+          )}
+          {props.selectedFeature === "Quizzes" && <Quizzes />}
+          {props.selectedFeature === "Chat" && <Chat />}
         </div>
       )}
     </div>
