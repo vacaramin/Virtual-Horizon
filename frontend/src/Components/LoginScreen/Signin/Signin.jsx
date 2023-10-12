@@ -12,6 +12,7 @@ function Signin(props) {
   const [error, setError] = useState("");
   
   const handleLogin_Teacher = () => {
+    setError("");
     const payload = { email, password };
     fetch("http://localhost:4000/login", {
       method: "POST",
@@ -20,28 +21,21 @@ function Signin(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        //if responsce is ok
         if (data.status === "success") {
           console.log("Login Successful");
-          //strong the recieving token in data to local browser cookies
           localStorage.setItem("Authorization", data.Authorization);
-
-          //setting cookie authorization token
+          // Setting authorization token cookie
           document.cookie = `Authorization=${data.Authorization}`;
-
-          //redirect to home page
           history("/home-teacher");
-
-          //redirect to home page
-        }
-        if (data.status === "failed") {
+        } else if (data.status === "failed") {
           console.log("Login Failed");
-
           console.log(data);
+          setError(data.error);
         }
       })
       .catch((error) => {
         console.log(error);
+        setError(error);
       });
   };
   const handleLogin_Student = () => {
@@ -59,7 +53,7 @@ function Signin(props) {
           localStorage.setItem("Authorization", data.Authorization);
           // Setting authorization token cookie
           document.cookie = `Authorization=${data.Authorization}`;
-          history("/home-student");
+          history("/home-student/home");
         } else if (data.status === "failed") {
           console.log("Login Failed");
           console.log(data);
@@ -79,7 +73,11 @@ function Signin(props) {
 
   const handleEnterPassword = (e) => {
     if (e.key === "Enter") {
-      handleLogin_Student(); // You can adjust this to your needs
+      if (props.type === 'student'){
+        handleLogin_Student(); 
+      }else{
+        handleLogin_Teacher(); 
+      }
     }
   };
 
@@ -194,7 +192,7 @@ function Signin(props) {
 
           <div className="sign-up-text">
             <i>
-              new here? <Link to="/sign-up">Sign up</Link>
+              Tutor? <Link to="/sign-up">Sign up</Link>
             </i>
           </div>
           <ErrorNotification error={error} />
