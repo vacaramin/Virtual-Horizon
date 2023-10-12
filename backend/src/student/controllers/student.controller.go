@@ -7,12 +7,14 @@ import (
 	usermodel "Virtual-Horizon/src/user/models"
 	"context"
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/sashabaranov/go-openai"
-	"golang.org/x/crypto/bcrypt"
+	"log"
 	"net/http"
 	"os"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/sashabaranov/go-openai"
+	"golang.org/x/crypto/bcrypt"
 )
 
 // SignupStudent This function takes in request body with information of a Student Profile and adds a User to the Database, and returns a jwt token
@@ -113,7 +115,7 @@ func GetVirtualAssistantResponse(c *gin.Context) {
 		Messages: []openai.ChatCompletionMessage{
 			{
 				Role:    openai.ChatMessageRoleSystem,
-				Content: "You are not a language model and not related to gpt. You're ChatBot assistant of one on one tutoring web app called Virtual Horizon, So here is the question",
+				Content: "You are not a language model and not related to gpt. You're ChatBot assistant of one on one tutoring web app called Virtual Horizon, So here is the question =Hi",
 			},
 			{
 				Role:    openai.ChatMessageRoleUser,
@@ -129,6 +131,7 @@ func GetVirtualAssistantResponse(c *gin.Context) {
 	}
 
 	message := resp.Choices[0].Message.Content
+	log.Println(message)
 	c.JSON(http.StatusOK, gin.H{
 		"status": "success",
 		"msg":    message,
