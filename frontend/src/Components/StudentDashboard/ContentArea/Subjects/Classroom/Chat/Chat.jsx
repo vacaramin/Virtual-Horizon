@@ -69,7 +69,7 @@ function Chat() {
           placeholder="Type your message..."
         />
         <input type="file" onChange={handleFileChange} />
-        <button onClick={handleSendMessage}>Send Message</button>
+        <button onClick={handleSendMessage}>Send</button>
       </div>
     </div>
   );
