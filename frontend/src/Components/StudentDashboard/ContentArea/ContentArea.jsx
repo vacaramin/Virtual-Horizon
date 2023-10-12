@@ -33,8 +33,7 @@ function ContentArea({ selectedItem, onComponentChange }) {
   } else if (selectedItem === "subjects") {
     return (
       <div>
-        <h1>Subjects</h1>
-        <div className="content-area-student">
+       <div className="content-area-student">
           <Subjects />
         </div>
       </div>
