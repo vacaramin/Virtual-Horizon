@@ -5,9 +5,10 @@ import (
 	"Virtual-Horizon/src/course/models"
 	userModel "Virtual-Horizon/src/user/models"
 	"Virtual-Horizon/src/utils"
-	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 func GetTutorRegisteredCourses(c *gin.Context) {
