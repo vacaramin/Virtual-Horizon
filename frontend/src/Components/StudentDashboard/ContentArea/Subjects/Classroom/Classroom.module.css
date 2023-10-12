@@ -114,3 +114,10 @@
   border: none;
   cursor: pointer;
 }
+
+.center{
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  
+}

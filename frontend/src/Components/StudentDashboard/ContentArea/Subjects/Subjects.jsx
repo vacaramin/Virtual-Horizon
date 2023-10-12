@@ -70,12 +70,24 @@ function Subjects() {
           <button style={styles.Backbtn} onClick={handleGoBack}>
             Go Back
           </button>
-
+    
+    
           <Classroom
-            name={selectedSubject.name}
-            content="temps"
+
+            name = "Awais Mohammad"
             className={styles.ClassroomSubjected}
-          />
+          >
+
+            <div className={styles.TeacherInfo}>
+              <img className = {styles.ProfilePicture} src="https://avatars.githubusercontent.com/u/94608299?v=4" alt="Teacher" />
+              
+              <div className={styles.TeacherName}>
+              {selectedSubject.name} 
+                </div>
+            </div>
+
+          </Classroom>
+
           <ClassroomFeatures
             className={styles.ClassroomFeatures}
             selectedFeature={selectedFeature}
@@ -88,8 +100,10 @@ function Subjects() {
           {selectedFeature === "VideoMeeting" && <VideoMeeting />}
         
         </div>
+    
       </div>
     );
+    
   } else {
     return (
       <div>
