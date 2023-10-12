@@ -74,7 +74,7 @@ function Subjects() {
     
           <Classroom
 
-            name={selectedSubject.name}
+            name = "Awais Mohammad"
             className={styles.ClassroomSubjected}
           >
 
@@ -82,7 +82,7 @@ function Subjects() {
               <img className = {styles.ProfilePicture} src="https://avatars.githubusercontent.com/u/94608299?v=4" alt="Teacher" />
               
               <div className={styles.TeacherName}>
-                    Awais Mohammad
+              {selectedSubject.name} 
                 </div>
             </div>
 
