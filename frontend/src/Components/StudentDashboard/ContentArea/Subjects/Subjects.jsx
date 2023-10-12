@@ -121,7 +121,7 @@ function Subjects() {
                           className={styles.profilePicture}
                         />
                         <div className={styles.tutorName}>
-                          Awais Mohammad YOLO
+                          Awais Mohammad
                         </div>
                       </div>
                       <br />
