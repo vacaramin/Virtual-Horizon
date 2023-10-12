@@ -4,6 +4,8 @@ import axios from "axios";
 import Classroom from "./Classroom/Classroom";
 import LoadingOverlay from "../../../LoadingOverlay/LoadingOverlay";
 import ClassroomFeatures from "./Classroom/ClassroomFeatures/ClassroomFeatures";
+import Quizzes from "./Classroom/Quizzess/Quizzes";
+import Chat from "./Classroom/Chat/Chat";
 
 function Subjects() {
   const [isPending, setIsPending] = useState(false);
@@ -16,6 +18,7 @@ function Subjects() {
     setSelectedSubject(null);
     setSubjectSelected(false);
   };
+
   const getStudentCourses = async () => {
     try {
       setIsPending(true);
@@ -46,24 +49,24 @@ function Subjects() {
       try {
         const subjectsData = await getStudentCourses();
         setStudentSubjects(subjectsData);
-        console.log(subjectsData); // Log the data after updating the state
+        console.log(subjectsData);
       } catch (error) {
         console.error("Error:", error);
       }
     })();
   }, []);
+
   const handleSubjectClick = (subject) => {
     setSelectedSubject(subject);
     setSubjectSelected(true);
     setSelectedFeature(""); // Reset selected feature when a new subject is selected
   };
-  //Selected subject it will include the students activity, tasks, quizzes, video conferencing, etc.
+
   if (subjectSelected) {
     return (
       <div>
         <div className={styles.ContainerSubject}>
-          <button style={styles.BackButton} onClick={handleGoBack}>
-            {" "}
+          <button style={styles.Backbtn} onClick={handleGoBack}>
             Go Back
           </button>
 
@@ -71,14 +74,17 @@ function Subjects() {
             name={selectedSubject.name}
             content="temps"
             className={styles.ClassroomSubjected}
-          ></Classroom>
+          />
           <ClassroomFeatures
             className={styles.ClassroomFeatures}
             selectedFeature={selectedFeature}
-            setSelectedFeature={setSelectedFeature} // Pass setSelectedFeature function
+            setSelectedFeature={setSelectedFeature}
           />
         </div>
-        <div className={styles.ContainerSubject}></div>
+        <div className={styles.ContainerSubject}>
+          {selectedFeature === "Quizzes" && <Quizzes />}
+          {selectedFeature === "Chat" && <Chat />}
+        </div>
       </div>
     );
   } else {
@@ -90,21 +96,20 @@ function Subjects() {
             <div className={styles.subjectContainer}>
               {studentSubjects.Courses &&
                 studentSubjects.Courses.map((course) => (
-                  <div className={styles.subjectCard}>
+                  <div className={styles.subjectCard} key={course.id}>
                     <div
-                      key={course.id}
                       style={{
                         border: "1px solid blue",
                         borderRadius: "8px",
                         padding: "10px",
                         cursor: "pointer",
-                        position: "relative", // Added position relative for absolute positioning
-                        backgroundImage: `url(${course.backgroundImage})`, // Add background image URL here
-                        backgroundSize: "cover", // Optional: Adjust background size as needed
-                        backgroundPosition: "center", // Optional: Adjust background position as needed
+                        position: "relative",
+                        backgroundImage: `url(${course.backgroundImage})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
                       }}
                       className={styles.subjectCardContent}
-                      onClick={() => handleSubjectClick(course)} // Added onClick handler
+                      onClick={() => handleSubjectClick(course)}
                     >
                       <div
                         className={styles.tutorBanner}
@@ -115,7 +120,9 @@ function Subjects() {
                           alt="Tutor Profile"
                           className={styles.profilePicture}
                         />
-                        <div className={styles.tutorName}>Awais Mohammad YOLO</div>
+                        <div className={styles.tutorName}>
+                          Awais Mohammad YOLO
+                        </div>
                       </div>
                       <br />
                       <br />
@@ -134,4 +141,5 @@ function Subjects() {
     );
   }
 }
+
 export default Subjects;

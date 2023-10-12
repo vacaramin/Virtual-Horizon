@@ -1,0 +1,84 @@
+/* VhAssistant.module.css */
+.vhAssistant {
+  /* Add any additional styles for the main container here */
+}
+
+.topbar {
+  width: 100%;
+  margin-top: 5%;
+}
+
+.center {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin-left: 40%;
+  margin-right: 40%;
+  margin-top: 2%;
+}
+
+.messageContainer {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.message {
+  display: flex;
+  align-items: flex-start;
+  margin: 5px;
+}
+
+.user {
+  justify-content: flex-end;
+}
+
+.assistant {
+  justify-content: flex-start;
+}
+
+.profilePic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.messageContent {
+  background-color: #f0f0f0;
+  color: #333;
+  border-radius: 5px;
+  padding: 10px;
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+.messageInput {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  margin-right: 10px;
+}
+
+input[type="file"] {
+  margin-right: 10px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}

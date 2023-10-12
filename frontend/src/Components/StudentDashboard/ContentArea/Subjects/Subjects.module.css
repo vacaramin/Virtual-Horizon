@@ -1,7 +1,11 @@
 .ContainerSubject {
   display: flex;
-}
 
+}
+.ContainerSubject2 {
+  display: block;
+
+}
 .ClassroomSubjected {
   background-color: #fffb46;
   padding: 20px;
@@ -10,7 +14,6 @@
   margin-top: 20px;
   max-width: 100%; /* Set a max width for better layout on larger screens */
   position: relative;
-  
   width: 60%;
 }
 

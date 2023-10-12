@@ -41,7 +41,7 @@ function ContentArea({ selectedItem, onComponentChange }) {
   } else if (selectedItem === "vhassistant") {
     return (
       <div>
-        <h1>Welcome to the VH Assistant</h1>
+        <h1>VH Assistant</h1>
         <div className="content-area-student">
           <VhAssistant />
         </div>

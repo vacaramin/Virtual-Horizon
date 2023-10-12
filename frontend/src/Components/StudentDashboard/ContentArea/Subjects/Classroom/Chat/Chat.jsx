@@ -39,7 +39,7 @@ function Chat() {
 
   return (
     <div>
-      <h2>Messaging Inbox</h2>
+      <h2>Chat</h2>
 
       <div className={ChatCSS.messageContainer}>
         {messages.map((message, index) => (

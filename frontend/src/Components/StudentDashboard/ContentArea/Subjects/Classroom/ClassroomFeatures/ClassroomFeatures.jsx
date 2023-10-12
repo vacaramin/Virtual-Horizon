@@ -1,27 +1,29 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styles from "./ClassroomFeatures.module.css";
 import VideoMeeting from "../Video meeting/VideoMeeting";
 import Quizzes from "../Quizzess/Quizzes";
 import Chat from "../Chat/Chat";
+
 function ClassroomFeatures(props) {
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [subjectSelected, setSubjectSelected] = useState(false);
-  const handleSelectFeature = (feature) => {
-    props.setSelectedFeature(feature);
-  };
+
   const handleVideoConferencing = () => {
     setSelectedSubject("Video Conferencing");
     setSubjectSelected(true);
+    props.setSelectedFeature("Video Conferencing");
   };
 
   const handleQuizzes = () => {
     setSelectedSubject("Quizzes");
     setSubjectSelected(true);
+    props.setSelectedFeature("Quizzes");
   };
 
   const handleChat = () => {
     setSelectedSubject("Chat");
     setSubjectSelected(true);
+    props.setSelectedFeature("Chat");
   };
 
   return (
@@ -29,54 +31,34 @@ function ClassroomFeatures(props) {
       <h2>Dashboard</h2>
       <button
         className={styles.longButton}
-        style={{
-          backgroundColor: "#243047",
-          width: "100%",
-          marginRight: "20%",
-        }}
+        style={{ backgroundColor: "#243047", width: "100%", marginRight: "20%" }}
         onClick={handleVideoConferencing}
       >
-        <i className="fa fa-video-camera" aria-hidden="true"></i> Video
-        Conferencing
+        <i className="fa fa-video-camera" aria-hidden="true"></i> Video Conferencing
       </button>
       <button
         className={styles.longButton}
-        style={{
-          backgroundColor: "#243047",
-          width: "100%",
-          marginRight: "20%",
-        }}
+        style={{ backgroundColor: "#243047", width: "100%", marginRight: "20%" }}
         onClick={handleQuizzes}
       >
         <i className="fa fa-question-circle" aria-hidden="true"></i> Quizzes
       </button>
       <button
         className={styles.longButton}
-        style={{
-          backgroundColor: "#243047",
-          width: "100%",
-          marginRight: "20%",
-        }}
+        style={{ backgroundColor: "#243047", width: "100%", marginRight: "20%" }}
         onClick={handleChat}
       >
         <i className="fa fa-comments" aria-hidden="true"></i> Chat
       </button>
-      {/* Render the selected subject component */}
+
+      {/* Render the selected subject component 
       {subjectSelected && (
         <div>
-          {/* Render the selected subject component */}
           {selectedSubject === "Video Conferencing" && <VideoMeeting />}
           {selectedSubject === "Quizzes" && <Quizzes />}
           {selectedSubject === "Chat" && <Chat />}
-
-          {/* Render the selected feature component */}
-          {props.selectedFeature === "Video Conferencing" && (
-            <VideoMeeting />
-          )}
-          {props.selectedFeature === "Quizzes" && <Quizzes />}
-          {props.selectedFeature === "Chat" && <Chat />}
         </div>
-      )}
+      )}*/}
     </div>
   );
 }
