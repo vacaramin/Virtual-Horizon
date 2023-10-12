@@ -11,9 +11,7 @@ function VhAssistant() {
 
 
   return (
-  
     <div>
-
       <div>Welcome to the Virtual Horizon Assistant. The VH Assistant is an AI based chatbot helping you in asking different sort of questions in order to resolve your queries.</div>
       <img src= {vhAssistant} className="center" alt='vhAssistant' />
       
@@ -44,10 +42,7 @@ function VhAssistant() {
             style={{ marginLeft: "10%", marginTop: "2%" ,width: "80%", marginRight: "10%", overflow: "visible"}}
            
          />
-          
-
       </div>
-
     
   );
 }
