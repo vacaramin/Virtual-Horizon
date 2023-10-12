@@ -11,7 +11,10 @@ function Subjects() {
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [subjectSelected, setSubjectSelected] = useState(false);
   const [studentSubjects, setStudentSubjects] = useState({});
-
+  const handleGoBack = () => {
+    setSelectedSubject(null);
+    setSubjectSelected(false);
+  };
   const getStudentCourses = async () => {
     try {
       setIsPending(true);
@@ -57,8 +60,15 @@ function Subjects() {
   //Selected subject it will include the students activity, tasks, quizzes, video conferencing, etc.
   if (subjectSelected) {
     return (
-      <div>
-        <Classroom name={selectedSubject.name} content="temps" className = {styles.Classroom}></Classroom>
+
+
+      <div className={styles.ContainerSubject}>
+      <button style={{ backgroundColor: "#243047" }} onClick={handleGoBack}>
+        {" "}
+        Go Back
+      </button>
+
+        <Classroom name={selectedSubject.name} content="temps" className = {styles.ClassroomSubjected}></Classroom>
         <ClassroomFeatures  className = {styles.ClassroomFeatures}/>
       </div>
     );

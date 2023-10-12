@@ -1,5 +1,31 @@
-.ClassroomFeatures{
+.ContainerSubject {
   display: flex;
+}
+
+.ClassroomSubjected {
+  background-color: #fffb46;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  max-width: 100%; /* Set a max width for better layout on larger screens */
+  position: relative;
+  
+  width: 60%;
+}
+
+.ClassroomFeatures {
+  background-color: white;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  max-width: 100%; /* Set a max width for better layout on larger screens */
+  position: relative;
+
+  width: 20%;
+
 }
 
 /* Tutor Banner Styles */
@@ -23,7 +49,6 @@
   border-radius: 50%; /* Make it circular */
 }
 
-
 /* Common Styles */
 .subjectCardContent {
   display: flex;
@@ -34,8 +59,6 @@
   width: 100%;
 }
 
-
-
 .subjectCardContent p.courseDescription {
   font-style: italic;
   font-size: smaller;
@@ -45,7 +68,7 @@
 .subjectCard {
   width: 30%;
   height: 250px;
-  margin : 10px; /* Add some space between cards */
+  margin: 10px; /* Add some space between cards */
   border: 1px solid #ccc;
   border-radius: 8px;
   overflow: hidden;
@@ -70,20 +93,17 @@
 
 .subjectCardContent p.courseName {
   font-weight: bold;
-  color:#243047
+  color: #243047;
 }
 
 /* Course Description Styles */
 .subjectCardContent p.courseDescription {
   font-style: italic;
   font-size: smaller;
-  color:#243047;
-
+  color: #243047;
 }
-
 
 .subjectContainer {
   display: flex;
   flex-wrap: wrap;
 }
-
