@@ -3,10 +3,7 @@ import styles from "./ClassroomFeatures.module.css";
 
 function ClassroomFeatures(props) {
 
-  const handleVideoConferencing = () => {
-    props.setSelectedFeature("Video Conferencing");
-  };
-
+  
   const handleQuizzes = () => {
     props.setSelectedFeature("Quizzes");
   };
@@ -15,13 +12,17 @@ function ClassroomFeatures(props) {
     props.setSelectedFeature("Chat");
   };
 
+  const handleVideoMeeting = () => {
+    props.setSelectedFeature("VideoMeeting");
+  };
+
   return (
     <div className={props.className}>
       <h2>Dashboard</h2>
       <button
         className={styles.longButton}
         style={{ backgroundColor: "#243047", width: "100%", marginRight: "20%" }}
-        onClick={handleVideoConferencing}
+        onClick={handleVideoMeeting}
       >
         <i className="fa fa-video-camera" aria-hidden="true"></i> Video Conferencing
       </button>
@@ -40,14 +41,6 @@ function ClassroomFeatures(props) {
         <i className="fa fa-comments" aria-hidden="true"></i> Chat
       </button>
 
-      {/* Render the selected subject component 
-      {subjectSelected && (
-        <div>
-          {selectedSubject === "Video Conferencing" && <VideoMeeting />}
-          {selectedSubject === "Quizzes" && <Quizzes />}
-          {selectedSubject === "Chat" && <Chat />}
-        </div>
-      )}*/}
     </div>
   );
 }
