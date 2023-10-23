@@ -9,7 +9,7 @@
 #       2. Set env variables, to add database
 #       3. Run Migrations
 #       4. Expose port for the backend
-#   C.  Go
+#   C. Go
 #       1. Go Image Pull
 #       2. Run Scripts
 #       3. Install Go-lang Migrate
@@ -17,13 +17,14 @@
 #       
 #   D.  Alpine
 #       1. Run the Builds
-#   
-From golang:alpine
+#       2. 
+#   Database, frontend, and Backend should run on 3 different containers over shared network
+FROM golang:alpine
 
 WORKDIR /backend
-ADD ./backend .
 
-RUN go build main.go
+COPY ./backend . 
 
-ENTRYPOINT [ "go run" ]
-CMD [ "main" ]
+RUN go build -o main
+
+CMD ["./main"]
