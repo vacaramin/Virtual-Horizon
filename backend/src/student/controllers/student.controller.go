@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"Virtual-Horizon/initializers"
-	"Virtual-Horizon/src/Enrollments/controllers"
+	EnrollmentController "Virtual-Horizon/src/Enrollments/controllers"
 	studentmodel "Virtual-Horizon/src/student/models"
 	usermodel "Virtual-Horizon/src/user/models"
 	"context"
@@ -17,8 +17,16 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+type StudentController struct{}
+type StudentFunctions interface {
+	SignupStudent(*gin.Context)
+	GetWelcomeMessage(*gin.Context)
+	GetVirtualAssistantResponse(*gin.Context)
+	GetEnrollments(*gin.Context, EnrollmentController.EnrollmentFunctions)
+}
+
 // SignupStudent This function takes in request body with information of a Student Profile and adds a User to the Database, and returns a jwt token
-func SignupStudent(c *gin.Context) {
+func (_ *StudentController) SignupStudent(c *gin.Context) {
 	fmt.Println("Signup_student")
 	var body struct {
 		Email               string
@@ -93,11 +101,11 @@ func SignupStudent(c *gin.Context) {
 		"message": "User created successfully",
 	})
 }
-func GetWelcomeMessage(c *gin.Context) {
+func (_ *StudentController) GetWelcomeMessage(c *gin.Context) {
 
 }
 
-func GetVirtualAssistantResponse(c *gin.Context) {
+func (_ *StudentController) GetVirtualAssistantResponse(c *gin.Context) {
 	var body struct {
 		Message string
 	}
@@ -137,6 +145,6 @@ func GetVirtualAssistantResponse(c *gin.Context) {
 		"msg":    message,
 	})
 }
-func GetEnrollments(c *gin.Context) {
-	controllers.GetEnrollments(c)
+func (_ *StudentController) GetEnrollments(c *gin.Context, controller EnrollmentController.EnrollmentFunctions) {
+	controller.GetEnrollments(c)
 }
