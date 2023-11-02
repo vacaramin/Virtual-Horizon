@@ -14,9 +14,9 @@ import (
 type EnrollmentFunctions interface {
 	GetEnrollments(*gin.Context)
 }
-type Enrollment struct{}
+type EnrollmentController struct{}
 
-func (_ *Enrollment) GetEnrollments(ctx *gin.Context) {
+func (_ *EnrollmentController) GetEnrollments(ctx *gin.Context) {
 
 	user, err := utils.GetUserFromToken(ctx)
 	if err != nil {
@@ -45,7 +45,7 @@ func (_ *Enrollment) GetEnrollments(ctx *gin.Context) {
 		Find(&enrollments)
 
 	ctx.JSON(http.StatusOK, gin.H{
-		"status":     "Success",
-		"Enrollment": enrollments,
+		"status":               "Success",
+		"EnrollmentController": enrollments,
 	})
 }
