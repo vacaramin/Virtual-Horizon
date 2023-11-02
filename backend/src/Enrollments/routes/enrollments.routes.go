@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRoutes(engine *gin.Engine) {
+func SetupRoutes(engine *gin.Engine, controller controllers.EnrollmentFunctions) {
 	enrollmentRoutes := engine.Group("enrollments")
-	enrollmentRoutes.POST("getEnrollments", controllers.GetEnrollments)
+	enrollmentRoutes.POST("getEnrollments", controller.GetEnrollments)
 }

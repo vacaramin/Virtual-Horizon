@@ -11,7 +11,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetEnrollments(ctx *gin.Context) {
+type EnrollmentFunctions interface {
+	GetEnrollments(*gin.Context)
+}
+type Enrollment struct{}
+
+func (_ *Enrollment) GetEnrollments(ctx *gin.Context) {
 
 	user, err := utils.GetUserFromToken(ctx)
 	if err != nil {
