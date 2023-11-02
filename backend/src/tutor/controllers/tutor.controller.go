@@ -16,7 +16,17 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func TutorSignup(c *gin.Context) {
+type TutorFunctions interface {
+	TutorSignup(*gin.Context)
+	DeleteTutor(*gin.Context)
+	UpdateTutorProfileFromToken(*gin.Context)
+	GetTutorProfileFromToken(*gin.Context)
+	GetTutorProfileByID(*gin.Context)
+}
+
+type TutorController struct{}
+
+func (*TutorController) TutorSignup(c *gin.Context) {
 	fmt.Println("Signup")
 
 	var body struct {
@@ -80,7 +90,7 @@ func TutorSignup(c *gin.Context) {
 
 }
 
-func GetTutorProfileByID(c *gin.Context) {
+func (*TutorController) GetTutorProfileByID(c *gin.Context) {
 	idStr, _ := c.Params.Get("ID")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
@@ -108,7 +118,7 @@ func GetTutorProfileByID(c *gin.Context) {
 		"user":   tutor,
 	})
 }
-func GetTutorProfileFromToken(c *gin.Context) {
+func (*TutorController) GetTutorProfileFromToken(c *gin.Context) {
 	tokenString, err := c.Cookie("Authorization")
 
 	if err != nil {
@@ -147,7 +157,7 @@ func GetTutorProfileFromToken(c *gin.Context) {
 
 	}
 }
-func UpdateTutorProfileFromToken(c *gin.Context) {
+func (*TutorController) UpdateTutorProfileFromToken(c *gin.Context) {
 	tokenString, err := c.Cookie("Authorization")
 
 	if err != nil {
@@ -233,7 +243,7 @@ func UpdateTutorProfileFromToken(c *gin.Context) {
 		})
 	}
 }
-func DeleteTutor(c *gin.Context) {
+func (*TutorController) DeleteTutor(c *gin.Context) {
 	tokenStr, err := c.Cookie("Authorization")
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{

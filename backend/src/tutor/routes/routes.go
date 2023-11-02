@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRoutes(r *gin.Engine) {
+func SetupRoutes(r *gin.Engine, controller controllers.TutorFunctions) {
 	tutorRoutes := r.Group("/tutor")
-	tutorRoutes.POST("signup", controllers.TutorSignup)
+	tutorRoutes.POST("signup", controller.TutorSignup)
 }
