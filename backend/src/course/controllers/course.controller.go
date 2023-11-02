@@ -11,7 +11,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetTutorRegisteredCourses(c *gin.Context) {
+type CourseController struct{}
+type CourseFunctions interface {
+	GetTutorRegisteredCourses(*gin.Context)
+	GetStudentCourses(*gin.Context)
+}
+
+func (_ *CourseController) GetTutorRegisteredCourses(c *gin.Context) {
 
 	user, err := utils.GetUserFromToken(c)
 	if err != nil {
@@ -33,7 +39,7 @@ func GetTutorRegisteredCourses(c *gin.Context) {
 	})
 }
 
-func GetStudentCourses(ctx *gin.Context) {
+func (_ *CourseController) GetStudentCourses(ctx *gin.Context) {
 
 	user, err := utils.GetUserFromToken(ctx)
 	if err != nil {
