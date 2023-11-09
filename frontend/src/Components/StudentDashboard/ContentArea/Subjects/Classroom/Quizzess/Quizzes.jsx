@@ -7,20 +7,20 @@ function Quizzes() {
   const quizzesData = [
     {
       id: 1,
-      topic: "Topic 1",
-      description: "Description for Topic 1",
+      topic: "Real and Complex Numbers",
+      description: "Test for real and complex numbers.",
       image: {QuizPic}, // or provide URL
     },
     {
       id: 2,
-      topic: "Topic 2",
-      description: "Description for Topic 2",
+      topic: "Quadratic Equations",
+      description: "Test for quadratic equations using different methods.",
       image: {QuizPic}, // or provide URL
     },
     {
       id: 3,
-      topic: "Topic 3",
-      description: "Description for Topic 3",
+      topic: "Trigonometry",
+      description: "Test for trignometric identities and their usage.",
       image: {QuizPic}, // or provide URL
     },
     // Add more quizzes as needed
