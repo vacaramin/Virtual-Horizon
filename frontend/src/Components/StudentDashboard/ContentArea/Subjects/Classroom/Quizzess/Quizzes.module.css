@@ -60,6 +60,7 @@
   padding: 20px;
   border-radius: 8px;
   margin-top: 20px;
+  position: relative;
 }
 
 .questionForm h3 {

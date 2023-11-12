@@ -51,6 +51,9 @@ function Quizzes() {
             
             <label htmlFor="question2">Question 2:</label>
             <input type="text" id="question2" name="question2" />
+
+            <label htmlFor="question3">Question 3:</label>
+            <input type="text" id="question3" name="question3" />
             
             <button type="submit">Submit</button>
           </form>
