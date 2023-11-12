@@ -10,6 +10,14 @@ services:
       POSTGRES_DB: postgres
     volumes:
       - db-data:/var/lib/postgresql/data
-
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./backend/Dockerfile
+    env_file:
+      - ./backend/.env
+      
+    depends_on:
+      - db
 volumes:
   db-data:
