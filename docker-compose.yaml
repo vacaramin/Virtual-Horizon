@@ -8,16 +8,14 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: helloworld
       POSTGRES_DB: postgres
+    command: postgres -c ssl=on -c ssl_cert_file=/var/lib/postgresql/server.crt -c ssl_key_file=/var/lib/postgresql/server.key
+    ports:
+      - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
-  backend:
-    build:
-      context: ./backend
-      dockerfile: ./backend/Dockerfile
-    env_file:
-      - ./backend/.env
-      
-    depends_on:
-      - db
+      - "/home/vacaramin/Desktop/Virtual-Horizon/ssl-certs/server.crt:/var/lib/postgresql/server.crt:ro"
+      - "/home/vacaramin/Desktop/Virtual-Horizon/ssl-certs/server.key:/var/lib/postgresql/server.key:ro"
+
 volumes:
   db-data:
+
