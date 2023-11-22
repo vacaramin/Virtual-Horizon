@@ -2,4 +2,6 @@
 
 /backend/.idea/
 .idea/
-/ssl-certs
+ssl-certs/server.crt
+ssl-certs/server.csr
+ssl-certs/server.key
