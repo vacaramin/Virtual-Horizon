@@ -16,6 +16,18 @@ services:
       - "/home/vacaramin/Desktop/Virtual-Horizon/ssl-certs/server.crt:/var/lib/postgresql/server.crt:ro"
       - "/home/vacaramin/Desktop/Virtual-Horizon/ssl-certs/server.key:/var/lib/postgresql/server.key:ro"
 
+  # backend:
+  #   build:
+  #     context: ./backend
+  #     dockerfile: ./backend/Dockerfile
+  #   env_file:
+  #     - ./backend/.env
+
+  #   depends_on:
+  #     - db
+  
+  # Migrator:
+  # Frontend:
 volumes:
   db-data:
 
