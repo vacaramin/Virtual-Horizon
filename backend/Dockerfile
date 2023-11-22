@@ -21,9 +21,9 @@
 #   Database, frontend, and Backend should run on 3 different containers over shared network
 FROM golang:alpine
 
-WORKDIR /backend
+WORKDIR /apiServer
 
-COPY ./backend . 
+COPY . . 
 
 RUN go build -o main
 
