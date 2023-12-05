@@ -18,4 +18,5 @@ WORKDIR /app
 COPY --from=builder /apiServer/main .
 COPY --from=builder /apiServer/.env .
 
+
 CMD ["./main"]
