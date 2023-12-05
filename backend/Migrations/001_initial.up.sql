@@ -79,6 +79,16 @@ CREATE TABLE IF NOT EXISTS enrollments (
     FOREIGN KEY (student_id) REFERENCES students (id) ON DELETE CASCADE,
     FOREIGN KEY (link_id) REFERENCES tutor_course_links (id) ON DELETE CASCADE
 );
+-- Create the "notifications" table
+CREATE TABLE IF NOT EXISTS notifications (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    message VARCHAR(255) NOT NULL,
+    time TIMESTAMPTZ,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE    
+);
 
 -- Create the "chats" table
 CREATE TABLE IF NOT EXISTS chats (
