@@ -3,14 +3,17 @@ package routes
 import (
 	enrollmentControllers "Virtual-Horizon/src/Enrollments/controllers"
 	enrollmentRoutes "Virtual-Horizon/src/Enrollments/routes"
+
 	courseControllers "Virtual-Horizon/src/course/controllers"
 	courseRoutes "Virtual-Horizon/src/course/routes"
 	"Virtual-Horizon/src/middleware"
+
 	notificationControllers "Virtual-Horizon/src/notifications/controllers"
 	notificationRoutes "Virtual-Horizon/src/notifications/routes"
 
 	studentcontrollers "Virtual-Horizon/src/student/controllers"
 	studentRoutes "Virtual-Horizon/src/student/routes"
+
 	tutorControllers "Virtual-Horizon/src/tutor/controllers"
 	tutorRoutes "Virtual-Horizon/src/tutor/routes"
 
