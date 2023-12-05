@@ -10,23 +10,23 @@ backend:
 
 migrate-up:
 
-	migrate -database "postgres://postgres:helloworld@localhost:5432/postgres" -path backend/Migrations/ up
+	migrate -database "postgres://postgres:helloworld@localhost:5432/postgres?sslmode=disable" -path backend/Migrations/ up
 
 migrate-down:
 
-	yes | migrate -database "postgres://postgres:helloworld@localhost:5432/postgres" -path backend/Migrations/ down
+	yes | migrate -database "postgres://postgres:helloworld@localhost:5432/postgres?sslmode=disable" -path backend/Migrations/ down
 
 migrate-up-force:
 
-	migrate -database "postgres://postgres:helloworld@localhost:5432/postgres" -path backend/Migrations/ -verbose up 
+	migrate -database "postgres://postgres:helloworld@localhost:5432/postgres?sslmode=disable" -path backend/Migrations/ -verbose up 
 
 migrate-down-force:
 
-	migrate -database "postgres://postgres:helloworld@localhost:5432/postgres" -path backend/Migrations/ -verbose down 
+	migrate -database "postgres://postgres:helloworld@localhost:5432/postgres?sslmode=disable" -path backend/Migrations/ -verbose down 
 
 migrate-fix:
 
-	migrate -database "postgres://postgres:helloworld@localhost:5432/postgres" -path backend/Migrations/ force 1
+	migrate -database "postgres://postgres:helloworld@localhost:5432/postgres?sslmode=disable" -path backend/Migrations/ force 1
 
 nvm: 
 
