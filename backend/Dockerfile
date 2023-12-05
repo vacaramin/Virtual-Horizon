@@ -1,16 +1,21 @@
-# TO DO
-#   A. Frontend
-#       1. Node Installation
-#       2. Running npm install script
-#       3. Running the application
-#       4. expose localhost:3000
-#   Database, frontend, and Backend should run on 3 different containers over shared network
-FROM golang:alpine
+# Stage 1: Build the application
+FROM golang:alpine AS builder
 
 WORKDIR /apiServer
 
-COPY . . 
+COPY go.mod go.sum ./
+RUN go mod download
 
+
+COPY . .
 RUN go build -o main
+
+# Stage 2: Create a minimal image with only the necessary artifacts
+FROM alpine:latest
+
+WORKDIR /app
+
+COPY --from=builder /apiServer/main .
+COPY --from=builder /apiServer/.env .
 
 CMD ["./main"]
