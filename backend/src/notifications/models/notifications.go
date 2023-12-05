@@ -5,8 +5,8 @@ import (
 )
 
 type Notification struct {
-	ID        uint      `json:"enrollment_id"`
-	User_ID   uint      `json:"user_id"`
+	ID        uint      `json:"-"`
+	User_ID   uint      `json:"-"`
 	Message   string    `json:"message"`
 	Status    string    `json:"status"`
 	CreatedAt time.Time `json:"created_at"`

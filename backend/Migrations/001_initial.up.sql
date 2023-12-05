@@ -412,4 +412,9 @@ VALUES
         2,
         'Welcome to Virtual Horizon, Thank you for signing up', 
         'unread'
+    ),
+    (
+        2,
+        'Welcome Again, Thank you for signing up', 
+        'unread'
     );
