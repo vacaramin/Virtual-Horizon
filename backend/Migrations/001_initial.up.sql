@@ -410,5 +410,6 @@ INSERT INTO
 VALUES
     (
         2,
-        'Welcome to Virtual Horizon, Thank you for signing up', 'unread'
+        'Welcome to Virtual Horizon, Thank you for signing up', 
+        'unread'
     );
