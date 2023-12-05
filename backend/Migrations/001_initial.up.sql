@@ -80,6 +80,17 @@ CREATE TABLE IF NOT EXISTS enrollments (
     FOREIGN KEY (link_id) REFERENCES tutor_course_links (id) ON DELETE CASCADE
 );
 
+-- Create the "notifications" table
+CREATE TABLE IF NOT EXISTS notifications (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    message VARCHAR(255) NOT NULL,
+    status VARCHAR(20),
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+);
+
 -- Create the "chats" table
 CREATE TABLE IF NOT EXISTS chats (
     id SERIAL PRIMARY KEY,
@@ -178,7 +189,7 @@ INSERT INTO
     tutors (id, subject, experience, rating)
 VALUES
     (2, 'Math', '5 years', '4.5');
-    
+
 -- Insert values into the "courses" table
 INSERT INTO
     courses (
@@ -216,7 +227,9 @@ VALUES
         'biology',
         '2023-09-20',
         '2023-12-20'
-    );;
+    );
+
+;
 
 -- Insert values into the "tutor_courses" table
 -- Insert values into the "tutor_courses" table
@@ -269,6 +282,7 @@ VALUES
         12,
         6
     );
+
 -- Insert values into the "enrollments" table
 INSERT INTO
     enrollments (
@@ -389,4 +403,18 @@ VALUES
         'https://example.com/sonnets.txt',
         '2023-09-18',
         2
+    );
+
+INSERT INTO
+    notifications (user_id, message,status)
+VALUES
+    (
+        2,
+        'Welcome to Virtual Horizon, Thank you for signing up', 
+        'unread'
+    ),
+    (
+        2,
+        'Welcome Again, Thank you for signing up', 
+        'unread'
     );
