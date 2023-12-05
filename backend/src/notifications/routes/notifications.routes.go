@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRoutes(engine *gin.Engine, controller controllers.NotificationController) {
+func SetupRoutes(engine *gin.Engine, controller controllers.NotificationFunctions) {
 	enrollmentRoutes := engine.Group("notification")
 	enrollmentRoutes.POST("getNotifications", controller.GetNotifications)
 }
