@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from "./logo.svg";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
 
 function App() {
   const history = useNavigate();
@@ -34,8 +35,10 @@ function App() {
       }
   };
 
-  fetchData();
-
+  useEffect(() => {
+    fetchData();
+  }, [])
+  
 
   return (
     <div className="App">
