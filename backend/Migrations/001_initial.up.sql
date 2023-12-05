@@ -85,6 +85,7 @@ CREATE TABLE IF NOT EXISTS notifications (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
     message VARCHAR(255) NOT NULL,
+    status VARCHAR(20),
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW(),
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
@@ -405,9 +406,9 @@ VALUES
     );
 
 INSERT INTO
-    notifications (user_id, message)
+    notifications (user_id, message,status)
 VALUES
     (
         2,
-        'Welcome to Virtual Horizon, Thank you for signing up'
+        'Welcome to Virtual Horizon, Thank you for signing up', 'unread'
     );
