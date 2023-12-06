@@ -28,15 +28,15 @@ jobs:
 
       - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-        
+
       - name: Build and Push Docker Compose for Backend
         run: |
           docker-compose -f docker-compose-prod.yaml build backend
-          docker tag backend:latest vacaramin/virtual-horizon-backend:latest
-          docker push vacaramin/virtual-horizon-backend:latest
+          docker tag backend:latest vacaramin/virtual-horizon_backend:latest
+          docker push vacaramin/virtual-horizon_backend:latest
 
       - name: Build and Push Docker Compose for Frontend
         run: |
           docker-compose -f docker-compose-prod.yaml build frontend
-          docker tag frontend:latest vacaramin/virtual-horizon-frontend:latest
-          docker push vacaramin/virtual-horizon-frontend:latest
+          docker tag frontend:latest vacaramin/virtual-horizon_frontend:latest
+          docker push vacaramin/virtual-horizon_frontend:latest
