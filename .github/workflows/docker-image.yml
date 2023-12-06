@@ -15,10 +15,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Debug directory structure
-        run: |
-          ls -R Virtual-Horizon
-          ls -R Virtual-Horizon/backend
+      
       - name: Set up environment
         run: |
           echo "PORT=${{ secrets.PORT }}" >> backend/.env
