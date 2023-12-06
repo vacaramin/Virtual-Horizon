@@ -42,7 +42,9 @@ services:
       migrate -path /migrations -database "postgres://postgres:helloworld@db:5432/postgres?sslmode=disable" up'
 
   backend:
-    image: vacaramin/virtual-horizon-backend:latest
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
     env_file:
       - ./backend/.env
     ports:
@@ -54,7 +56,9 @@ services:
       - vh-net
 
   frontend:
-    image: vacaramin/virtual-horizon-frontend:latest
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
     ports:
       - "3000:3000"
     depends_on:
