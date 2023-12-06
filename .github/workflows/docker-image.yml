@@ -31,12 +31,12 @@ jobs:
 
       - name: Build and Push Docker Compose for Backend
         run: |
-          docker-compose -f docker-compose-prod.yaml build vacaramin/virtual-horizon_backend
-          docker tag backend:latest vacaramin/virtual-horizon_backend:latest
-          docker push vacaramin/virtual-horizon_backend:latest
+          docker-compose -f docker-compose-prod.yaml build backend
+          docker tag virtual-horizon_backend:latest vacaramin/virtual-horizon-backend:latest
+          docker push vacaramin/virtual-horizon-backend:latest
 
       - name: Build and Push Docker Compose for Frontend
         run: |
-          docker-compose -f docker-compose-prod.yaml build vacaramin/virtual-horizon_frontend
-          docker tag frontend:latest vacaramin/virtual-horizon_frontend:latest
-          docker push vacaramin/virtual-horizon_frontend:latest
+          docker-compose -f docker-compose-prod.yaml build frontend
+          docker tag virtual-horizon_frontend:latest vacaramin/virtual-horizon-frontend:latest
+          docker push vacaramin/virtual-horizon-frontend:latest
