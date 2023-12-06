@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      
+
       - name: Set up environment
         run: |
           echo "PORT=${{ secrets.PORT }}" >> backend/.env
@@ -31,12 +31,18 @@ jobs:
 
       - name: Build and Push Docker Compose for Backend
         run: |
+          version="v1.$GITHUB_RUN_NUMBER"
           docker-compose -f docker-compose-ci.yaml build backend
+          docker tag virtual-horizon_backend:latest vacaramin/virtual-horizon-backend:$version
           docker tag virtual-horizon_backend:latest vacaramin/virtual-horizon-backend:latest
+          docker push vacaramin/virtual-horizon-backend:$version
           docker push vacaramin/virtual-horizon-backend:latest
 
       - name: Build and Push Docker Compose for Frontend
         run: |
+          version="v1.$GITHUB_RUN_NUMBER"
           docker-compose -f docker-compose-ci.yaml build frontend
+          docker tag virtual-horizon_frontend:latest vacaramin/virtual-horizon-frontend:$version
           docker tag virtual-horizon_frontend:latest vacaramin/virtual-horizon-frontend:latest
+          docker push vacaramin/virtual-horizon-frontend:$version
           docker push vacaramin/virtual-horizon-frontend:latest
