@@ -15,6 +15,12 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+      - name: Set up environment
+        run: |
+          echo "PORT=${{ secrets.PORT }}" >> Virtual-Horizon/backend/.env
+          echo "DB=${{ secrets.DB }}" >> Virtual-Horizon/backend/.env
+          echo "SECRET=${{ secrets.SECRET }}" >> Virtual-Horizon/backend/.env
+          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> Virtual-Horizon/backend/.env
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
