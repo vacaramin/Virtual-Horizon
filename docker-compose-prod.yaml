@@ -13,7 +13,7 @@ networks:
 services:
   db:
     image: postgres
-    container_name: pg
+    container_name: pg-database
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: helloworld
