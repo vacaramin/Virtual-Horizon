@@ -13,7 +13,7 @@ networks:
 services:
   db:
     image: postgres
-    container_name: pg
+    container_name: pg-database
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: helloworld
@@ -23,7 +23,7 @@ services:
     restart: always
     networks:
       vh-net:
-        ipv4_address: 172.19.0.5
+        ipv4_address: 172.19.0.2
     user: postgres 
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
