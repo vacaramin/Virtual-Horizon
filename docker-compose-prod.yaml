@@ -69,7 +69,8 @@ services:
 volumes:
   db-data:
 
-
+ 
+ 
   # pgadmin:
   #   container_name: pgadmin
   #   environment:
