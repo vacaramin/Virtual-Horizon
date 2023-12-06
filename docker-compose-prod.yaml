@@ -22,12 +22,25 @@ services:
       - "5434:5432"
     restart: always
     networks:
-      vh-net:
-        ipv4_address: 172.19.0.5
+      - vh-net
     user: postgres 
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - db-data:/var/lib/postgresql/data
+
+  migrate:
+    image: migrate/migrate
+    networks:
+      - vh-net
+    volumes:
+      - ./backend/Migrations:/migrations
+    depends_on:
+      - db
+    entrypoint: ["/bin/sh", "-c"]
+    command: >
+      'yes | migrate -path /migrations -database "postgres://postgres:helloworld@db:5432/postgres?sslmode=disable" down &&
+      migrate -path /migrations -database "postgres://postgres:helloworld@db:5432/postgres?sslmode=disable" up'
+
   backend:
     build:
       context: ./backend
@@ -37,10 +50,26 @@ services:
     ports:
       - "4000:4000"
     depends_on:
+      - migrate
       - db
     networks:
-      vh-net:
-        ipv4_address: 172.19.0.7
+      - vh-net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - vh-net
+
+volumes:
+  db-data:
+
+
   # pgadmin:
   #   container_name: pgadmin
   #   environment:
@@ -55,18 +84,3 @@ services:
   #   networks:
   #     vh-net:
   #       ipv4_address: 172.19.0.6
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: ./Dockerfile
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend
-    networks:
-      vh-net:
-        ipv4_address: 172.19.0.9
-  
-volumes:
-  db-data:
-

@@ -10,7 +10,7 @@ backend:
 
 migrate-up:
 
-	migrate -database "postgres://postgres:helloworld@localhost:5432/postgres?sslmode=disable" -path backend/Migrations/ up
+	migrate -database "postgres://postgres:helloworld@db:5432/postgres?sslmode=disable" -path backend/Migrations/ up
 
 migrate-down:
 
