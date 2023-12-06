@@ -21,10 +21,10 @@ jobs:
           ls -R Virtual-Horizon/backend
       - name: Set up environment
         run: |
-          echo "PORT=${{ secrets.PORT }}" >> Virtual-Horizon/backend/.env
-          echo "DB=${{ secrets.DB }}" >> Virtual-Horizon/backend/.env
-          echo "SECRET=${{ secrets.SECRET }}" >> Virtual-Horizon/backend/.env
-          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> Virtual-Horizon/backend/.env
+          echo "PORT=${{ secrets.PORT }}" >> backend/.env
+          echo "DB=${{ secrets.DB }}" >> backend/.env
+          echo "SECRET=${{ secrets.SECRET }}" >> backend/.env
+          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> backend/.env
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
