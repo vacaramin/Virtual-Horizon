@@ -1,0 +1,38 @@
+name: Build and Push Docker Compose for Production
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Get the current version from Docker Hub
+        id: get_version
+        run: echo "::set-output name=version::$(docker run --rm vacaramin/virtual-horizon:latest version)"
+
+      - name: Increment the version
+        id: increment_version
+        run: echo "::set-output name=version::$(echo "${{ steps.get_version.outputs.version }}" | awk -F '.' '{print $1 "." $2 "." $3 + 1}')"
+
+      - name: Build and Push Docker Compose
+        run: |
+          docker-compose -f docker-compose-prod.yaml build
+          docker tag virtual-horizon vacaramin/virtual-horizon:${{ steps.increment_version.outputs.version }}
+          docker push vacaramin/virtual-horizon:${{ steps.increment_version.outputs.version }}
+        working-directory: .
