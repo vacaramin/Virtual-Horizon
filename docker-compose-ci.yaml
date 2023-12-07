@@ -65,9 +65,11 @@ services:
       - backend
     networks:
       - vh-net
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
 
-volumes:
-  db-data:
+
 
  
  
@@ -85,3 +87,5 @@ volumes:
   #   networks:
   #     vh-net:
   #       ipv4_address: 172.19.0.6
+volumes:
+  db-data:
