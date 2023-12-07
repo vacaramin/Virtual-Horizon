@@ -1,5 +1,29 @@
+// Import the necessary React components and CSS file
+
 import React, { useState } from "react";
 import "./Tutor.css";
+
+function TutorCard({ tutor, onSelectTutor }) {
+  return (
+    <div className="card" onClick={() => onSelectTutor(tutor)}>
+      <div className="top-part">
+        <div className="profile-pic">
+          <img
+            src="https://avatars.githubusercontent.com/u/94608299?v=4"
+            alt={`${tutor.name}'s profile`}
+          />
+        </div>
+        <div>
+          <h4>{tutor.name}</h4>
+          <h3>{tutor.subject}</h3>
+        </div>
+      </div>
+      <div className="bottom-part">
+        <p className="course-description">Experience: {tutor.experience}</p>
+      </div>
+    </div>
+  );
+}
 
 function Tutor() {
   const [isHireTutor, setIsHireTutor] = useState(true);
@@ -28,7 +52,6 @@ function Tutor() {
     console.log("Tutor confirmed:", selectedTutor);
   };
 
-  
   const handleFormChange = (e) => {
     setFormData({
       ...formData,
@@ -49,38 +72,25 @@ function Tutor() {
   };
 
   const availableTutors = [
-    { id: 1, name: "Tutor 1", subject: "Math", experience: "5 years" },
-    { id: 2, name: "Tutor 2", subject: "Science", experience: "3 years" },
-    { id: 3, name: "Tutor 3", subject: "English", experience: "4 years" },
+    { id: 1, name: "Awais Mohammad", subject: "Math", experience: "5 years" },
+    { id: 2, name: "Waqar Amin", subject: "Science", experience: "3 years" },
+    { id: 3, name: "Muhammad Aqib", subject: "English", experience: "4 years" },
   ];
 
   return (
     <div className="tutor-container">
-      <div className="tutor-buttons">
-        <button
-          className={isHireTutor ? "active" : ""}
-          onClick={handleHireTutor}
-        >
-          Hire a Tutor
-        </button>
-        <button
-          className={!isHireTutor ? "active" : ""}
-          onClick={handleBecomeTutor}
-        >
-          Become a Tutor
-        </button>
-      </div>
 
       {isHireTutor ? (
         <div className="available-tutors">
-          <h2>Available Tutors</h2>
-          <ul>
+          <div className="cards-container">
             {availableTutors.map((tutor) => (
-              <li key={tutor.id} onClick={() => handleSelectTutor(tutor)}>
-                {tutor.name}
-              </li>
+              <TutorCard
+                key={tutor.id}
+                tutor={tutor}
+                onSelectTutor={handleSelectTutor}
+              />
             ))}
-          </ul>
+          </div>
           {selectedTutor && (
             <div className="selected-tutor">
               <h3>Selected Tutor:</h3>

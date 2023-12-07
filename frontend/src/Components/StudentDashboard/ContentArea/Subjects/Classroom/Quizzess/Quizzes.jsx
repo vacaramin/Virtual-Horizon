@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import QuizCSS from "./Quizzes.module.css";
-import QuizPic from "./quizzes.svg";
+import QuizPic from "./quiz.png";
 
 function Quizzes() {
   const quizzesData = [
@@ -8,19 +8,19 @@ function Quizzes() {
       id: 1,
       topic: "Real and Complex Numbers",
       description: "Test for real and complex numbers.",
-      image: "URL_TO_IMAGE_1", // Replace with actual image URL
+      image: {QuizPic}, // Replace with actual image URL
     },
     {
       id: 2,
       topic: "Quadratic Equations",
       description: "Test for quadratic equations using different methods.",
-      image: "URL_TO_IMAGE_2", // Replace with actual image URL
+      image: {QuizPic}, // Replace with actual image URL
     },
     {
       id: 3,
       topic: "Trigonometry",
       description: "Test for trigonometric identities and their usage.",
-      image: "URL_TO_IMAGE_3", // Replace with actual image URL
+      image: {QuizPic}, // Replace with actual image URL
     },
     {
       id: 4,
