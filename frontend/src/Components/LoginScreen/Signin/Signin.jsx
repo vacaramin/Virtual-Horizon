@@ -96,7 +96,7 @@ function Signin(props) {
 
           <div>
             <div className="Welcome-Text">
-              Welcome to Virtual Horizon
+              Welcome to Virtual Horizonss
               <br />{" "}
             </div>
           </div>
