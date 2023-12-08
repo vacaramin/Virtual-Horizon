@@ -1,7 +1,8 @@
-// Import the necessary React components and CSS file
+// Tutor.js
 
 import React, { useState } from "react";
 import "./Tutor.css";
+import "./Modal.css";
 
 function TutorCard({ tutor, onSelectTutor }) {
   return (
@@ -25,9 +26,20 @@ function TutorCard({ tutor, onSelectTutor }) {
   );
 }
 
+function Modal({ onClose, children }) {
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        {children}
+      </div>
+    </div>
+  );
+}
+
 function Tutor() {
   const [isHireTutor, setIsHireTutor] = useState(true);
   const [selectedTutor, setSelectedTutor] = useState(null);
+  const [showConfirmationMenu, setShowConfirmationMenu] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -49,7 +61,11 @@ function Tutor() {
 
   const handleConfirmTutor = () => {
     // Perform confirmation logic here
-    console.log("Tutor confirmed:", selectedTutor);
+    setShowConfirmationMenu(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowConfirmationMenu(false);
   };
 
   const handleFormChange = (e) => {
@@ -80,7 +96,6 @@ function Tutor() {
 
   return (
     <div className="tutor-container">
-
       {isHireTutor ? (
         <div className="available-tutors">
           <div className="cards-container">
@@ -101,6 +116,17 @@ function Tutor() {
               <div className="confirm-tutor-button">
                 <button onClick={handleConfirmTutor}>Confirm Tutor</button>
               </div>
+              {showConfirmationMenu && (
+                <Modal onClose={handleCloseModal}>
+                  <div>
+                    <h3>Confirmation Details</h3>
+                    <p>Course Fee: $XXX</p>
+                    <p>Qualification: {selectedTutor.qualification}</p>
+                    {/* Add any other details you want to display */}
+                    <button onClick={handleCloseModal}>Close</button>
+                  </div>
+                </Modal>
+              )}
             </div>
           )}
         </div>
