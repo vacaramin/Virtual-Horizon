@@ -1,7 +1,9 @@
 .home-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
   padding: 20px;
-  width: 100%;
+  width: 90%;
 }
 
 .box {
@@ -16,7 +18,7 @@
   padding: 10px;
   border-radius: 8px 8px 0 0;
   margin: 0;
-  width: 101%;
+  width: 100%;
   position: relative;
   top: -15px;
   left: -15px;
@@ -25,16 +27,41 @@
 
 .box-content {
   margin-top: 20px;
+  text-align: left;
 }
 
-.welcome-box {
-  grid-column: 1 / -1;
+/* Updated styles for notifications */
+.notification-row {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.notification-row:hover {
+  background-color: #f7f7f7;
+}
+
+.notification-text {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.notification-status {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.notification-date {
+  color: #666;
 }
 
 .notifications-box {
   grid-column: span 2;
-}
-
-.to-do-box {
-  grid-column: span 1;
 }
