@@ -1,3 +1,5 @@
+/* Tutor.css */
+
 .card {
   border: 1px solid #5e4949;
   border-radius: 8px;
@@ -9,19 +11,15 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   margin: 10px;
-
-  /* now small the space between cards */
   margin-bottom: 50px;
   margin-top: 10px;
-
 }
 
 .cards-container {
   display: flex;
-  flex-wrap: wrap; /* Allow cards to wrap to the next line if there isn't enough space */
-  justify-content: space-between; /* Distribute cards evenly */
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
-
 
 .card:hover {
   box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);
@@ -58,3 +56,59 @@ h3 {
 .course-description {
   font-size: 14px;
 }
+
+.selected-tutor {
+  text-align: center;
+}
+
+.confirm-tutor-button button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.confirm-tutor-button button:hover {
+  background-color: #45a049;
+}
+
+.become-tutor-form {
+  text-align: center;
+  margin: 20px;
+}
+
+.become-tutor-form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.become-tutor-form label {
+  margin-top: 10px;
+}
+
+.become-tutor-form input {
+  padding: 8px;
+  margin-top: 5px;
+  width: 200px;
+}
+
+.become-tutor-form button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.become-tutor-form button:hover {
+  background-color: #45a049;
+}
+
+.tutor-container {
+  text-align: center;
+}
+

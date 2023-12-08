@@ -1,7 +1,8 @@
-// Import the necessary React components and CSS file
+// Tutor.js
 
 import React, { useState } from "react";
 import "./Tutor.css";
+import "./Modal.css";
 
 function TutorCard({ tutor, onSelectTutor }) {
   return (
@@ -25,15 +26,28 @@ function TutorCard({ tutor, onSelectTutor }) {
   );
 }
 
+function Modal({ onClose, children }) {
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        {children}
+      </div>
+    </div>
+  );
+}
+
 function Tutor() {
   const [isHireTutor, setIsHireTutor] = useState(true);
   const [selectedTutor, setSelectedTutor] = useState(null);
+  const [showConfirmationMenu, setShowConfirmationMenu] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
     experience: "",
   });
+
+  const [confirmationStep, setConfirmationStep] = useState(1);
 
   const handleHireTutor = () => {
     setIsHireTutor(true);
@@ -49,7 +63,39 @@ function Tutor() {
 
   const handleConfirmTutor = () => {
     // Perform confirmation logic here
-    console.log("Tutor confirmed:", selectedTutor);
+    setShowConfirmationMenu(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowConfirmationMenu(false);
+    setConfirmationStep(1); // Reset confirmation step when closing modal
+  };
+
+  const handleNextStep = () => {
+    setConfirmationStep((prevStep) => prevStep + 1);
+  };
+
+  const renderConfirmationStep = () => {
+    switch (confirmationStep) {
+      case 1:
+        return (
+          <div>
+            <h3>Tutor Availability</h3>
+            <p>Days: {selectedTutor.availability.days}</p>
+            <p>Time: {selectedTutor.availability.time}</p>
+          </div>
+        );
+      case 2:
+        return (
+          <div>
+            <h3>Payment Options</h3>
+            <p>Choose a payment method:</p>
+            {/* Add payment options here */}
+          </div>
+        );
+      default:
+        return null;
+    }
   };
 
   const handleFormChange = (e) => {
@@ -72,15 +118,54 @@ function Tutor() {
   };
 
   const availableTutors = [
-    { id: 1, name: "Awais Mohammad", subject: "Math", experience: "5 years" },
-    { id: 2, name: "Waqar Amin", subject: "Science", experience: "3 years" },
-    { id: 3, name: "Muhammad Aqib", subject: "English", experience: "4 years" },
-    { id: 4, name: "Muhammad Karim", subject: "Chemistry", experience: "3.5 years" },
+    {
+      id: 1,
+      name: "Awais Mohammad",
+      subject: "Math",
+      experience: "5 years",
+      qualification: "Ph.D. in Mathematics",
+      availability: {
+        days: "Mon, Wed, Fri",
+        time: "10:00 AM - 2:00 PM",
+      },
+    },
+    {
+      id: 2,
+      name: "Waqar Amin",
+      subject: "Science",
+      experience: "3 years",
+      qualification: "M.Sc. in Physics",
+      availability: {
+        days: "Tue, Thu",
+        time: "2:00 PM - 6:00 PM",
+      },
+    },
+    {
+      id: 3,
+      name: "Muhammad Aqib",
+      subject: "English",
+      experience: "4 years",
+      qualification: "MA in English Literature",
+      availability: {
+        days: "Mon, Wed, Fri",
+        time: "3:00 PM - 7:00 PM",
+      },
+    },
+    {
+      id: 4,
+      name: "Muhammad Karim",
+      subject: "Chemistry",
+      experience: "3.5 years",
+      qualification: "M.Sc. in Chemistry",
+      availability: {
+        days: "Tue, Thu",
+        time: "10:00 AM - 1:00 PM",
+      },
+    },
   ];
 
   return (
     <div className="tutor-container">
-
       {isHireTutor ? (
         <div className="available-tutors">
           <div className="cards-container">
@@ -101,6 +186,25 @@ function Tutor() {
               <div className="confirm-tutor-button">
                 <button onClick={handleConfirmTutor}>Confirm Tutor</button>
               </div>
+              {showConfirmationMenu && (
+                <Modal onClose={handleCloseModal}>
+                  <div>
+                    <h3>Confirmation Details</h3>
+                    <p>Course Fee: $XXX</p>
+                    <p>Qualification: {selectedTutor.qualification}</p>
+
+                    {renderConfirmationStep()}
+
+                    {/* Navigation Buttons */}
+                    <div className="confirm-tutor-button">
+                      <button onClick={handleCloseModal}>Close</button>
+                      {confirmationStep < 2 && (
+                        <button onClick={handleNextStep}>Next</button>
+                      )}
+                    </div>
+                  </div>
+                </Modal>
+              )}
             </div>
           )}
         </div>
