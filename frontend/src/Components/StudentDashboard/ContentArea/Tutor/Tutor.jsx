@@ -75,6 +75,7 @@ function Tutor() {
     { id: 1, name: "Awais Mohammad", subject: "Math", experience: "5 years" },
     { id: 2, name: "Waqar Amin", subject: "Science", experience: "3 years" },
     { id: 3, name: "Muhammad Aqib", subject: "English", experience: "4 years" },
+    { id: 4, name: "Muhammad Karim", subject: "Chemistry", experience: "3.5 years" },
   ];
 
   return (
