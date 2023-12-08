@@ -47,6 +47,8 @@ function Tutor() {
     experience: "",
   });
 
+  const [confirmationStep, setConfirmationStep] = useState(1);
+
   const handleHireTutor = () => {
     setIsHireTutor(true);
   };
@@ -66,12 +68,34 @@ function Tutor() {
 
   const handleCloseModal = () => {
     setShowConfirmationMenu(false);
+    setConfirmationStep(1); // Reset confirmation step when closing modal
   };
 
   const handleNextStep = () => {
-    // Handle logic for the next step in the confirmation process
-    // For example, you could navigate to a payment step
-    console.log("Moving to the next step...");
+    setConfirmationStep((prevStep) => prevStep + 1);
+  };
+
+  const renderConfirmationStep = () => {
+    switch (confirmationStep) {
+      case 1:
+        return (
+          <div>
+            <h3>Tutor Availability</h3>
+            <p>Days: {selectedTutor.availability.days}</p>
+            <p>Time: {selectedTutor.availability.time}</p>
+          </div>
+        );
+      case 2:
+        return (
+          <div>
+            <h3>Payment Options</h3>
+            <p>Choose a payment method:</p>
+            {/* Add payment options here */}
+          </div>
+        );
+      default:
+        return null;
+    }
   };
 
   const handleFormChange = (e) => {
@@ -169,24 +193,14 @@ function Tutor() {
                     <p>Course Fee: $XXX</p>
                     <p>Qualification: {selectedTutor.qualification}</p>
 
-                    {/* Step 1: Availability */}
-                    <div>
-                      <h3>Tutor Availability</h3>
-                      <p>Days: {selectedTutor.availability.days}</p>
-                      <p>Time: {selectedTutor.availability.time}</p>
-                    </div>
-
-                    {/* Step 2: Payment Options */}
-                    <div>
-                      <h3>Payment Options</h3>
-                      <p>Choose a payment method:</p>
-                      {/* Add payment options here */}
-                    </div>
+                    {renderConfirmationStep()}
 
                     {/* Navigation Buttons */}
-                    <div>
+                    <div className="confirm-tutor-button">
                       <button onClick={handleCloseModal}>Close</button>
-                      <button onClick={handleNextStep}>Next</button>
+                      {confirmationStep < 2 && (
+                        <button onClick={handleNextStep}>Next</button>
+                      )}
                     </div>
                   </div>
                 </Modal>
