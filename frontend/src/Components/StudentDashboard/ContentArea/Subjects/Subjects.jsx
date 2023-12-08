@@ -80,7 +80,6 @@ function Subjects() {
 
             <div className={styles.TeacherInfo}>
               <img className = {styles.ProfilePicture} src="https://avatars.githubusercontent.com/u/94608299?v=4" alt="Teacher" />
-              
               <div className={styles.TeacherName}>
               {selectedSubject.name} 
                 </div>
