@@ -67,12 +67,20 @@ function Tutor() {
   };
 
   const handleCloseModal = () => {
-    setShowConfirmationMenu(false);
-    setConfirmationStep(1); // Reset confirmation step when closing modal
+    if (confirmationStep > 1) {
+      setConfirmationStep((prevStep) => prevStep - 1);
+    } else {
+      setShowConfirmationMenu(false);
+      setConfirmationStep(1); // Reset confirmation step when closing modal
+    }
+  };
+
+  const handleBackStep = () => {
+    setConfirmationStep((prevStep) => Math.max(prevStep - 1, 1));
   };
 
   const handleNextStep = () => {
-    setConfirmationStep((prevStep) => prevStep + 1);
+    setConfirmationStep((prevStep) => Math.min(prevStep + 1, 3));
   };
 
   const renderConfirmationStep = () => {
