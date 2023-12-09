@@ -13,7 +13,7 @@ docker-compose -f docker-compose-ci.yaml up
 This command starts all services defined in the docker-compose-ci.yaml file.
 
 ### Production Environment
-For a production environment, use the docker-compose-prod.yaml file. This pulls the latest images of the code from your repository and runs the services.
+For a production environment, use the docker-compose-prod.yaml file. This pulls the latest backend and frontend images of virtual horizon from docker huband runs the services directly.
 ```console
 docker-compose -f docker-compose-prod.yaml up -d
 ```
