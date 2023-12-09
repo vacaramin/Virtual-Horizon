@@ -93,6 +93,16 @@ function Tutor() {
             {/* Add payment options here */}
           </div>
         );
+      case 3:
+        return (
+          <div>
+            <h3>Confirmation</h3>
+            <p>Course Fee: $XXX</p>
+            <p>Qualification: {selectedTutor.qualification}</p>
+
+            {/* Additional details and options for confirmation */}
+          </div>
+        );
       default:
         return null;
     }
@@ -197,9 +207,14 @@ function Tutor() {
 
                     {/* Navigation Buttons */}
                     <div className="confirm-tutor-button">
-                      <button onClick={handleCloseModal}>Close</button>
-                      {confirmationStep < 2 && (
+                      <button onClick={handleCloseModal}>
+                        {confirmationStep === 1 ? "Close" : "Back"}
+                      </button>
+                      {confirmationStep < 3 && (
                         <button onClick={handleNextStep}>Next</button>
+                      )}
+                      {confirmationStep === 3 && (
+                        <button onClick={handleConfirmTutor}>Confirm</button>
                       )}
                     </div>
                   </div>
