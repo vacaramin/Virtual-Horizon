@@ -33,6 +33,7 @@ func SetupRoutes(r *gin.Engine) {
 	studentController := &studentcontrollers.StudentController{}
 	tutorController := &tutorControllers.TutorController{}
 	notificationController := &notificationControllers.NotificationController{}
+
 	// user routes are being set in this route function
 	courseRoutes.SetupRoutes(r, courseController)
 	enrollmentRoutes.SetupRoutes(r, enrollmentController)
