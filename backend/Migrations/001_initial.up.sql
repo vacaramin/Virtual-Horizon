@@ -9,7 +9,9 @@ CREATE TABLE IF NOT EXISTS users (
     dob TIMESTAMPTZ,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW(),
-    role VARCHAR(10) -- Add the role column
+    role VARCHAR(10), -- Add the role column
+    about VARCHAR(255)
+    
 );
 
 -- Create the "students" table
@@ -156,6 +158,22 @@ VALUES
         'Waqar Amin',
         '1990-01-01',
         'student'
+    ),
+    (
+        'awaismadad@gmail.com',
+        '$2a$10$RoehRLxjbt1jHUT2j9Gihu6QYeRRa3xuycKs0GGDxpEb3dJFzo6ga',
+        'female',
+        'Awais Madad',
+        '1995-03-15',
+        'tutor'
+    ),
+    (
+        'awaismadad12@gmail.com',
+        '$2a$10$RoehRLxjbt1jHUT2j9Gihu6QYeRRa3xuycKs0GGDxpEb3dJFzo6ga',
+        'female',
+        'Awais Madad',
+        '1995-03-15',
+        'tutor'
     ),
     (
         'awaismadad@gmail.com',
