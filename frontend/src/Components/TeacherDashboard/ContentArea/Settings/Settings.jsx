@@ -1,83 +1,206 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import "./Settings.css";
 
 function Settings() {
-  const [fullName, setFullName] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [userInfo, setUserInfo] = useState({});
+  const [isEditing, setIsEditing] = useState(false);
 
-  const handleFullNameChange = (e) => {
-    setFullName(e.target.value);
+  const GetUserData = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:4000/user/GetProfileFromToken",
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
+      const data = await response.json();
+      if (data.status === "success") {
+        setUserInfo(data.user);
+      } else {
+        console.log("Failed to load user data");
+      }
+    } catch (error) {
+      console.error("Error loading user data:", error);
+    }
   };
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+  const handleUpdateInfo = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:4000/user/UpdateProfileFromToken",
+        {
+          method: "PUT",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            User: {
+              Name: userInfo.name,
+              Dob: userInfo.dob,
+              Gender: userInfo.gender,
+              About: userInfo.about
+            },
+          }),
+        }
+      );
+      const data = await response.json();
+      if (data.status === "success") {
+        setIsEditing(false);
+        localStorage.username = userInfo.name
+      } else {
+        console.error("Error Updating user data:", data.message);
+      }
+    } catch (error) {
+      console.error("Error Updating user data:", error);
+    }
   };
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+  const handleEditClick = () => {
+    setIsEditing(true);
   };
 
-  const handleUpdateInfo = () => {
-    // Handle update info logic here, e.g., make API request to update user info
-    console.log("Full Name:", fullName);
-    console.log("Password:", password);
-    console.log("Email:", email);
+  useEffect(() => {
+    GetUserData();
+  }, []);
+
+  const handleDateChange = (date) => {
+    setUserInfo((prevUserInfo) => ({
+      ...prevUserInfo,
+      dob: date.toISOString(), // Save the date in ISO format
+    }));
   };
-  const handleProfilePictureUpload = (e) => {
-    const file = e.target.files[0];
-    // Handle the file upload logic here, e.g., make API request to upload the file
-    console.log("Uploaded file:", file);
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setUserInfo((prevUserInfo) => ({
+      ...prevUserInfo,
+      [id]: value,
+    }));
   };
 
   return (
     <div className="profile-settings">
       <div className="profile-settings-right">
-        <div className="profile-photo">{/* Photo display */}</div>
+        <div className="profile-photo">
+          <img
+            src="https://avatars.githubusercontent.com/u/68877880?v=4"
+            alt="Profile"
+            className="profile-photo-img"
+          />
+        </div>
+
         <div className="photo-upload">
           <label htmlFor="profilePictureInput" className="upload-button">
             Upload New Picture
           </label>
-          <input
-            type="file"
-            id="profilePictureInput"
-            className="file-input"
-            onChange={handleProfilePictureUpload}
-          />
+          <input type="file" id="profilePictureInput" className="file-input" />
+        </div>
+        <br />
+        <br />
+        <div>
+          <label>
+            <b>About me</b>
+          </label>
+          {isEditing ? (
+            <input
+              type="text"
+              id="about"
+              defaultValue={userInfo.about}
+              onChange={handleInputChange}
+              className="form-input"
+            />
+          ) : (
+            <p className="field" id="aboutme">
+              {userInfo.about}
+            </p>
+          )}
         </div>
       </div>
+
       <div className="profile-settings-left">
         <h2>Profile Settings</h2>
+
         <div className="form-group">
-          <label htmlFor="fullName">Full Name</label>
-          <input
-            type="text"
-            id="fullName"
-            value={fullName}
-            onChange={handleFullNameChange}
-          />
+          <label>
+            <b>Name</b>
+          </label>
+          {isEditing ? (
+            <input
+              type="text"
+              id="name"
+              value={userInfo.name}
+              onChange={handleInputChange}
+              className="form-input"
+            />
+          ) : (
+            <p className="field" id="name">
+              {userInfo.name}
+            </p>
+          )}
         </div>
+
         <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
+          <label>
+            <b>Date of Birth</b>
+          </label>
+          {isEditing ? (
+            <DatePicker
+              selected={new Date(userInfo.dob)}
+              onChange={(date) => handleDateChange(date)}
+              className="form-input"
+            />
+          ) : (
+            <p className="field" id="DOB">
+              {new Date(userInfo.dob).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </p>
+          )}
         </div>
+
         <div className="form-group">
-          <label htmlFor="email">Email Address</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={handleEmailChange}
-          />
+          <label>
+            <b>Email Address</b>
+          </label>
+          <p className="field">{userInfo.email}</p>
         </div>
-        <button className="update-btn" onClick={handleUpdateInfo}>
-          Update Info
-        </button>
+
+        <div className="form-group">
+          <label>
+            <b>Gender</b>
+          </label>
+          {isEditing ? (
+            <select
+              id="gender"
+              value={userInfo.gender}
+              onChange={handleInputChange}
+              className="form-input"
+            >
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          ) : (
+            <p className="field" id="gender">
+              {userInfo.gender}
+            </p>
+          )}
+        </div>
+
+        {isEditing ? (
+          <button className="update-btn" onClick={handleUpdateInfo}>
+            Update Information
+          </button>
+        ) : (
+          <button className="edit-btn" onClick={handleEditClick}>
+            Edit
+          </button>
+        )}
       </div>
     </div>
   );

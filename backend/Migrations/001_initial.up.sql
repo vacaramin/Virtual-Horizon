@@ -171,15 +171,15 @@ VALUES
         'awaismadad12@gmail.com',
         '$2a$10$RoehRLxjbt1jHUT2j9Gihu6QYeRRa3xuycKs0GGDxpEb3dJFzo6ga',
         'female',
-        'Awais Madad',
+        'Awais Madad 2',
         '1995-03-15',
         'tutor'
     ),
     (
-        'awaismadad@gmail.com',
+        'awaismadad123@gmail.com',
         '$2a$10$RoehRLxjbt1jHUT2j9Gihu6QYeRRa3xuycKs0GGDxpEb3dJFzo6ga',
         'female',
-        'Awais Madad',
+        'Awais Madad 3',
         '1995-03-15',
         'tutor'
     );
