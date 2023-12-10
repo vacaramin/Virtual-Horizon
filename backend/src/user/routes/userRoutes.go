@@ -3,6 +3,7 @@ package routes
 import (
 	middleware "Virtual-Horizon/src/middleware"
 	controller "Virtual-Horizon/src/user/controllers"
+
 	"github.com/gin-gonic/gin"
 )
 

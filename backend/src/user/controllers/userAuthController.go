@@ -3,11 +3,12 @@ package userControllers
 import (
 	"Virtual-Horizon/initializers"
 	model "Virtual-Horizon/src/user/models"
-	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
 	"os"
 	"time"
+
+	"github.com/gin-gonic/gin"
 
 	"golang.org/x/crypto/bcrypt"
 
@@ -42,7 +43,7 @@ func Login(c *gin.Context) {
 	if user.ID == 0 {
 		c.JSON(http.StatusUnauthorized, gin.H{
 			"status": "failed",
-			"error":  "Invalid Email or Password",
+			"error":  "Invalid Email",
 		})
 		return
 	}
@@ -52,7 +53,7 @@ func Login(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{
 			"status": "failed",
-			"error":  "Invalid Email or Password",
+			"error":  "Invalid Password",
 		})
 		return
 	}
