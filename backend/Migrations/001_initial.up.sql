@@ -31,7 +31,6 @@ CREATE TABLE IF NOT EXISTS students (
 -- Create the "tutors" table
 CREATE TABLE IF NOT EXISTS tutors (
     id SERIAL PRIMARY KEY,
-    subject VARCHAR(255) NOT NULL,
     experience VARCHAR(255) NOT NULL,
     rating VARCHAR(10) NOT NULL,
     created_at TIMESTAMPTZ DEFAULT NOW(),
@@ -204,9 +203,9 @@ VALUES
 
 -- Insert sample tutors
 INSERT INTO
-    tutors (id, subject, experience, rating)
+    tutors (id, experience, rating)
 VALUES
-    (2, 'Math', '5 years', '4.5');
+    (2, '5 years', '4.5');
 
 -- Insert values into the "courses" table
 INSERT INTO

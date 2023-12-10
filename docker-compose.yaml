@@ -38,7 +38,7 @@ services:
       - db
     entrypoint: ["/bin/sh", "-c"]
     command: >
-      'yes | migrate -path /migrations -database "postgres://postgres:helloworld@db:5432/postgres?sslmode=disable" down &&
+      'migrate -database "postgres://postgres:helloworld@db:5432/postgres?sslmode=disable" -path /migrations force 1 && yes | migrate -path /migrations -database "postgres://postgres:helloworld@db:5432/postgres?sslmode=disable" down &&
       migrate -path /migrations -database "postgres://postgres:helloworld@db:5432/postgres?sslmode=disable" up'
 
   backend:

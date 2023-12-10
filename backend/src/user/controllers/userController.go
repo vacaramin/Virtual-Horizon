@@ -154,12 +154,8 @@ func UpdateProfileFromToken(c *gin.Context) {
 		})
 	}
 	type UpdatePayload struct {
-		Student studentmodel.Student
-		User    usermodel.User
+		User usermodel.User
 	}
-	// Find the user with token sub
-	var student studentmodel.Student
-	initializers.DB.First(&student, "ID = ?", user.ID)
 
 	if user.ID == 0 {
 		c.JSON(http.StatusUnauthorized, gin.H{
@@ -193,27 +189,12 @@ func UpdateProfileFromToken(c *gin.Context) {
 		user.About = updatePayload.User.About
 	}
 
-	// Here, we update only student-specific fields
-	if updatePayload.Student.ParentGuardianName != "" {
-		student.ParentGuardianName = updatePayload.Student.ParentGuardianName
-	}
-	if updatePayload.Student.ParentGuardianEmail != "" {
-		student.ParentGuardianEmail = updatePayload.Student.ParentGuardianEmail
-	}
-	if updatePayload.Student.ParentGuardianPhone != "" {
-		student.ParentGuardianPhone = updatePayload.Student.ParentGuardianPhone
-	}
-	if updatePayload.Student.GradeLevel != "" {
-		student.GradeLevel = updatePayload.Student.GradeLevel
-	}
-	log.Println(student.GradeLevel, user.Name, updatePayload.Student.GradeLevel)
 	// Save the updated student information
-	initializers.DB.Save(&user).Save(&student)
+	initializers.DB.Save(&user)
 
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "success",
 		"message": "Student profile updated successfully",
-		"student": student,
 		"user":    user,
 	})
 }
