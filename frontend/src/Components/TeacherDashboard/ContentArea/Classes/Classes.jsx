@@ -1,7 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Classes.css";
 
 function Classes() {
+  const [subjects, setSubjects] = useState([]);
+  const Subject = async () => {
+    const response = await fetch(
+      "http://localhost:4000/courses/getTutorCourses",
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    );
+    const data = await response.json();
+    if (data.status === "success") {
+      setSubjects(data.links);
+    }
+  };
+
+  useEffect(() => {
+    Subject();
+  }, []);
+
   const [selectedClass, setSelectedClass] = useState(null);
 
   const handleClassSelection = (className) => {
@@ -18,19 +37,16 @@ function Classes() {
       <div className="classes-container">
         <h1>Classes</h1>
         <ul className="class-list">
-          <li className="class-item" onClick={() => handleClassSelection("Math")}>
-            <span>Math</span>
-            <span>Grade 10</span>
-          </li>
-          <li className="class-item" onClick={() => handleClassSelection("English")}>
-            <span>English</span>
-            <span>Grade 9</span>
-          </li>
-          <li className="class-item" onClick={() => handleClassSelection("Science")}>
-            <span>Science</span>
-            <span>Grade 8</span>
-          </li>
-          {/* Add more classes here */}
+          {subjects.map((course) => (
+            <li
+              key={course.id} // Add a unique key to each element in the array
+              className="class-item"
+              onClick={() => handleClassSelection(course.name)}
+            >
+              <span>{course.name}</span>
+              <span>{course.description}</span>
+            </li>
+          ))}
         </ul>
       </div>
     );
@@ -39,7 +55,6 @@ function Classes() {
   // Render submenu for selected class
   return (
     <div className="classes-container">
-      
       <h2>{selectedClass}</h2>
       <ul className="submenu-list">
         <li>Add Assignment</li>
