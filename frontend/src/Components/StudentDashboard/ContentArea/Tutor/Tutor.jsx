@@ -4,13 +4,14 @@ import React, { useState } from "react";
 import "./Tutor.css";
 import "./Modal.css";
 
+
 function TutorCard({ tutor, onSelectTutor }) {
   return (
     <div className="card" onClick={() => onSelectTutor(tutor)}>
       <div className="top-part">
         <div className="profile-pic">
           <img
-            src="https://avatars.githubusercontent.com/u/94608299?v=4"
+            src= "https://avatars.githubusercontent.com/u/68877880?v=4"
             alt={`${tutor.name}'s profile`}
           />
         </div>
@@ -232,47 +233,7 @@ function Tutor() {
           )}
         </div>
       ) : (
-        <div className="become-tutor-form">
-          <h2>Become a Tutor</h2>
-          <form onSubmit={handleFormSubmit}>
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleFormChange}
-            />
-
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleFormChange}
-            />
-
-            <label htmlFor="subject">Subject</label>
-            <input
-              type="text"
-              id="subject"
-              name="subject"
-              value={formData.subject}
-              onChange={handleFormChange}
-            />
-
-            <label htmlFor="experience">Experience</label>
-            <input
-              type="text"
-              id="experience"
-              name="experience"
-              value={formData.experience}
-              onChange={handleFormChange}
-            />
-
-            <button type="submit">Submit</button>
-          </form>
+        <div>
         </div>
       )}
     </div>
