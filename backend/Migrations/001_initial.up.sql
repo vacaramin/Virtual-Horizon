@@ -406,15 +406,29 @@ VALUES
     );
 
 INSERT INTO
-    notifications (user_id, message,status)
+    notifications (user_id, message, status)
 VALUES
     (
         2,
-        'Welcome to Virtual Horizon, Thank you for signing up', 
+        'Welcome to Virtual Horizon, Thank you for signing up',
         'unread'
     ),
     (
         2,
-        'Welcome Again, Thank you for signing up', 
+        'Welcome Again, Thank you for signing up',
+        'unread'
+    );
+
+INSERT INTO
+    notifications (user_id, message, status)
+VALUES
+    (
+        1,
+        'Welcome to Virtual Horizon, Thank you for signing up',
+        'unread'
+    ),
+    (
+        1,
+        'Please Join meeting for MCAT Class',
         'unread'
     );
