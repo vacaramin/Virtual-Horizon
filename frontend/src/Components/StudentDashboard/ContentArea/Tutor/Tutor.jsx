@@ -67,12 +67,20 @@ function Tutor() {
   };
 
   const handleCloseModal = () => {
-    setShowConfirmationMenu(false);
-    setConfirmationStep(1); // Reset confirmation step when closing modal
+    if (confirmationStep > 1) {
+      setConfirmationStep((prevStep) => prevStep - 1);
+    } else {
+      setShowConfirmationMenu(false);
+      setConfirmationStep(1); // Reset confirmation step when closing modal
+    }
+  };
+
+  const handleBackStep = () => {
+    setConfirmationStep((prevStep) => Math.max(prevStep - 1, 1));
   };
 
   const handleNextStep = () => {
-    setConfirmationStep((prevStep) => prevStep + 1);
+    setConfirmationStep((prevStep) => Math.min(prevStep + 1, 3));
   };
 
   const renderConfirmationStep = () => {
@@ -91,6 +99,16 @@ function Tutor() {
             <h3>Payment Options</h3>
             <p>Choose a payment method:</p>
             {/* Add payment options here */}
+          </div>
+        );
+      case 3:
+        return (
+          <div>
+            <h3>Confirmation</h3>
+            <p>Course Fee: $XXX</p>
+            <p>Qualification: {selectedTutor.qualification}</p>
+
+            {/* Additional details and options for confirmation */}
           </div>
         );
       default:
@@ -197,9 +215,14 @@ function Tutor() {
 
                     {/* Navigation Buttons */}
                     <div className="confirm-tutor-button">
-                      <button onClick={handleCloseModal}>Close</button>
-                      {confirmationStep < 2 && (
+                      <button onClick={handleCloseModal}>
+                        {confirmationStep === 1 ? "Close" : "Back"}
+                      </button>
+                      {confirmationStep < 3 && (
                         <button onClick={handleNextStep}>Next</button>
+                      )}
+                      {confirmationStep === 3 && (
+                        <button onClick={handleConfirmTutor}>Confirm</button>
                       )}
                     </div>
                   </div>
