@@ -65,3 +65,47 @@
   li:hover {
     background-color: #d1d1d1;
   }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .class-card {
+    width: 200px;
+    padding: 20px;
+    height: 100px;
+    border: 1px solid #05599e;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .class-card:hover {
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+  }
+  
+  .class-card h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  .tutor-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .tutor-name {
+    margin-left: 10px;
+    /*make the text italic*/
+    font-style: italic;
+  }
+  
