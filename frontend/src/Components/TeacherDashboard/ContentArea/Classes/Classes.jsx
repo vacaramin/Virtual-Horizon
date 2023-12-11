@@ -1,10 +1,13 @@
-// JSX
+// Classes.js
 import React, { useState, useEffect } from "react";
 import "./Classes.css";
+import QuizForm from "./QuizForm"; // Import QuizForm component
 
 function Classes() {
   const [subjects, setSubjects] = useState([]);
   const [selectedClass, setSelectedClass] = useState(null);
+  const [showQuizForm, setShowQuizForm] = useState(false); // New state for controlling visibility
+  const [quizzes, setQuizzes] = useState([]);
 
   const Subject = async () => {
     const response = await fetch(
@@ -26,10 +29,22 @@ function Classes() {
 
   const handleClassSelection = (className) => {
     setSelectedClass(className);
+    setShowQuizForm(false); // Hide the quiz form when a class is selected
   };
 
   const handleBackToClasses = () => {
     setSelectedClass(null);
+    setShowQuizForm(false); // Hide the quiz form when going back to classes
+  };
+
+  const handleAddQuizClick = () => {
+    setShowQuizForm(true); // Show the quiz form when the text is clicked
+  };
+
+  const handleQuizSave = (quizData) => {
+    // Save the quiz data to the state
+    setQuizzes([...quizzes, quizData]);
+    setShowQuizForm(false); // Hide the quiz form after saving
   };
 
   return (
@@ -41,7 +56,15 @@ function Classes() {
           <ul className="submenu-list">
             <li>Add Assignment</li>
             <li>Grade Assignment</li>
-            <li>Add Quiz</li>
+            <li>
+              {/* Conditionally render QuizForm based on the showQuizForm state */}
+              {showQuizForm && <QuizForm onSave={handleQuizSave} />}
+              {!showQuizForm && (
+                <p  onClick={handleAddQuizClick}>
+                  Add Quiz
+                </p>
+              )}
+            </li>
             <li>Start Classroom</li>
             <li>Class Chat</li>
             {/* Add more submenu options here */}
