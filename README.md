@@ -6,11 +6,11 @@ Welcome to Virtual Horizon, a remote education startup leveraging a React JS fro
 
 ## Development
 ### Local Development
-For local development, use the docker-compose-ci.yaml file. This runs all the services directly from the code on your computer.
+For local development, This command runs all the services directly from the code on your computer.
 ```console
-docker-compose -f docker-compose-ci.yaml up
+docker-compose up -d
 ```
-This command starts all services defined in the docker-compose-ci.yaml file.
+This command starts all services defined in the docker-compose.yaml file.
 
 ### One Command to Run it all
 For running this application, use the docker-compose-prod.yaml file. This pulls the latest backend and frontend images of virtual horizon from docker hub and runs the images directly. No setups are required except docker and docker-compose.
