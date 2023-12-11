@@ -69,7 +69,10 @@ function Classes() {
                     alt={`${course.tutorName}'s profile`}
                     className="profile-picture"
                   />
-                  <p className="tutor-name">Awais Mohammad</p>
+                  <div>
+                    <p className="tutor-name">Awais Mohammad</p>
+                    <p className="tutor-description">Experienced tutor with a passion for teaching.</p>
+                  </div>
                 </div>
               </div>
             ))}
