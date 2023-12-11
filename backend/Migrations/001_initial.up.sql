@@ -10,8 +10,7 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW(),
     role VARCHAR(10), -- Add the role column
-    about VARCHAR(255)
-    
+    about VARCHAR(255)    
 );
 
 -- Create the "students" table
@@ -24,7 +23,6 @@ CREATE TABLE IF NOT EXISTS students (
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    -- Add the deleted_at column
     FOREIGN KEY (id) REFERENCES users (id) ON DELETE CASCADE
 );
 
@@ -79,6 +77,37 @@ CREATE TABLE IF NOT EXISTS enrollments (
     updated_at TIMESTAMPTZ DEFAULT NOW(),
     FOREIGN KEY (student_id) REFERENCES students (id) ON DELETE CASCADE,
     FOREIGN KEY (link_id) REFERENCES tutor_course_links (id) ON DELETE CASCADE
+);
+
+-- Create the "Quiz" table
+CREATE TABLE IF NOT EXISTS quiz (
+    id SERIAL PRIMARY KEY,
+    course_id INT NOT NULL,
+    message VARCHAR(255) NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    FOREIGN KEY (course_id) REFERENCES courses (id) ON DELETE CASCADE
+);
+
+-- Create the "Quiz" table
+CREATE TABLE IF NOT EXISTS quiz_question (
+    id SERIAL PRIMARY KEY,
+    quiz_id INT NOT NULL,
+    message VARCHAR(255) NOT NULL,
+    status VARCHAR(20),
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    FOREIGN KEY (quiz_id) REFERENCES quiz (id) ON DELETE CASCADE
+);
+-- Create the "Quiz" table
+CREATE TABLE IF NOT EXISTS quiz_question_option (
+    id SERIAL PRIMARY KEY,
+    quiz_question_id INT NOT NULL,
+    option VARCHAR(255) NOT NULL,
+    correct Boolean,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    FOREIGN KEY (quiz_question_id) REFERENCES quiz_question (id) ON DELETE CASCADE
 );
 
 -- Create the "notifications" table

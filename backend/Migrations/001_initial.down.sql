@@ -5,6 +5,14 @@ DROP TABLE IF EXISTS messages;
 -- Drop the "chats" table
 DROP TABLE IF EXISTS chats;
 
+-- Drop the "quiz_question_option" table
+DROP TABLE IF EXISTS quiz_question_option;
+
+-- Drop the "quiz_question" table
+DROP TABLE IF EXISTS quiz_question;
+
+-- Drop the "quiz" table
+DROP TABLE IF EXISTS quiz;
 
 -- Drop the "resource_items" table
 DROP TABLE IF EXISTS resource_items;
