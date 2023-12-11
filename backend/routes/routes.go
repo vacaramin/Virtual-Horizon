@@ -17,6 +17,8 @@ import (
 	tutorControllers "Virtual-Horizon/src/tutor/controllers"
 	tutorRoutes "Virtual-Horizon/src/tutor/routes"
 
+	quizController "Virtual-Horizon/src/quiz/controllers"
+	quizRoutes "Virtual-Horizon/src/quiz/routes"
 	"Virtual-Horizon/src/user/routes"
 
 	"github.com/gin-gonic/gin"
@@ -33,6 +35,7 @@ func SetupRoutes(r *gin.Engine) {
 	studentController := &studentcontrollers.StudentController{}
 	tutorController := &tutorControllers.TutorController{}
 	notificationController := &notificationControllers.NotificationController{}
+	quizController := &quizController.QuizController{}
 
 	// user routes are being set in this route function
 	courseRoutes.SetupRoutes(r, courseController)
@@ -40,6 +43,7 @@ func SetupRoutes(r *gin.Engine) {
 	studentRoutes.SetupStudentRoutes(r, studentController, enrollmentController)
 	tutorRoutes.SetupRoutes(r, tutorController)
 	notificationRoutes.SetupRoutes(r, notificationController)
+	quizRoutes.SetupRoutes(r, quizController)
 
 	routes.SetupUserRoutes(r)
 	routes.SetupUserAuthRoutes(r)

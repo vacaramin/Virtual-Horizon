@@ -7,7 +7,7 @@ import (
 )
 
 func SetupRoutes(r *gin.Engine, controller controllers.TutorFunctions) {
-	tutorRoutes := r.Group("/tutor")
 
+	tutorRoutes := r.Group("/tutor")
 	tutorRoutes.POST("signup", controller.TutorSignup)
 }
