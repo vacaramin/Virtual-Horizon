@@ -54,6 +54,8 @@ services:
       - db
     networks:
       - vh-net
+    volumes:
+      - ./backend:/apiServer
 
   frontend:
     build:
@@ -68,7 +70,7 @@ services:
     volumes:
       - /app/node_modules
       - ./frontend:/app
-
+      
 
 
  

@@ -23,10 +23,13 @@ func (*QuizController) GetQuiz(ctx *gin.Context) {
 		log.Println(err)
 	}
 
-	var body struct {
-		subject int
+	var Body struct {
+		Subject *int
 	}
-	if ctx.Bind(&body) != nil {
+	requestBody, _ := ctx.GetRawData()
+	log.Println("Raw Request Body:", string(requestBody))
+
+	if ctx.Bind(&Body) != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"status": "failed",
 			"error":  "Invalid request body",
@@ -34,11 +37,11 @@ func (*QuizController) GetQuiz(ctx *gin.Context) {
 		return
 	}
 
-	var Quiz models.Quiz
-
-	result := initializers.DB.
-		Where("id = ?", body.subject).
-		Find(&Quiz)
+	var Quiz models.Quizzes
+	log.Println("Body Subject", Body.Subject)
+	log.Println("Executing query for course_id:", Body.Subject)
+	result := initializers.DB.Where("course_id = ?", Body.Subject).Find(&Quiz)
+	log.Println("Query executed:", result.Dialector.Explain(result.Statement.SQL.String(), result.Statement.Vars...))
 
 	if result.Error != nil {
 		log.Println(result.Error)

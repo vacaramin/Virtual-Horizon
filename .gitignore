@@ -2,7 +2,4 @@
 /backend/.env.prod
 /backend/.idea/
 .idea/
-ssl-certs/server.crt
-ssl-certs/server.csr
-ssl-certs/server.key
-ssl-certs/ 
+/backend/main
