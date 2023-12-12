@@ -316,6 +316,10 @@ VALUES
     (
         3,
         'History of Art'
+    ),
+    (
+        3,
+        'History of Art Quiz#2'
     );
 
 -- INSERT INTO quiz_question (quiz_id, message, status)

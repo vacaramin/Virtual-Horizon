@@ -24,18 +24,18 @@ func (*QuizController) GetQuiz(ctx *gin.Context) {
 	}
 
 	var Body struct {
-		Subject *int
+		Subject int `json:"Subject"`
 	}
-	requestBody, _ := ctx.GetRawData()
-	log.Println("Raw Request Body:", string(requestBody))
 
-	if ctx.Bind(&Body) != nil {
+	if err := ctx.ShouldBindJSON(&Body); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"status": "failed",
 			"error":  "Invalid request body",
 		})
 		return
 	}
+
+	log.Println("Body after binding", Body)
 
 	var Quiz models.Quizzes
 	log.Println("Body Subject", Body.Subject)

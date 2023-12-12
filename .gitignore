@@ -3,3 +3,6 @@
 /backend/.idea/
 .idea/
 /backend/main
+/node_modules
+package.json
+package.lock
