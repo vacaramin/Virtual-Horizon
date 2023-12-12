@@ -65,3 +65,84 @@
   li:hover {
     background-color: #d1d1d1;
   }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .class-card {
+    width: 200px;
+    padding: 20px;
+    height: 100px;
+    border: 1px solid #05599e;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .class-card:hover {
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+  }
+  
+  .class-card h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  .tutor-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-picture {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20%;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .tutor-name {
+    margin-left: 10px;
+    /*make the text align right*/
+    text-align: left;
+    font-weight: bold;
+    font-style: italic;
+    
+  }
+  
+ /* Updated CSS */
+.classes-container {
+  text-align: center;
+  padding: 20px;
+  width: 100%; /* Use 100% of the screen width */
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.class-card {
+  width: calc(28% - 5px); /* Adjust the width based on the number of cards you want in a row */
+  padding: 20px;
+  margin-top: 20px;
+  height: 150px;
+  border: 1px solid #002f55;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.tutor-description{
+
+  text-align: left;
+  font-style: italic;
+  margin-bottom: 10px;
+  margin-left: 10px;
+
+}
