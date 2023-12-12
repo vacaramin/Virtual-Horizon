@@ -13,7 +13,7 @@ docker-compose up -d
 This command starts all services defined in the docker-compose.yaml file.
 
 ### One Command to Run it all
-For running this application, use the docker-compose-prod.yaml file. This pulls the latest backend and frontend images of virtual horizon from docker hub and runs the images directly. No setups are required except docker and docker-compose.
+To run this application, use the docker-compose-prod.yaml file. This pulls the latest backend and frontend images of the virtual horizon from the docker hub and runs the images directly. No setups are required except docker and docker-compose.
 ```console
 docker-compose -f docker-compose-prod.yaml up -d
 ```
