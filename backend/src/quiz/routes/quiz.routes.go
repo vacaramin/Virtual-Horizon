@@ -9,7 +9,7 @@ import (
 func SetupRoutes(r *gin.Engine, controller controllers.QuizFunctions) {
 	quizRoutes := r.Group("quiz")
 	quizRoutes.GET("getquiz", controller.GetQuiz)
-	quizRoutes.POST("quiz", controller.GetQuiz)
+	quizRoutes.POST("quiz", controller.AddQuiz)
 	quizRoutes.DELETE("quiz", controller.GetQuiz)
 
 }
